@@ -17,9 +17,11 @@
   <%= link_to tweet, class: "level" do %>
     <article class="media">
       <div class="media-left">
+        <%= link_to user_path(tweet.user_id) do %>
         <figure class="image is-64x64">
            <%= gravatar_image_tag(tweet.user.email, size: 64, alt: tweet.user.name) %>
         </figure>
+        <% end %>
       </div>
       <div class="media-content">
         <div class="content">

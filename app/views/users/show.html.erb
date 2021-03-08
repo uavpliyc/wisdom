@@ -13,8 +13,8 @@
 				<div class="media-content">
 					<div class="content">
 						<p>
-							<strong><%= current_user.name %></strong><br>
-							<small><%= current_user.username %></small>
+							<strong><%= @user.name %></strong><br>
+							<small><%= @user.username %></small>
 						</p>
 					</div>
 				</div>
@@ -25,20 +25,25 @@
 				<div class="level-item has-centered-text">
 					<div>
 						<p class="heading">Tweets</p>
-						<p class="title is-6"><%= current_user.tweets.count %></p>
+						<p class="title is-6"><%= @user.tweets.count %></p>
 					</div>
 				</div>
 				<div class="level-item has-centered-text">
 					<div>
 						<p class="heading">Following</p>
-						<p class="title is-6"><%= current_user.follower.count %></p>
+						<p class="title is-6"><%= @user.follower.count %></p>
 					</div>
 				</div>
 					<div class="level-item has-centered-text">
 					<div>
 						<p class="heading">Followers</p>
-						<p class="title is-6"><%= current_user.followed.count %></p>
+						<p class="title is-6"><%= @user.followed.count %></p>
 					</div>
+					<% if current_user.following?(@user) %>
+				    <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST, class: "btn btn-danger btn-block" %>
+				  <% else %>
+				    <%= link_to 'フォローする', follow_path(@user.id), method: :POST, class: "btn btn-success btn-block" %>
+				  <% end %>
 				</div>
 			</div>
 		</div>
