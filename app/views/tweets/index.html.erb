@@ -6,7 +6,7 @@
       <% else %>
         <%= render 'trends' %>
       <% end %>
-      <%= render 'feed' %>
+      <%= render 'feed', user: @user %>
       <%= render 'who-to-follow' %>
     </div>
   </div>

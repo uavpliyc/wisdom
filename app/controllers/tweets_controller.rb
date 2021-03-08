@@ -6,6 +6,8 @@ class TweetsController < ApplicationController
   def index
     @tweets = Tweet.all.order("created_at DESC")
     @tweet = Tweet.new
+    # @tweet.user_id = current_user.id
+    # @user = User.find(@tweet.user_id)
   end
 
   # GET /tweets/1 or /tweets/1.json
