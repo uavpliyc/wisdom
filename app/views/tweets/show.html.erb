@@ -20,7 +20,7 @@
 
               <div class="level-left is-mobile">
                 <%= link_to @tweet, class: "level-item" do %>
-                  <span class="icon"><i class="fas fa-link" aria-hidden="true"></i></span>
+                  <span class="icon"><i class="far fa-comment" aria-hidden="true"></i><%= @tweet.comments.count %></span>
                 <% end %>
             <% if user_signed_in? && current_user.id == @tweet.user_id %>
                 <%= link_to edit_tweet_path(@tweet), class: "level-item" do %>
@@ -64,9 +64,11 @@
       <% @tweet.comments.each do |tweet| %>
       <div class="box">
         <article class="media">
+          <%= link_to user_path(tweet.user_id) do %>
           <div class="media-left">
               <figure class="image is-64x64"><%= gravatar_image_tag(tweet.user.email, size: 64, alt: tweet.user.name) %></figure>
           </div>
+          <% end %>
           <div class="media-content">
               <%= tweet.user.name %>
               <%= tweet.user.username %>

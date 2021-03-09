@@ -14,8 +14,9 @@ class TweetsController < ApplicationController
   def show
     @tweet = Tweet.find(params[:id])
     # @user = User.find(@tweet.user_id)
-    @comment = Comment.new
     @comments = @tweet.comments
+    @comment = Comment.new
+    # @comment = @tweet.comments.build
   end
 
   # GET /tweets/new
