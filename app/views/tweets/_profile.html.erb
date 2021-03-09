@@ -6,9 +6,11 @@
 		<div class="panel-block">
 			<article class="media">
 				<div class="media-left">
+					<%= link_to user_path(current_user.id) do %>
 					<figure class="image is-64x64">
 						<%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
 					</figure>
+					<% end %>
 				</div>
 				<div class="media-content">
 					<div class="content">
@@ -25,7 +27,7 @@
 				<div class="level-item has-centered-text">
 					<div>
 						<p class="heading">ツイート</p>
-						<p class="title is-6"><%= current_user.tweets.count %></p>
+						<p class="title is-6"><%= link_to current_user.tweets.count, user_path(current_user.id) %></p>
 					</div>
 				</div>
 				<div class="level-item has-centered-text">

@@ -17,7 +17,7 @@
               <small><%= @tweet.user.username %></small><br>
               <p><%= @tweet.tweet %></p>
             </div>
-    
+
               <div class="level-left is-mobile">
                 <%= link_to @tweet, class: "level-item" do %>
                   <span class="icon"><i class="fas fa-link" aria-hidden="true"></i></span>
@@ -31,11 +31,58 @@
                 <% end %>
               </div>
             <% end %>
-    
+
           </div>
         </article>
       </div>
-      
+
+      <!--コメント-->
+      <div class="box media">
+        <div class="media-left">
+          <figure class="image is-64x64">
+            <%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
+          </figure>
+        </div>
+        <div class="media-content">
+          <%= simple_form_for([@tweet, @comment]) do |f| %>
+            <%= f.error_notification %>
+            <div class="field">
+              <div class="control">
+                 <%= f.input :tweet, label: "返信コメントしよう✒️", input_html: { class: "textarea "}, wrapper: false, label_html: {class: "label"}, placeholder: "返信をツイートする...", autofocus: true %>
+                 <!--<= f.hidden_field :tweet_id, value: @tweet.id %>-->
+              </div>
+            </div>
+            <%= f.button :submit, class: "button is-info" %>
+          <% end %>
+        </div>
+      </div>
+      <!---->
+
+      <!--コメント一覧-->
+      <p>コメント件数：<%= @tweet.comments.count %></p>
+
+      <% @tweet.comments.each do |tweet| %>
+      <div class="box">
+        <article class="media">
+          <div class="media-left">
+              <figure class="image is-64x64"><%= gravatar_image_tag(tweet.user.email, size: 64, alt: tweet.user.name) %></figure>
+          </div>
+          <div class="media-content">
+              <%= tweet.user.name %>
+              <%= tweet.user.username %>
+              <%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %>
+              <%= tweet.content %>
+          <% if tweet.user == current_user %>
+            <div class="btn btn-danger">
+              <%= link_to "削除", tweet_comment_path(@tweet, tweet), method: :delete, class: "btn btn-danger" %>
+            </div>
+          <% end %>
+          </div>
+        </article>
+      </div>
+      <% end %>
+      <!---->
+
       <%= link_to 'Back', tweets_path %>
 
     </div>
