@@ -1,52 +1,63 @@
+<section class="section">
+<div class="container">
+	<div class="columns is-centered">
+	  <div class="column is-6">
 
-<div class="column is-one-quarter">
-	<nav class="panel">
-		<p class="panel-heading">Profile</p>
+		<nav class="panel">
+			<p class="panel-heading">Profile</p>
 
-		<div class="panel-block">
-			<article class="media">
-				<div class="media-left">
-					<figure class="image is-64x64">
-						<%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
-					</figure>
-				</div>
-				<div class="media-content">
-					<div class="content">
-						<p>
-							<strong><%= @user.name %></strong><br>
-							<small><%= @user.username %></small>
-						</p>
+			<div class="panel-block">
+				<article class="media">
+					<div class="media-left">
+						<%= link_to user_path(@user.id) do %>
+						<figure class="image is-64x64">
+							<%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
+						</figure>
+						<% end %>
 					</div>
-				</div>
-			</article>
-		</div>
-		<div class="panel-block">
-			<div class="level is-mobile">
-				<div class="level-item has-centered-text">
-					<div>
-						<p class="heading">Tweets</p>
-						<p class="title is-6"><%= @user.tweets.count %></p>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong><%= @user.name %></strong><br>
+								<small><%= @user.username %></small>
+							</p>
+						</div>
 					</div>
-				</div>
-				<div class="level-item has-centered-text">
-					<div>
-						<p class="heading">Following</p>
-						<p class="title is-6"><%= @user.follower.count %></p>
-					</div>
-				</div>
+				</article>
+			</div>
+			<div class="panel-block">
+				<div class="level is-mobile">
 					<div class="level-item has-centered-text">
-					<div>
-						<p class="heading">Followers</p>
-						<p class="title is-6"><%= @user.followed.count %></p>
+						<div>
+							<p class="heading">Tweets</p>
+							<p class="title is-6"><%= @user.tweets.count %></p>
+						</div>
 					</div>
-					<% if current_user.following?(@user) %>
-				    <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST, class: "btn btn-danger btn-block" %>
-				  <% else %>
-				    <%= link_to 'フォローする', follow_path(@user.id), method: :POST, class: "btn btn-success btn-block" %>
-				  <% end %>
+					<div class="level-item has-centered-text">
+						<div>
+							<p class="heading">Following</p>
+							<p class="title is-6"><%= @user.follower.count %></p>
+						</div>
+					</div>
+						<div class="level-item has-centered-text">
+						<div>
+							<p class="heading">Followers</p>
+							<p class="title is-6"><%= @user.followed.count %></p>
+						</div>
+						<% if current_user.following?(@user) %>
+					    <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST, class: "btn btn-danger btn-block" %>
+					  <% else %>
+					    <%= link_to 'フォローする', follow_path(@user.id), method: :POST, class: "btn btn-success btn-block" %>
+					  <% end %>
+					</div>
 				</div>
 			</div>
-		</div>
 
-	</nav>
+		</nav>
+
+		<%= link_to 'Back', tweets_path %>
+
+   </div>
+  </div>
 </div>
+</section>

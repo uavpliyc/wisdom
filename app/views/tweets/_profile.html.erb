@@ -24,20 +24,20 @@
 			<div class="level is-mobile">
 				<div class="level-item has-centered-text">
 					<div>
-						<p class="heading">Tweets</p>
+						<p class="heading">ツイート</p>
 						<p class="title is-6"><%= current_user.tweets.count %></p>
 					</div>
 				</div>
 				<div class="level-item has-centered-text">
 					<div>
-						<p class="heading">Following</p>
-						<p class="title is-6"><%= current_user.follower.count %></p>
+						<p class="heading">フォロー</p>
+						<p class="title is-6"><%= link_to current_user.follower.count, following_user_path(current_user.id) %></p>
 					</div>
 				</div>
 					<div class="level-item has-centered-text">
 					<div>
-						<p class="heading">Followers</p>
-						<p class="title is-6"><%= current_user.followed.count %></p>
+						<p class="heading">フォロワー</p>
+						<p class="title is-6"><%= link_to current_user.followed.count, followers_user_path(current_user.id) %></p>
 					</div>
 				</div>
 			</div>
