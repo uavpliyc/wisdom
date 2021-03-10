@@ -46,6 +46,7 @@ class TweetsController < ApplicationController
 
   # PATCH/PUT /tweets/1 or /tweets/1.json
   def update
+    @tweet = Tweet.find(params[:id])
     respond_to do |format|
       if @tweet.update(tweet_params)
         format.html { redirect_to @tweet, notice: "Tweet was successfully updated." }
@@ -59,6 +60,7 @@ class TweetsController < ApplicationController
 
   # DELETE /tweets/1 or /tweets/1.json
   def destroy
+    @tweet = Tweet.find(params[:id])
     @tweet.destroy
     respond_to do |format|
       format.html { redirect_to tweets_url, notice: "Tweet was successfully destroyed." }
