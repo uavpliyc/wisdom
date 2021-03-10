@@ -27,8 +27,11 @@
               <%= link_to tweet, method: :delete, data: { confirm: "Are you sure you want to delete this tweet?"} do %>
                 <span class="icon"><i class="far fa-trash-alt" aria-hidden="true"></i></span>
               <% end %>
-            </div>
           <% end %>
+              <%= link_to tweet, class: "level-item" do %>
+                <span class="icon"><%= render 'tweets/favorite', tweet: tweet %></span>
+              <% end %>
+            </div>
 
         </div>
       </article>

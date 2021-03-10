@@ -7,11 +7,11 @@
       </p>
     </figure>
     <div class="media-content">
-      <%= render 'tweets/form' %>
+      <%= render 'tweets/form', tweet: @tweet %>
     </div>
   </article>
   <% end %>
 
  <%= render 'tweets/index', tweets: @tweets %>
- 
+
 </div>

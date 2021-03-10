@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow'
 
   resources :tweets do
+    resource :favorites, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end
 
