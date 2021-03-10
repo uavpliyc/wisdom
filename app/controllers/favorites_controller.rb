@@ -5,7 +5,6 @@ class FavoritesController < ApplicationController
     @favorite = current_user.favorites.new(tweet_id: @tweet.id)
     @favorite.save
     redirect_back(fallback_location: root_path)
-    # redirect_to tweet_path(@tweet)
   end
 
   def destroy

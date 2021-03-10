@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: %i[ show edit update destroy ]
+  # before_action :set_tweet, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:index, :show]
 
   # GET /tweets or /tweets.json
@@ -26,6 +26,7 @@ class TweetsController < ApplicationController
 
   # GET /tweets/1/edit
   def edit
+    @tweet = Tweet.find(params[:id])
   end
 
   # POST /tweets or /tweets.json
@@ -73,6 +74,6 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:tweet)
+      params.require(:tweet).permit(:tweet, :image)
     end
 end
