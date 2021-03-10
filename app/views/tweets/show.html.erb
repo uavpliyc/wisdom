@@ -41,7 +41,7 @@
         </article>
       </div>
 
-      <!--コメント-->
+      <!--コメント投稿-->
       <div class="box media">
         <div class="media-left">
           <figure class="image is-64x64">
@@ -77,7 +77,7 @@
           <div class="media-content">
               <%= tweet.user.name %>
               <%= tweet.user.username %>
-              <%= l tweet.created_at %>
+              <%= l tweet.created_at %><br>
               <%= tweet.content %>
               <!--<p><= attachment_image_tag tweet, :image, size: "100x100", format: 'jpeg' %></p>-->
           <% if tweet.user == current_user %>
