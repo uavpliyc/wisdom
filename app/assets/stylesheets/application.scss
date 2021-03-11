@@ -20,6 +20,20 @@
   color: white;
 }
 
+.navbar {
+  background-color: navy;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+　width: 1170px;
+}
+
+.control {
+  background-color: #eee;
+  color: #483D8B;
+}
+
 .image {
   border-radius: 50%;
   img {
@@ -29,4 +43,8 @@
 
 .notification:not(:last-child) {
   margin-bottom: 0;
+}
+
+.container {
+  margin-top: 40px; 
 }

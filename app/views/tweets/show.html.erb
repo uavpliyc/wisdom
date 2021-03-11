@@ -8,7 +8,7 @@
         <article class="media">
           <div class="media-left">
             <figure class="image is-64x64">
-               <%= gravatar_image_tag(@tweet.user.email, size: 64, alt: @tweet.user.name) %>
+               <%= attachment_image_tag @tweet.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
             </figure>
           </div>
           <div class="media-content">
@@ -20,6 +20,7 @@
               <p><%= attachment_image_tag @tweet, :image, size: "100x100", format: 'jpeg' %></p>
             </div>
 
+              <!--ツイート下部-->
               <div class="level-left is-mobile">
                 <%= link_to @tweet, class: "level-item" do %>
                   <span class="icon"><i class="far fa-comment" aria-hidden="true"></i><%= @tweet.comments.count %></span>
@@ -28,10 +29,10 @@
                   <%= render 'tweets/favorite', tweet: @tweet %>
                 <% end %>
               <% if user_signed_in? && current_user.id == @tweet.user_id %>
-                <%= link_to edit_tweet_path(@tweet), class: "level-item" do %>
+                <%= link_to edit_tweet_path(@tweet), class: "level-item ml-5" do %>
                   <span class="icon"><i class="fas fa-pencil-alt" aria-hidden="true"></i></span>
                 <% end %>
-                <%= link_to @tweet, method: :delete, data: { confirm: "Are you sure you want to delete this tweet?"} do %>
+                <%= link_to @tweet, method: :delete, data: { confirm: "Are you sure you want to delete this tweet?"}, class: "ml-3" do %>
                   <span class="icon"><i class="far fa-trash-alt" aria-hidden="true"></i></span>
                 <% end %>
               <% end %>
@@ -45,7 +46,7 @@
       <div class="box media">
         <div class="media-left">
           <figure class="image is-64x64">
-            <%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
+            <%= attachment_image_tag @tweet.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
           </figure>
         </div>
         <div class="media-content">
@@ -71,7 +72,7 @@
         <article class="media">
           <%= link_to user_path(tweet.user_id) do %>
           <div class="media-left">
-              <figure class="image is-64x64"><%= gravatar_image_tag(tweet.user.email, size: 64, alt: tweet.user.name) %></figure>
+              <figure class="image is-64x64"><%= attachment_image_tag tweet.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %></figure>
           </div>
           <% end %>
           <div class="media-content">

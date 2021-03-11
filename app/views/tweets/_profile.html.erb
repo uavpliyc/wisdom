@@ -1,6 +1,6 @@
 
 <div class="column is-one-quarter">
-	<nav class="panel">
+	<nav class="panel .bg-white">
 		<p class="panel-heading">Profile</p>
 
 		<div class="panel-block">
@@ -8,7 +8,7 @@
 				<div class="media-left">
 					<%= link_to user_path(current_user.id) do %>
 					<figure class="image is-64x64">
-						<%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
+						<%= attachment_image_tag user, :profile_image, size: "64x64", format: 'jpeg' %>
 					</figure>
 					<% end %>
 				</div>
