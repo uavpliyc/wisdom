@@ -2448,28 +2448,28 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #f4623a;
+  background-color: blue;
   border-color: #f4623a;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #f24516;
+  background-color: navy;
   border-color: #ee3e0d;
 }
 .btn-primary:focus, .btn-primary.focus {
   color: #fff;
-  background-color: #f24516;
+  background-color: blue;
   border-color: #ee3e0d;
   box-shadow: 0 0 0 0.2rem rgba(246, 122, 88, 0.5);
 }
 .btn-primary.disabled, .btn-primary:disabled {
   color: #fff;
-  background-color: #f4623a;
+  background-color: blue;
   border-color: #f4623a;
 }
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #ee3e0d;
+  background-color: blue;
   border-color: #e23a0d;
 }
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
@@ -10100,6 +10100,7 @@ header.masthead h1 {
     min-height: 40rem;
     padding-top: 4.5rem;
     padding-bottom: 0;
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
   }
   header.masthead p {
     font-size: 1.15rem;
@@ -10153,3 +10154,13 @@ header.masthead h1 {
 .text-white-75 {
   color: rgba(255, 255, 255, 0.75);
 }
+
+.about {
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.py-5 {
+  background-color: navy;
+}
+
+
