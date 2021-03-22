@@ -12,7 +12,8 @@
         <div class="media-content">
           <div class="content">
             <strong><%= tweet.user.name %></strong>
-            <%= l tweet.created_at %><br>
+            <%= l tweet.created_at %>
+            【<%= tweet.category.name %>】<br>
             <small><%= tweet.user.username %></small><br>
             <p><%= tweet.tweet %></p>
             <p><%= attachment_image_tag tweet, :image, size: "100x100", format: 'jpeg' %></p>

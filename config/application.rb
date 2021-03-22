@@ -13,6 +13,7 @@ module Wisdom
     # -- all .rb files in that directory are automatically loaded.
     config.time_zone = 'Asia/Tokyo'
     config.i18n.default_locale = :ja
+    # config.logger = Logger.new(STDOUT)
   end
 end
 

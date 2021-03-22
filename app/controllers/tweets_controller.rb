@@ -8,6 +8,7 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new
     # @tweet.user_id = current_user.id
     # @user = User.find(@tweet.user_id)
+    @categories = Category.all
   end
 
   # GET /tweets/1 or /tweets/1.json
@@ -35,13 +36,14 @@ class TweetsController < ApplicationController
 
     respond_to do |format|
       if @tweet.save
-        format.html { redirect_to root_path, notice: "Tweet was successfully created." }
+        format.html { redirect_to tweets_path, notice: "Tweet was successfully created." }
         format.json { render :show, status: :created, location: @tweet }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
     end
+    # logger.debug @tweet.errors.inspect
   end
 
   # PATCH/PUT /tweets/1 or /tweets/1.json
@@ -76,6 +78,6 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:tweet, :image)
+      params.require(:tweet).permit(:tweet, :image, :category_id)
     end
 end
