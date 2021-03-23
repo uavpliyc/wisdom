@@ -14,4 +14,6 @@ Category.create([
     { name: 'マーケティング'},
     { name: '就職・転職'},
     { name: 'デザイン'},
+    { name: '習慣'},
+    { name: '思考法'},
     ])

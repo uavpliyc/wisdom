@@ -4,19 +4,19 @@ class TweetsController < ApplicationController
 
   # GET /tweets or /tweets.json
   def index
-    @tweets = Tweet.all.order("created_at DESC")
-    @tweet = Tweet.new
+    @tweets     = Tweet.all.order("created_at DESC")
+    @tweet      = Tweet.new
+    @categories = Category.all
     # @tweet.user_id = current_user.id
     # @user = User.find(@tweet.user_id)
-    @categories = Category.all
   end
 
   # GET /tweets/1 or /tweets/1.json
   def show
-    @tweet = Tweet.find(params[:id])
-    # @user = User.find(@tweet.user_id)
+    @tweet    = Tweet.find(params[:id])
     @comments = @tweet.comments
-    @comment = Comment.new
+    @comment  = Comment.new
+    # @user = User.find(@tweet.user_id)
     # @comment = @tweet.comments.build
   end
 
@@ -27,7 +27,8 @@ class TweetsController < ApplicationController
 
   # GET /tweets/1/edit
   def edit
-    @tweet = Tweet.find(params[:id])
+    @tweet      = Tweet.find(params[:id])
+    @categories = Category.all
   end
 
   # POST /tweets or /tweets.json

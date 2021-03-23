@@ -45,10 +45,12 @@
 							<p class="heading">Followers</p>
 							<p class="title is-6"><%= @user.followed.count %></p>
 						</div>
-						<% if current_user.following?(@user) %>
-					    <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST, class: "btn btn-danger btn-block" %>
-					  <% else %>
-					    <%= link_to 'フォローする', follow_path(@user.id), method: :POST, class: "btn btn-success btn-block" %>
+						<% if user_signed_in? && current_user.id != @user.id %>
+							<% if current_user.following?(@user) %>
+						    <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST, class: "btn btn-danger btn-sm ml-5" %>
+						  <% else %>
+						    <%= link_to 'フォローする', follow_path(@user.id), method: :POST, class: "btn btn-success btn-sm ml-5" %>
+						  <% end %>
 					  <% end %>
 					</div>
 				</div>

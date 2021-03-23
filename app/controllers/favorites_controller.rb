@@ -1,7 +1,7 @@
 class FavoritesController < ApplicationController
 
   def create
-    @tweet = Tweet.find(params[:tweet_id])
+    @tweet    = Tweet.find(params[:tweet_id])
     @favorite = current_user.favorites.new(tweet_id: @tweet.id)
     @favorite.save
     redirect_back(fallback_location: root_path)

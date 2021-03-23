@@ -83,8 +83,8 @@
               <%= tweet.content %>
               <!--<p><= attachment_image_tag tweet, :image, size: "100x100", format: 'jpeg' %></p>-->
           <% if tweet.user == current_user %>
-            <div class="btn btn-danger">
-              <%= link_to "削除", tweet_comment_path(@tweet, tweet), method: :delete, class: "btn btn-danger" %>
+            <div class="btn">
+              <%= link_to "削除", tweet_comment_path(@tweet, tweet), method: :delete, class: "btn btn-danger btn-sm" %>
             </div>
           <% end %>
           </div>
