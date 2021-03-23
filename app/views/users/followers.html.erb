@@ -14,7 +14,7 @@
 
             <%= link_to user_path(user.id) do %>
             <figure class="image is-64x64">
-               <%= gravatar_image_tag(user.email, size: 64, alt: user.name) %>
+               <%= attachment_image_tag user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
             </figure>
             <% end %>
           </div>

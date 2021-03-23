@@ -3,18 +3,18 @@
 	<div class="columns is-centered">
 	  <div class="column is-6">
       <div class="center-block">
-        
+
       <p class="font-weight-bold">フォロー中</p>
 
       <% @user.following_user.each do |user| %>
-    
+
       <div class="box mx-auto mb-5">
         <article class="media">
           <div class="media-left">
-              
+
             <%= link_to user_path(user.id) do %>
             <figure class="image is-64x64">
-               <%= gravatar_image_tag(user.email, size: 64, alt: user.name) %>
+               <%= attachment_image_tag user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
             </figure>
             <% end %>
           </div>
@@ -24,11 +24,11 @@
               <small><%= user.username %></small><br>
             </div>
           </div>
-    
+
           </div>
         </article>
       </div>
-    
+
     <% end %>
 
      </div>
