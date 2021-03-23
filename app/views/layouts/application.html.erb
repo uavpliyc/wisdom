@@ -11,15 +11,15 @@
   </head>
 
   <body>
-    
+
     <nav class="navbar">
       <div class="navbar-brand">
         <% if user_signed_in? %>
-          <%= link_to tweets_path, class: "navbar-item" do %>
+          <%= link_to tweets_path, class: "navbar-item text-decoration-none" do %>
             <h1 class="title is-5"><img src="/assets/logo.png" alt="Wisdom"> Wisdom</h1>
           <% end %>
         <% else %>
-          <%= link_to root_path, class: "navbar-item" do %>
+          <%= link_to root_path, class: "navbar-item text-decoration-none" do %>
             <h1 class="title is-5"><img src="/assets/logo.png" alt="Wisdom"> Wisdom</h1>
           <% end %>
         <% end %>
@@ -36,20 +36,30 @@
             <div class="field is-grouped">
               <% if user_signed_in? %>
               <p class="control">
-                <%= link_to 'New Tweet', tweets_path, class: "button" %>
+                <%= link_to tweets_path, class: "button text-decoration-none" do %>
+                  <i class="fas fa-hand-holding-heart"></i>&nbsp;新しい知識を提供する
+                <% end %>
               </p>
                 <p class="control">
-                  <%= link_to current_user.name, edit_user_registration_path, class: "button" %>
+                  <%= link_to edit_user_registration_path, class: "button text-decoration-none" do %>
+                    <i class="fas fa-user-edit"></i>&nbsp;マイページ編集
+                  <% end %>
                 </p>
                 <p class="control">
-                  <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "button" %>
+                  <%= link_to destroy_user_session_path, method: :delete, class: "button text-decoration-none" do %>
+                    <i class="fas fa-sign-out-alt"></i>&nbsp;ログアウト
+                  <% end %>
                 </p>
               <% else %>
               <p class="control">
-                <%= link_to 'Log In', new_user_session_path, class: "button is-info" %>
+                <%= link_to new_user_session_path, class: "button text-decoration-none" do %>
+                  <i class="fas fa-sign-in-alt"></i>&nbsp;ログイン
+                <% end %>
               </p>
               <p class="control">
-                <%= link_to 'Sign Up', new_user_registration_path, class: "button is-info" %>
+                <%= link_to new_user_registration_path, class: "button text-decoration-none" do %>
+                  <i class="fas fa-user-plus"></i>&nbsp;新規登録
+                <% end %>
               </p>
               <% end %>
             </div>
@@ -57,7 +67,7 @@
         </div>
       </div>
     </nav>
-    
+
     <div class="d">
       <% if flash[:notice] %>
         <div class="notification is-primary global-notification">

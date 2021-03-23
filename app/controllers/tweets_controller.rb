@@ -29,6 +29,7 @@ class TweetsController < ApplicationController
   def edit
     @tweet      = Tweet.find(params[:id])
     @categories = Category.all
+    # logger.debug @tweet.errors.inspect
   end
 
   # POST /tweets or /tweets.json
@@ -44,7 +45,6 @@ class TweetsController < ApplicationController
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
     end
-    # logger.debug @tweet.errors.inspect
   end
 
   # PATCH/PUT /tweets/1 or /tweets/1.json

@@ -8,7 +8,7 @@
           </figure>
           <% end %>
         </div>
-    <%= link_to tweet, class: "level" do %>
+    <%= link_to tweet, class: "level text-decoration-none" do %>
         <div class="media-content">
           <div class="content">
             <strong><%= tweet.user.name %></strong>
@@ -21,14 +21,14 @@
 
             <!--ツイート下部-->
             <div class="level-left is-mobile">
-              <%= link_to tweet, class: "level-item" do %>
+              <%= link_to tweet, class: "level-item text-decoration-none" do %>
                 <span class="icon"><i class="far fa-comment" aria-hidden="true"></i><%= tweet.comments.count %></span>
               <% end %>
               <%= link_to tweet, class: "level-item" do %>
                 <%= render 'tweets/favorite', tweet: tweet %>
               <% end %>
           <% if user_signed_in? && current_user.id == tweet.user_id %>
-              <%= link_to edit_tweet_path(tweet), class: "level-item ml-5" do %>
+              <%= link_to edit_tweet_path(tweet), class: "level-item ml-5 text-decoration-none" do %>
                 <span class="icon"><i class="fas fa-pencil-alt" aria-hidden="true"></i></span>
               <% end %>
               <%= link_to tweet, method: :delete, data: { confirm: "このツイートを消しますか?"}, class: "ml-3" do %>

@@ -23,14 +23,14 @@
 
               <!--ツイート下部-->
               <div class="level-left is-mobile">
-                <%= link_to @tweet, class: "level-item" do %>
+                <%= link_to @tweet, class: "level-item text-decoration-none" do %>
                   <span class="icon"><i class="far fa-comment" aria-hidden="true"></i><%= @tweet.comments.count %></span>
                 <% end %>
                 <%= link_to @tweet, class: "level-item" do %>
                   <%= render 'tweets/favorite', tweet: @tweet %>
                 <% end %>
               <% if user_signed_in? && current_user.id == @tweet.user_id %>
-                <%= link_to edit_tweet_path(@tweet), class: "level-item ml-5" do %>
+                <%= link_to edit_tweet_path(@tweet), class: "level-item ml-5 text-decoration-none" do %>
                   <span class="icon"><i class="fas fa-pencil-alt" aria-hidden="true"></i></span>
                 <% end %>
                 <%= link_to @tweet, method: :delete, data: { confirm: "Are you sure you want to delete this tweet?"}, class: "ml-3" do %>
@@ -55,7 +55,7 @@
             <%= f.error_notification %>
             <div class="field">
               <div class="control">
-                 <%= f.input :content, label: "返信コメントしよう✒️", input_html: { class: "textarea "}, wrapper: false, label_html: {class: "label"}, placeholder: "返信をツイートする...", autofocus: true %><br>
+                 <%= f.input :content, label: "アクションプランをコメントする✒️", input_html: { class: "textarea "}, wrapper: false, label_html: {class: "label"}, placeholder: "こんな行動をすると良いと思います", autofocus: true %><br>
                  <!--<= f.attachment_field :image %>-->
               </div>
             </div>

@@ -34,8 +34,8 @@
 // }
 
 .control {
-  background-color: #eee;
   color: #483D8B;
+// 　text-decoration: none;
 }
 
 .image {
@@ -51,4 +51,14 @@
 
 .container,.d{
   margin-top: 40px;
+}
+
+.button {
+  transition : 1s;
+}
+
+.button:hover {
+  background-color: #000;
+  color: #fff;
+  transition : 1s;
 }

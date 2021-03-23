@@ -1,10 +1,10 @@
 
 <% if tweet.favorited_by?(current_user) %>
-    <%= link_to tweet_favorites_path(tweet), method: :delete do %>
+    <%= link_to tweet_favorites_path(tweet), method: :delete, class: "text-decoration-none" do %>
       <span class="icon"><i class="fas fa-heart"></i><%= tweet.favorites.count %></span>
     <% end %>
 <% else %>
-    <%= link_to tweet_favorites_path(tweet), method: :post do %>
+    <%= link_to tweet_favorites_path(tweet), method: :post, class: "text-decoration-none" do %>
       <span class="icon"><i class="far fa-heart"></i><%= tweet.favorites.count %></span>
     <% end %>
 <% end %>
