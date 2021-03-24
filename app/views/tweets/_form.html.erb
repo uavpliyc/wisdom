@@ -4,7 +4,7 @@
     <div class="control">
        <%= f.input :tweet, label: "知識を提供する", input_html: { class: "textarea "}, wrapper: false, label_html: {class: "label"}, placeholder: "こんなことを学びました", autofocus: true %><br>
        <%= f.attachment_field :image %>
-       <%= f.collection_select :category_id, categories.all, :id, :name, include_blank: "カテゴリー選択" %>
+       <%= f.collection_select :category_id, categories.all, :id, :name, prompt: "カテゴリー選択" %>
     </div>
   </div>
   <%= f.button :submit, class: "button is-info" %>
