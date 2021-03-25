@@ -11,6 +11,13 @@ class TweetsController < ApplicationController
     # @user = User.find(@tweet.user_id)
   end
 
+  def category
+    @categories = Category.all
+    @category   = Category.find(params[:id])
+    @tweets     = @category.tweets.all.order("created_at DESC")
+    @tweet      = Tweet.new
+  end
+
   # GET /tweets/1 or /tweets/1.json
   def show
     @tweet    = Tweet.find(params[:id])

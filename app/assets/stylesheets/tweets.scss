@@ -10,6 +10,12 @@
   background: white;
 }
 
+.category-hover:hover {
+  background-color: #000080;
+  color: #fff;
+  transition : 1s;
+}
+
 // .fixed {
 //   position: fixed;
 // }

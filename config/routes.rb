@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   post 'follow/:id' => 'relationships#follow', as: 'follow'
   post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow'
+  get 'tweets/category/:id' => 'tweets#category', as: 'tweet_category'
 
   resources :tweets do
     resource :favorites, only: [:create, :destroy]
