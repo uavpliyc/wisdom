@@ -1,2 +1,68 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<section class="section">
+<div class="container">
+	<div class="columns is-centered">
+	  <div class="column is-6">
+
+	 <% @users.each do |user| %>
+
+		<nav class="panel">
+
+			<div class="panel-block">
+				<article class="media">
+					<div class="media-left">
+						<%= link_to user_path(user.id) do %>
+						<figure class="image is-64x64">
+							<%= attachment_image_tag user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
+						</figure>
+						<% end %>
+					</div>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong><%= user.name %></strong><br>
+								<small><%= user.username %></small>
+								<div><%= user.profile %></div>
+							</p>
+						</div>
+					</div>
+				</article>
+			</div>
+			<div class="panel-block">
+				<div class="level is-mobile">
+					<div class="level-item has-centered-text">
+						<div>
+							<p class="heading">ツイート</p>
+							<p class="title is-6"><%= user.tweets.count %></p>
+						</div>
+					</div>
+					<div class="level-item has-centered-text">
+						<div>
+							<p class="heading">フォロー</p>
+							<p class="title is-6"><%= user.follower.count %></p>
+						</div>
+					</div>
+						<div class="level-item has-centered-text">
+						<div>
+							<p class="heading">フォロワー</p>
+							<p class="title is-6"><%= user.followed.count %></p>
+						</div>
+						<% if user_signed_in? && current_user.id != user.id %>
+							<% if current_user.following?(user) %>
+						    <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST, class: "btn btn-danger btn-sm ml-5" %>
+						  <% else %>
+						    <%= link_to 'フォローする', follow_path(user.id), method: :POST, class: "btn btn-success btn-sm ml-5" %>
+						  <% end %>
+					  <% end %>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<% end %>
+
+		<%= link_to 'Back', tweets_path %>
+
+		</div>
+  </div>
+</div>
+</section>

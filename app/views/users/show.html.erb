@@ -4,7 +4,7 @@
 	  <div class="column is-6">
 
 		<nav class="panel">
-			<p class="panel-heading">Profile</p>
+			<p class="panel-heading">プロフィール</p>
 
 			<div class="panel-block">
 				<article class="media">
@@ -30,19 +30,19 @@
 				<div class="level is-mobile">
 					<div class="level-item has-centered-text">
 						<div>
-							<p class="heading">Tweets</p>
+							<p class="heading">ツイート</p>
 							<p class="title is-6"><%= @user.tweets.count %></p>
 						</div>
 					</div>
 					<div class="level-item has-centered-text">
 						<div>
-							<p class="heading">Following</p>
+							<p class="heading">フォロー</p>
 							<p class="title is-6"><%= @user.follower.count %></p>
 						</div>
 					</div>
 						<div class="level-item has-centered-text">
 						<div>
-							<p class="heading">Followers</p>
+							<p class="heading">フォロワー</p>
 							<p class="title is-6"><%= @user.followed.count %></p>
 						</div>
 						<% if user_signed_in? && current_user.id != @user.id %>

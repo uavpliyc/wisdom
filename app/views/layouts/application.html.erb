@@ -38,11 +38,16 @@
           <div class="navbar-item">
             <div class="field is-grouped">
               <% if user_signed_in? %>
-              <p class="control">
-                <%= link_to tweets_path, class: "button text-decoration-none" do %>
-                  <i class="fas fa-hand-holding-heart"></i>&nbsp;新しい知識を提供する
-                <% end %>
-              </p>
+                <p class="control">
+                  <%= link_to tweets_path, class: "button text-decoration-none" do %>
+                    <i class="fas fa-hand-holding-heart"></i>&nbsp;新しい知識を提供する
+                  <% end %>
+                </p>
+                <p class="control">
+                  <%= link_to users_path, class: "button text-decoration-none" do %>
+                    <i class="fas fa-users"></i>&nbsp;ユーザー一覧
+                  <% end %>
+                </p>
                 <p class="control">
                   <%= link_to edit_user_registration_path, class: "button text-decoration-none" do %>
                     <i class="fas fa-user-edit"></i>&nbsp;マイページ編集
