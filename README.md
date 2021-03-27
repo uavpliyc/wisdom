@@ -1,5 +1,6 @@
 # Wisdom
 ![pinterest_board_photo](https://user-images.githubusercontent.com/68683051/112710027-72e0b380-8f01-11eb-837b-e0821e2cb603.png)
+![logo](https://user-images.githubusercontent.com/68683051/112710059-a6bbd900-8f01-11eb-8517-d0b85fa0ab44.png)
 
 ## 概要
 <...>
