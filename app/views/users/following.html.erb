@@ -22,7 +22,11 @@
           <div class="media-content">
             <div class="content">
              <p>
-              <strong><%= user.name %></strong><br>
+              <strong><%= user.name %></strong>
+              <% if user.following?(current_user) %>
+								&nbsp;<small class="badge badge-secondary">フォローされています</small>
+							<% end %>
+							<br>
               <small><%= user.username %></small><br>
               <div><%= user.profile %></div>
              </p>
@@ -62,7 +66,7 @@
 		</nav>
 
     <% end %>
-    
+
     <%= link_to 'Back', tweets_path %>
 
    </div>
