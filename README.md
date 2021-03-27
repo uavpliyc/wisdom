@@ -1,4 +1,5 @@
 # Wisdom
+![pinterest_board_photo](https://user-images.githubusercontent.com/68683051/112710027-72e0b380-8f01-11eb-837b-e0821e2cb603.png)
 
 ## 概要
 <...>
