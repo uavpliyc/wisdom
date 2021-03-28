@@ -1,0 +1,6 @@
+ja:
+  enums:
+    tweet:
+      status:
+        published: 'ツイートする ▼'
+        draft: '下書き保存 ▼'

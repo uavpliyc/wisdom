@@ -4,11 +4,13 @@ class TweetsController < ApplicationController
 
   # GET /tweets or /tweets.json
   def index
-    @tweets     = Tweet.all.order("created_at DESC")
+    @tweets     = Tweet.published.order("created_at DESC")
     @tweet      = Tweet.new
     @categories = Category.all
-    # @tweet.user_id = current_user.id
-    # @user = User.find(@tweet.user_id)
+  end
+
+  def confirm
+    @tweets = Tweet.draft.order("created_at DESC")
   end
 
   def category
@@ -23,8 +25,12 @@ class TweetsController < ApplicationController
     @tweet    = Tweet.find(params[:id])
     @comments = @tweet.comments
     @comment  = Comment.new
-    # @user = User.find(@tweet.user_id)
-    # @comment = @tweet.comments.build
+    # 下書きはログインしていないと見れない
+    if  @tweet.nil?
+      redirect_to root_path
+    elsif @tweet.draft?
+      login_required
+    end
   end
 
   # GET /tweets/new
@@ -52,6 +58,11 @@ class TweetsController < ApplicationController
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
     end
+    # if tweet_params[:tweet][:category_id] ==  ""
+    #   flash[:notice] = "選択して下さい"
+    #   redirect_to tweets_path
+    # end
+
   end
 
   # PATCH/PUT /tweets/1 or /tweets/1.json
@@ -86,6 +97,10 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:tweet, :image, :category_id)
+      params.require(:tweet).permit(:tweet, :image, :category_id, :status)
+    end
+
+    def login_required
+      redirect_to login_url unless current_user
     end
 end
