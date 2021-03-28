@@ -1,24 +1,51 @@
-# README
+# Wisdom
+![pinterest_board_photo](https://user-images.githubusercontent.com/68683051/112710027-72e0b380-8f01-11eb-837b-e0821e2cb603.png)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 概要
+- 知識をアウトプット（ツイート）
+- 知識に対するアクションプランを提供（コメント）
+- みんなの知識をインプット
 
-Things you may want to cover:
+### サイトテーマ
+「知識を知恵にするコミュニケーションの場」
 
-* Ruby version
+### テーマを選んだ理由
+- 現状・問題点
+「知識があっても、それを実際に活かしきれていないこと」
+自己啓発系の本をよく読んでいるのですが、自分の脳内世界は変わるものの、現実世界を変えることができていないことに気付きました。
+知識のインプットはアウトプット（行動）ありきであると感じました。
+しかし、その知識をどのようにアウトプットするべきなのかが分からないことが多々ありました。
 
-* System dependencies
+- 解決策
+「アウトプットの方法を共有できるコミュニケーションの場を設ける」
+いろんな人のアウトプット方法や知見を見聞きすることができれば、アウトプット方法の選択肢が増えると考えました。
+また、知識を投稿すること自体もアウトプットになると考えました。
 
-* Configuration
+- 実行
+そのような「コミュニケーションの場」があれば、多くの人が教え合い、助け合うことができると思い、制作に至りました。
+知識にとどまらず、知恵にする、という意味で「Wisdom（知恵）」というアプリ名にしました。
 
-* Database creation
+### ターゲットユーザ
+自己成長を求める方々
 
-* Database initialization
+### 主な利用シーン
+- 個人発信の情報を入手したい時
+- 知識を言語化してアウトプットしたい時
+- 知識の具体的アクションプランのアドバイスが欲しい時
+- 意識の高い人脈を広げたい時
 
-* How to run the test suite
+## 設計書
 
-* Services (job queues, cache servers, search engines, etc.)
+## チャレンジ要素一覧
+<https://docs.google.com/spreadsheets/d/1UgK-6l38k5T81XjcTIn7CHnGRkB_sBXS5xQWAVhWmks/edit#gid=0>
 
-* Deployment instructions
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* ...
+## 使用素材
+- ロゴ：hatchful（https://hatchful.shopify.com/ja/）
+- アイコン：FontAwesome（https://fontawesome.com/icons?d=gallery&p=2）
