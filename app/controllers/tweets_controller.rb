@@ -16,7 +16,7 @@ class TweetsController < ApplicationController
   def category
     @categories = Category.all
     @category   = Category.find(params[:id])
-    @tweets     = @category.tweets.all.order("created_at DESC")
+    @tweets     = @category.tweets.published.order("created_at DESC")
     @tweet      = Tweet.new
   end
 
