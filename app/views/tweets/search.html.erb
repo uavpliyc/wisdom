@@ -1,0 +1,73 @@
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <% if user_signed_in? %>
+        <%= render 'profile', user: @user %>
+      <% else %>
+        <%= render 'trends' %>
+      <% end %>
+  <!--真ん中-->
+      <div class="column is-half">
+        <% if user_signed_in? %>
+          <article class="media box">
+            <figure class="media-left">
+              <p class="image is-64x64">
+                <%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
+              </p>
+            </figure>
+            <div class="media-content">
+              <%= render 'tweets/form', tweet: @tweet, categories: @categories %>
+            </div>
+          </article>
+        <% end %>
+      <!--検索で絞られたツイート-->
+        <% @tweets.each do |tweet| %>
+          <div class="box">
+            <article class="media">
+              <div class="media-left">
+                <%= link_to user_path(tweet.user_id) do %>
+                <figure class="image is-64x64">
+                   <%= attachment_image_tag tweet.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
+                </figure>
+                <% end %>
+              </div>
+          <%= link_to tweet, class: "level text-decoration-none" do %>
+              <div class="media-content">
+                <div class="content">
+                  <strong><%= tweet.user.name %></strong>
+                  <%= l tweet.created_at %>
+                  【<%= tweet.category.name %>】<br>
+                  <small><%= tweet.user.username %></small><br>
+                  <p><%= tweet.tweet %></p>
+                  <p><%= attachment_image_tag tweet, :image, size: "100x100", format: 'jpeg' %></p>
+                </div>
+                  <!--ツイート下部-->
+                  <div class="level-left is-mobile">
+                    <%= link_to tweet, class: "level-item text-decoration-none" do %>
+                      <span class="icon"><i class="far fa-comment" aria-hidden="true"></i><%= tweet.comments.count %></span>
+                    <% end %>
+                    <%= link_to tweet, class: "level-item" do %>
+                      <%= render 'tweets/favorite', tweet: tweet %>
+                    <% end %>
+                <% if user_signed_in? && current_user.id == tweet.user_id %>
+                    <%= link_to edit_tweet_path(tweet), class: "level-item ml-5 text-decoration-none" do %>
+                      <span class="icon"><i class="fas fa-pencil-alt" aria-hidden="true"></i></span>
+                    <% end %>
+                    <%= link_to tweet, method: :delete, data: { confirm: "このツイートを消しますか?"}, class: "ml-3" do %>
+                      <span class="icon"><i class="far fa-trash-alt" aria-hidden="true"></i></span>
+                    <% end %>
+                <% end %>
+                  </div>
+                  <!---->
+              </div>
+            </article>
+          </div>
+        <% end %>
+      <% end %>
+      <!---->
+      </div>
+  <!---->
+      <%= render 'categories', categories: @categories %>
+    </div>
+  </div>
+</section>

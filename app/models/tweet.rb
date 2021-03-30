@@ -9,6 +9,15 @@ class Tweet < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
 
+
+  def self.search(search)
+    if search
+      Tweet.where(['tweet LIKE ?', "%#{search}%"])
+    else
+      Tweet.all
+    end
+  end
+
   # def login_required
   #   redirect_to login_url unless current_user
   # end

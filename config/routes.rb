@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     member do
         get :following, :followers
       end
+        get :search, on: :collection
   end
 
   post 'follow/:id' => 'relationships#follow', as: 'follow'
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
     resources :categories, only: [:index, :create, :edit, :update]
+    get :search, on: :collection
     collection do
       get 'confirm'
     end

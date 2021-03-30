@@ -1,0 +1,7 @@
+<nav class="panel bg-white">
+	<p class="panel-heading">ツイートを検索する</p>
+  <%= form_with model: tweet, url: search_tweets_path, method: :get, local: true do |f| %>
+    <%= f.text_field :tweet, class: "form-control" %>
+    <%= f.submit :search, class: "btn btn-primary" %>
+  <% end %>
+</nav>
