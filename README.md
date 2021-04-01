@@ -35,6 +35,10 @@
 - 意識の高い人脈を広げたい時
 
 ## 設計書
+- ER図：https://drive.google.com/file/d/1x89z5kMf7Typfa9Z8XHU_ZD8A0Nkhgeh/view?usp=sharing
+- テーブル定義書：https://docs.google.com/spreadsheets/d/1zHaFxdleZrA4mA03z4QmDkjlBBYB1RReHwsOFwTD5MA/edit?usp=sharing
+- アプリケーション詳細設計書：https://drive.google.com/file/d/1tbYb2JWaVovgeaQGEjt52JatBI1iSOMt/view?usp=sharing
+
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1UTzIwUKKz4slRCEYWaZUA19uY1rX6ojcG39kXVQOcqk/edit?usp=sharing
