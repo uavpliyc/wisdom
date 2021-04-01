@@ -27,5 +27,6 @@ Rails.application.routes.draw do
   # get 'tweets/search/:id' => 'tweets#search',as: 'tweet_search'
   root "homes#index"
   get 'contacts/new' => 'contacts#new', as: 'contact'
+  post 'contacts/new', to: 'contacts#create'
 
 end
