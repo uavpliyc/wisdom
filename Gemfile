@@ -62,3 +62,7 @@ gem "refile-mini_magick"
 gem 'enum_help'
 
 gem "dotenv-rails"
+
+# deviseエラーメッセージの日本語化
+gem 'devise-i18n'
+gem 'devise-i18n-views'
