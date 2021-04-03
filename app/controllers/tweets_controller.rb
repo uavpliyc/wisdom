@@ -9,7 +9,7 @@ class TweetsController < ApplicationController
   end
 
   def confirm
-    @tweets = Tweet.draft.order("created_at DESC")
+    @tweets = current_user.tweets.draft.order("created_at DESC")
   end
 
   def category
