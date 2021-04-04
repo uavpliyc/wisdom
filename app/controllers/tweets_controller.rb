@@ -38,7 +38,6 @@ class TweetsController < ApplicationController
   def edit
     @tweet      = Tweet.find(params[:id])
     @categories = Category.all
-    # logger.debug @tweet.errors.inspect
   end
 
   def create
@@ -53,6 +52,7 @@ class TweetsController < ApplicationController
       flash[:alert] = "ツイートに失敗しました"
       render :new
     end
+    logger.debug @tweet.errors.inspect
 
     # if tweet_params[:tweet][:category_id] ==  ""
     #   flash[:notice] = "選択して下さい"
@@ -79,10 +79,10 @@ class TweetsController < ApplicationController
   end
 
   def search
-    @tweets     = Tweet.search(params[:search])
+    @tweets     = Tweet.published.order("created_at DESC")
+    @tweets     = @tweets.where('tweet LIKE ?', "%#{params[:search]}%") if params[:search].present?
     @tweet      = Tweet.new
     @categories = Category.all
-    # @category   = Category.find(params[:id])
   end
 
   private
