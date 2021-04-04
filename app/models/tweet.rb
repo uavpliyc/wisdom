@@ -26,6 +26,7 @@ class Tweet < ApplicationRecord
 
   enum status: { published: 0, draft: 1 }
 
-  # varidates :category_id, presence: true
+  validates :tweet, presence: true
+  validates :category_id, presence: true
 
 end

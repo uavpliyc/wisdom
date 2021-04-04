@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_31_231027) do
+ActiveRecord::Schema.define(version: 2021_04_03_225842) do
 
   create_table "categories", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_03_31_231027) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string "content"
+    t.string "content", null: false
     t.integer "user_id"
     t.integer "tweet_id"
     t.datetime "created_at", null: false
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 2021_03_31_231027) do
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.string "name"
-    t.string "message"
+    t.string "name", null: false
+    t.string "message", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -53,10 +53,10 @@ ActiveRecord::Schema.define(version: 2021_03_31_231027) do
   end
 
   create_table "tweets", force: :cascade do |t|
-    t.text "tweet"
+    t.text "tweet", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.string "image_id"
     t.integer "category_id", null: false
     t.integer "status", default: 0, null: false
@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(version: 2021_03_31_231027) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.string "username"
+    t.string "name", null: false
+    t.string "username", null: false
     t.text "profile"
     t.string "profile_image_id"
     t.index ["email"], name: "index_users_on_email", unique: true
