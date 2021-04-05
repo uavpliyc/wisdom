@@ -42,6 +42,7 @@ class TweetsController < ApplicationController
 
   def create
     @tweet = current_user.tweets.build(tweet_params)
+    @categories = Category.all
     if @tweet.save
       flash[:notice] = "ツイートをしました"
       redirect_to tweets_path
@@ -50,14 +51,15 @@ class TweetsController < ApplicationController
       redirect_to tweets_path
     else
       flash[:alert] = "ツイートに失敗しました"
-      render :new
+      @tweets     = Tweet.published.order("created_at DESC")
+      render :index
     end
-    logger.debug @tweet.errors.inspect
-
-    # if tweet_params[:tweet][:category_id] ==  ""
-    #   flash[:notice] = "選択して下さい"
+    # logger.debug @tweet.errors.inspect
+    # if tweet_params[:tweet][:category_id] == ""
+    #   flash[:alert] = "選択して下さい"
     #   redirect_to tweets_path
     # end
+
 
   end
 
