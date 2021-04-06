@@ -3,10 +3,8 @@ ja:
   time:
     formats:
       default: "%Y/%m/%d %H:%M"
-  # activerecord:
-  #   errors:
-  #     models:
-  #       tweet:
-  #         attributes:
-  #           tweet: "ツイート"
-              # blank: "が空になっています"
+  activerecord:
+    attributes:
+      tweet:
+        tweet: "ツイート"
+        category_id: "カテゴリー"

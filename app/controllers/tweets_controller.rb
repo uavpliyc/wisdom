@@ -52,12 +52,13 @@ class TweetsController < ApplicationController
     else
       flash[:alert] = "ツイートに失敗しました"
       @tweets     = Tweet.published.order("created_at DESC")
+      @categories = Category.all
       render :index
     end
     # logger.debug @tweet.errors.inspect
-    # if tweet_params[:tweet][:category_id] == ""
+    # if tweet_params[:category_id] == ""
     #   flash[:alert] = "選択して下さい"
-    #   redirect_to tweets_path
+    #   # redirect_to tweets_path
     # end
 
 
