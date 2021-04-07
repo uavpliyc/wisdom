@@ -25,7 +25,9 @@
                 <span class="icon"><i class="far fa-comment" aria-hidden="true"></i><%= tweet.comments.count %></span>
               <% end %>
               <%= link_to tweet, class: "level-item" do %>
-                <%= render 'tweets/favorite', tweet: tweet %>
+                <div id="fovorites_buttons_<%= tweet.id %>">
+                  <%= render 'favorites/favorite', tweet: tweet %>
+                </div>
               <% end %>
           <% if user_signed_in? && current_user.id == tweet.user_id %>
               <%= link_to edit_tweet_path(tweet), class: "level-item ml-5 text-decoration-none" do %>
