@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     @comment.tweet_id = @tweet.id
     if @comment.save
       flash[:notice] = "コメントしました！"
+      @comment.tweet.create_notification_comment!(current_user, @comment.id)
       redirect_back(fallback_location: root_path)
     else
       flash[:alert] = "コメントを記入してください"

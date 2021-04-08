@@ -1,0 +1,7 @@
+<% if user_signed_in? && current_user.id != user.id %>
+	<% if current_user.following?(user) %>
+    <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST, class: "btn btn-danger btn-sm ml-5", remote: true %>
+  <% else %>
+    <%= link_to 'フォローする', follow_path(user.id), method: :POST, class: "btn btn-success btn-sm ml-5", remote: true %>
+  <% end %>
+<% end %>
