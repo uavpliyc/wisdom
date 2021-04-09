@@ -1,7 +1,7 @@
 <section class="section">
-  <h3 class="text-center h3">通知</h3>
   <div class="container">
     <div class="col-8 mx-auto">
+      <h2 class="title is-3">通知一覧</h2>
       <% if @notifications.exists? %>
         <div>
           <%= render @notifications %>
@@ -9,7 +9,8 @@
       <% else %>
         <p class="text-center h5">通知はありません</p>
       <% end %>
+      <br>
+      <%= link_to 'Back', tweets_path %>
     </div>
-    <div class="col-3"></div>
   </div>
 </section>
