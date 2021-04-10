@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow'
   get 'tweets/category/:id' => 'tweets#category', as: 'tweet_category'
   resources :notifications, only: :index
+  resources :relationships, only: [:create, :destroy]
 
   resources :tweets do
     resource :favorites, only: [:create, :destroy]

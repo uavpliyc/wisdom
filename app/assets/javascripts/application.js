@@ -14,3 +14,19 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  $('.navbar-burger').on("click", function(){
+
+    $(this).toggleClass('open');
+    $('.navbar-item').toggleClass('open');
+  });
+
+});
+
+// メニューをクリックされたら、非表示にする
+$(function() {
+  $('.is-grouped').on("click", function(){
+     $('.navbar-item').removeClass('open');
+  });
+});

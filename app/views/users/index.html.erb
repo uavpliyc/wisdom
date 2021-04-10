@@ -42,17 +42,17 @@
 					<div class="level-item has-centered-text">
 						<div>
 							<p class="heading">フォロー</p>
-							<p class="title is-6"><%= user.follower.count %></p>
+							<p class="title is-6 following_count_<%= user.id %>"><%= user.follower.count %></p>
 						</div>
 					</div>
 						<div class="level-item has-centered-text">
 						<div>
 							<p class="heading">フォロワー</p>
-							<p class="title is-6"><%= user.followed.count %></p>
+							<p class="title is-6 follower_count_<%= user.id %>"><%= user.followed.count %></p>
 						</div>
 						<div id="follow_buttons_<%= user.id %>">
-			            	<%= render 'follows/follow', user: user %>
-			         	</div>
+			        <%= render 'follows/follow', user: user %>
+			      </div>
 					</div>
 				</div>
 			</div>
