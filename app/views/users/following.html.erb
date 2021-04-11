@@ -24,9 +24,9 @@
              <p>
               <strong><%= user.name %></strong>
               <% if user.following?(current_user) %>
-								&nbsp;<small class="badge badge-secondary">フォローされています</small>
-							<% end %>
-							<br>
+				&nbsp;<small class="badge badge-secondary">フォローされています</small>
+			  <% end %>
+			  <br>
               <small><%= user.username %></small><br>
               <div><%= user.profile %></div>
              </p>
@@ -35,33 +35,16 @@
         </article>
       </div>
       	<div class="panel-block">
-				<div class="level is-mobile">
-					<div class="level-item has-centered-text">
-						<div>
-							<p class="heading">ツイート</p>
-							<p class="title is-6"><%= user.tweets.count %></p>
-						</div>
-					</div>
-					<div class="level-item has-centered-text">
-						<div>
-							<p class="heading">フォロー</p>
-							<p class="title is-6"><%= user.follower.count %></p>
-						</div>
-					</div>
-						<div class="level-item has-centered-text">
-						<div>
-							<p class="heading">フォロワー</p>
-							<p class="title is-6"><%= user.followed.count %></p>
-						</div>
-						<% if user_signed_in? && current_user.id != user.id %>
-							<% if current_user.following?(user) %>
-						    <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST, class: "btn btn-danger btn-sm ml-5" %>
-						  <% else %>
-						    <%= link_to 'フォローする', follow_path(user.id), method: :POST, class: "btn btn-success btn-sm ml-5" %>
-						  <% end %>
-					  <% end %>
+			<div class="level is-mobile">
+				<div class="level-item has-centered-text">
+					<div>
+						<p class="heading">ツイート</p>
+						<p class="title is-6"><%= user.tweets.count %></p>
 					</div>
 				</div>
+				<div id="follow_buttons_<%= user.id %>">
+		          <%= render 'follows/follow', user: user %>
+		        </div>
 			</div>
 		</nav>
 
