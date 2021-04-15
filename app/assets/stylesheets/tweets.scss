@@ -24,10 +24,12 @@ select {
   border-color: #000;
 }
 
-// .fixed {
-//   position: fixed;
-// }
-
-// .control {
-//   background-color: white;
-// }
+@media screen and (max-width: 768px) {
+  
+  .fixed {
+    display: none;
+  }
+  
+  
+  
+}
