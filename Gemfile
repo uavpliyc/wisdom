@@ -61,6 +61,9 @@ gem "refile-mini_magick"
 
 gem 'enum_help'
 
+gem 'bootstrap', '~> 4.1.1'
+gem 'jquery-rails'
+
 gem "dotenv-rails"
 
 # deviseエラーメッセージの日本語化
