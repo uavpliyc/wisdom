@@ -1,11 +1,13 @@
 <div class="column is-half">
+  <nav class="panel">
+    <p class="panel-heading">ツイートする</p>
   <% if user_signed_in? %>
     <article class="media box">
-      <figure class="media-left">
-        <p class="image is-64x64">
-          <%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
-        </p>
-      </figure>
+      <!--<figure class="media-left">-->
+      <!--  <p class="image is-64x64">-->
+      <!--    <= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>-->
+      <!--  </p>-->
+      <!--</figure>-->
       <div class="media-content">
         <%= render 'tweets/form', tweet: @tweet, categories: @categories %>
       </div>
@@ -13,5 +15,5 @@
   <% end %>
 
  <%= render 'tweets/index', tweets: @tweets %>
-
+  </nav>
 </div>

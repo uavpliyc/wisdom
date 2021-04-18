@@ -19,7 +19,7 @@ $(function() {
   $('.navbar-burger').on("click", function(){
 
     $(this).toggleClass('open');
-    $('.navbar-item').toggleClass('open');
+    $('.burger-item').toggleClass('open');
   });
 
 });
@@ -27,6 +27,6 @@ $(function() {
 // メニューをクリックされたら、非表示にする
 $(function() {
   $('.is-grouped').on("click", function(){
-     $('.navbar-item').removeClass('open');
+     $('.burger-item').removeClass('open');
   });
 });

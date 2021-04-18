@@ -26,8 +26,12 @@ select {
 
 @media screen and (max-width: 768px) {
   
-  .fixed {
+  .category .is-one-quarter {
     display: none;
+  }
+  
+  .is-mobile {
+    display: flex;
   }
   
   

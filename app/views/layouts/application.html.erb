@@ -3,11 +3,12 @@
   <head>
     <title>Wisdom</title>
     <%= csrf_meta_tags %>
+    <meta charset="UTF-8" />
+    <meta name=”viewport” content=”width=device-width,initial-scale=1.0″>
     <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css">
     <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/9-4-1/css/9-4-1.css">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-    <meta name=”viewport” content=”width=device-width,initial-scale=1.0″>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -34,7 +35,7 @@
           <span></span>
         </div>
 
-          <nav class="navbar-item">
+          <nav class="navbar-item burger-item">
             <div class="field is-grouped">
               <% if user_signed_in? %>
                 <p class="control">
