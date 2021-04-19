@@ -26,7 +26,7 @@ select {
 
 @media screen and (max-width: 768px) {
   
-  .category .is-one-quarter {
+  .is-one-quarter {
     display: none;
   }
   
@@ -34,6 +34,13 @@ select {
     display: flex;
   }
   
+  .is-half {
+    width: 70%;
+  }
+  
+  .category {
+    width: 30%;
+  }
   
   
 }
