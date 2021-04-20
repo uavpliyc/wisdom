@@ -1,42 +1,54 @@
-# require 'rails_helper'
+require 'rails_helper'
 
-# describe '[STEP2] ユーザログイン後のテスト' do
-#   let(:user) { create(:user) }
-#   let!(:other_user) { create(:user) }
-#   let!(:tweet) { create(:tweet, user: user) }
-#   let!(:other_tweet) { create(:tweet, user: other_user) }
+describe '[STEP2] ユーザログイン後のテスト' do
+  let(:user) { create(:user) }
+  let!(:other_user) { create(:user) }
+  let!(:tweet) { create(:tweet, user: user) }
+  let!(:other_tweet) { create(:tweet, user: other_user) }
 
-#   before do
-#     visit new_user_session_path
-#     fill_in 'user[email]', with: user.email
-#     fill_in 'user[password]', with: user.password
-#     click_button 'Log in'
-#   end
+  before do
+    visit new_user_session_path
+    fill_in 'user[email]', with: Faker::Internet.email
+    fill_in 'user[password]', with: user.password
+    click_button 'Log in'
+  end
 
-#   describe 'ヘッダーのテスト: ログインしている場合' do
-#     context 'リンクの内容を確認: ※logoutは『ユーザログアウトのテスト』でテスト済みになります。' do
-#       subject { current_path }
+  describe 'ヘッダーのテスト: ログインしている場合' do
+    context 'リンクの内容を確認: ※logoutは『1_before_login』でテスト済み。' do
+      subject { current_path }
 
-#       it 'Homeを押すと、自分のユーザ詳細画面に遷移する' do
-#         home_link = find_all('a')[1].native.inner_text
-#         home_link = home_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
-#         click_link home_link
-#         is_expected.to eq '/users/' + user.id.to_s
-#       end
-#       it 'Usersを押すと、ユーザ一覧画面に遷移する' do
-#         users_link = find_all('a')[2].native.inner_text
-#         users_link = users_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
-#         click_link users_link
-#         is_expected.to eq '/users'
-#       end
-#       it 'Booksを押すと、投稿一覧画面に遷移する' do
-#         books_link = find_all('a')[3].native.inner_text
-#         books_link = books_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
-#         click_link books_link
-#         is_expected.to eq '/books'
-#       end
-#     end
-#   end
+      it '「新しい知識を提供する」を押すと、ツイート一覧画面に遷移する' do
+        home_link = find_all('a')[1].native.inner_text
+        home_link = home_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link home_link
+        is_expected.to eq '/tweets'
+      end
+      it '「下書き一覧」を押すと、下書き一覧画面に遷移する' do
+        home_link = find_all('a')[2].native.inner_text
+        home_link = home_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link home_link
+        is_expected.to eq '/tweets/confirm'
+      end
+      it '「ユーザー一覧」を押すと、ユーザ一覧画面に遷移する' do
+        users_link = find_all('a')[3].native.inner_text
+        users_link = users_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link users_link
+        is_expected.to eq '/users'
+      end
+      it '「通知一覧」を押すと、通知一覧画面に遷移する' do
+        books_link = find_all('a')[4].native.inner_text
+        books_link = books_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link books_link
+        is_expected.to eq '/notifications'
+      end
+      it '「マイページ編集」を押すと、マイページ編集画面に遷移する' do
+        books_link = find_all('a')[5].native.inner_text
+        books_link = books_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link books_link
+        is_expected.to eq '/users/edit'
+      end
+    end
+  end
 
 #   describe '投稿一覧画面のテスト' do
 #     before do
@@ -393,4 +405,4 @@
 #       end
 #     end
 #   end
-# end
+end
