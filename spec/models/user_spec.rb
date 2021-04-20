@@ -2,11 +2,11 @@
 
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe 'ユーザー', type: :model do
 
-describe 'モデルのテスト' do
+describe 'ユーザーモデルのテスト' do
   it "有効な投稿内容の場合は保存されるか" do
-    expect(FactoryBot.build(:user_test)).to be_valid
+    expect(FactoryBot.build(:user)).to be_valid
   end
 end
 

@@ -3,25 +3,30 @@
 require 'rails_helper'
 
 RSpec.describe Tweet, type: :model do
-  describe 'ツイートのバリデーション' do
-    
-    let!(:user_test) { FactoryBot.build(:user_test) }
-    let!(:category) { FactoryBot.build(:category) }
-    let!(:tweet) { FactoryBot.build(:tweet) }
+  describe 'ツイートモデルのテスト' do
 
-    # it 'バリデーションが有効であること' do
-    #   expect(tweet).to be_valid
-    # end
-    
-    it 'ツイートが空欄でないこと' do
-      tweet.tweet = ''
-      expect(tweet).to be_invalid
+    let!(:user) { build(:user) }
+    let!(:category) { build(:category) }
+    let!(:tweet) { build(:tweet, user_id: user.id) }
+
+    context 'tweetカラム' do
+      it 'ツイートが空欄でないこと' do
+        tweet.tweet = ''
+        expect(tweet).to be_invalid
+      end
+      it '140文字以下であること: 140文字は〇' do
+        tweet.tweet = Faker::Lorem.characters(number: 140)
+        is_expected.to eq true
+      end
+      it '140文字以下であること: 141文字は×' do
+        tweet.tweet = Faker::Lorem.characters(number: 141)
+        is_expected.to eq false
+      end
+      it 'カテゴリーが空欄でないこと' do
+        tweet.category_id = ''
+        expect(tweet).to be_invalid
+      end
     end
-    
-    it 'カテゴリーが空欄でないこと' do
-      tweet.category_id = ''
-      expect(tweet).to be_invalid
-    end
-    
+
   end
 end

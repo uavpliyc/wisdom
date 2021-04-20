@@ -50,7 +50,7 @@ class Tweet < ApplicationRecord
 
   enum status: { published: 0, draft: 1 }
 
-  validates :tweet, presence: true
+  validates :tweet, presence: true, length: { maximum: 140 }
   validates :category_id, presence: true
 
 end
