@@ -139,7 +139,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
 
     context 'ログイン成功のテスト' do
       before do
-        fill_in 'user[email]', with: Faker::Internet.email
+        fill_in 'user[email]', with: user.email
         fill_in 'user[password]', with: user.password
         click_button 'Log in'
       end

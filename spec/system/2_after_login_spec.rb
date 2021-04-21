@@ -3,12 +3,13 @@ require 'rails_helper'
 describe '[STEP2] ユーザログイン後のテスト' do
   let(:user) { create(:user) }
   let!(:other_user) { create(:user) }
-  let!(:tweet) { create(:tweet, user: user) }
+  let!(:category) { create(:category) }
+  let!(:tweet) { create(:tweet, user: user, category: category) }
   let!(:other_tweet) { create(:tweet, user: other_user) }
 
   before do
     visit new_user_session_path
-    fill_in 'user[email]', with: Faker::Internet.email
+    fill_in 'user[email]', with: user.email
     fill_in 'user[password]', with: user.password
     click_button 'Log in'
   end
