@@ -19,15 +19,15 @@ describe '[STEP2] ユーザログイン後のテスト' do
       subject { current_path }
 
       it '「新しい知識を提供する」を押すと、ツイート一覧画面に遷移する' do
-        home_link = find_all('a')[1].native.inner_text
-        home_link = home_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
-        click_link home_link
+        new_link = find_all('a')[1].native.inner_text
+        new_link = new_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link new_link
         is_expected.to eq '/tweets'
       end
       it '「下書き一覧」を押すと、下書き一覧画面に遷移する' do
-        home_link = find_all('a')[2].native.inner_text
-        home_link = home_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
-        click_link home_link
+        confirm_link = find_all('a')[2].native.inner_text
+        confirm_link = confirm_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link confirm_link
         is_expected.to eq '/tweets/confirm'
       end
       it '「ユーザー一覧」を押すと、ユーザ一覧画面に遷移する' do
@@ -37,15 +37,15 @@ describe '[STEP2] ユーザログイン後のテスト' do
         is_expected.to eq '/users'
       end
       it '「通知一覧」を押すと、通知一覧画面に遷移する' do
-        books_link = find_all('a')[4].native.inner_text
-        books_link = books_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
-        click_link books_link
+        notifications_link = find_all('a')[4].native.inner_text
+        notifications_link = notifications_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link notifications_link
         is_expected.to eq '/notifications'
       end
       it '「マイページ編集」を押すと、マイページ編集画面に遷移する' do
-        books_link = find_all('a')[5].native.inner_text
-        books_link = books_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
-        click_link books_link
+        mypage_link = find_all('a')[5].native.inner_text
+        mypage_link = mypage_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link mypage_link
         is_expected.to eq '/users/edit'
       end
     end
@@ -71,6 +71,112 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it '自分の投稿と他人のツイートが表示される' do
         expect(page).to have_content tweet.tweet
         expect(page).to have_content other_tweet.tweet
+      end
+    end
+
+    context 'サイドバーの確認' do
+      it '「プロフィール」と表示される' do
+        expect(page).to have_content 'プロフィール'
+      end
+      it '自分の名前とユーザーネームが表示される' do
+        expect(page).to have_content user.name
+        expect(page).to have_content user.username
+      end
+      it '自分の詳細画面へのリンクが存在する' do
+        expect(page).to have_link '', href: user_path(user)
+      end
+      it '自分のフォロー一覧画面へのリンクが存在する' do
+        expect(page).to have_link '', href: following_user_path(user)
+      end
+      it '自分のフォロワー一覧画面へのリンクが存在する' do
+        expect(page).to have_link '', href: followers_user_path(user)
+      end
+      it '「ツイートを検索する」と表示される' do
+        expect(page).to have_content 'ツイートを検索する'
+      end
+      it 'searchフォームが表示される' do
+        expect(page).to have_field 'search'
+      end
+      it 'searchフォームに値が入っていない' do
+        expect(find_field('search').text).to be_blank
+      end
+      it '「カテゴリー一覧」と表示される' do
+        expect(page).to have_content 'カテゴリー一覧'
+      end
+    end
+
+    context 'ツイートを検索するテスト' do
+      before do
+        fill_in 'search', with: 'a'
+        click_on 'search'
+      end
+      it '入力されたワードで検索したページへ遷移する' do
+        is_expected.to eq '/tweets/search'
+      end
+    end
+
+    context 'ツイート投稿フォームのテスト' do
+      it 'tweetフォームが表示される' do
+        expect(page).to have_field 'tweet[tweet]'
+      end
+      it 'tweetフォームに値が入っていない' do
+        expect(find_field('tweet[tweet]').text).to be_blank
+      end
+      it 'ツイート/下書きするボタンが表示される' do
+        expect(page).to have_button 'ツイート/下書きする'
+      end
+    end
+
+    context 'ツイート成功のテスト' do
+      before do
+        fill_in 'tweet[tweet]', with: Faker::Lorem.characters(number: 5)
+        # fill_in 'tweet[category]', with: 1 「入力」ではなく「選択」なので以下を使う
+        find("#tweet_category_id").find("option[value='1']").select_option
+      end
+
+      it '自分の新しい投稿が正しく保存される' do
+        expect { click_button 'ツイート/下書きする' }.to change(user.tweets, :count).by(1)
+      end
+      it 'リダイレクト先が、保存できた投稿の詳細画面になっている' do
+        click_button 'ツイート/下書きする'
+        expect(current_path).to eq '/tweets'
+      end
+    end
+
+    context 'カテゴリー選択のテスト' do
+      before do
+        click_on "category.id"
+      end
+      it '選択したカテゴリーの一覧ページが表示される' do
+        expect(current_path).to eq tweet_category_path(category)
+      end
+    end
+
+  end
+
+  describe '自分のツイート詳細画面のテスト' do
+    before do
+      visit tweet_path(tweet)
+    end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/tweets/' + tweet.id.to_s
+      end
+      it 'ユーザ画像・名前のリンク先が正しい' do
+        expect(page).to have_link book.user.name, href: user_path(book.user)
+      end
+      it '投稿のtitleが表示される' do
+        expect(page).to have_content book.title
+      end
+      it '投稿のopinionが表示される' do
+        expect(page).to have_content book.body
+      end
+      it '投稿の編集リンクが表示される' do
+        expect(page).to have_link 'Edit', href: edit_book_path(book)
+      end
+      it '投稿の削除リンクが表示される' do
+        expect(page).to have_link 'Destroy', href: book_path(book)
       end
     end
 
@@ -111,101 +217,28 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it '自分の新しい投稿が正しく保存される' do
         expect { click_button 'Create Book' }.to change(user.books, :count).by(1)
       end
-      it 'リダイレクト先が、保存できた投稿の詳細画面になっている' do
-        click_button 'Create Book'
-        expect(current_path).to eq '/books/' + Book.last.id.to_s
+    end
+
+    context '編集リンクのテスト' do
+      it '編集画面に遷移する' do
+        click_link 'Edit'
+        expect(current_path).to eq '/books/' + book.id.to_s + '/edit'
+      end
+    end
+
+    context '削除リンクのテスト' do
+      before do
+        click_link 'Destroy'
+      end
+
+      it '正しく削除される' do
+        expect(Book.where(id: book.id).count).to eq 0
+      end
+      it 'リダイレクト先が、投稿一覧画面になっている' do
+        expect(current_path).to eq '/books'
       end
     end
   end
-
-#   describe '自分の投稿詳細画面のテスト' do
-#     before do
-#       visit book_path(book)
-#     end
-
-#     context '表示内容の確認' do
-#       it 'URLが正しい' do
-#         expect(current_path).to eq '/books/' + book.id.to_s
-#       end
-#       it '「Book detail」と表示される' do
-#         expect(page).to have_content 'Book detail'
-#       end
-#       it 'ユーザ画像・名前のリンク先が正しい' do
-#         expect(page).to have_link book.user.name, href: user_path(book.user)
-#       end
-#       it '投稿のtitleが表示される' do
-#         expect(page).to have_content book.title
-#       end
-#       it '投稿のopinionが表示される' do
-#         expect(page).to have_content book.body
-#       end
-#       it '投稿の編集リンクが表示される' do
-#         expect(page).to have_link 'Edit', href: edit_book_path(book)
-#       end
-#       it '投稿の削除リンクが表示される' do
-#         expect(page).to have_link 'Destroy', href: book_path(book)
-#       end
-#     end
-
-#     context 'サイドバーの確認' do
-#       it '自分の名前と紹介文が表示される' do
-#         expect(page).to have_content user.name
-#         expect(page).to have_content user.introduction
-#       end
-#       it '自分のユーザ編集画面へのリンクが存在する' do
-#         expect(page).to have_link '', href: edit_user_path(user)
-#       end
-#       it '「New book」と表示される' do
-#         expect(page).to have_content 'New book'
-#       end
-#       it 'titleフォームが表示される' do
-#         expect(page).to have_field 'book[title]'
-#       end
-#       it 'titleフォームに値が入っていない' do
-#         expect(find_field('book[title]').text).to be_blank
-#       end
-#       it 'opinionフォームが表示される' do
-#         expect(page).to have_field 'book[body]'
-#       end
-#       it 'opinionフォームに値が入っていない' do
-#         expect(find_field('book[body]').text).to be_blank
-#       end
-#       it 'Create Bookボタンが表示される' do
-#         expect(page).to have_button 'Create Book'
-#       end
-#     end
-
-#     context '投稿成功のテスト' do
-#       before do
-#         fill_in 'book[title]', with: Faker::Lorem.characters(number: 5)
-#         fill_in 'book[body]', with: Faker::Lorem.characters(number: 20)
-#       end
-
-#       it '自分の新しい投稿が正しく保存される' do
-#         expect { click_button 'Create Book' }.to change(user.books, :count).by(1)
-#       end
-#     end
-
-#     context '編集リンクのテスト' do
-#       it '編集画面に遷移する' do
-#         click_link 'Edit'
-#         expect(current_path).to eq '/books/' + book.id.to_s + '/edit'
-#       end
-#     end
-
-#     context '削除リンクのテスト' do
-#       before do
-#         click_link 'Destroy'
-#       end
-
-#       it '正しく削除される' do
-#         expect(Book.where(id: book.id).count).to eq 0
-#       end
-#       it 'リダイレクト先が、投稿一覧画面になっている' do
-#         expect(current_path).to eq '/books'
-#       end
-#     end
-#   end
 
 #   describe '自分の投稿編集画面のテスト' do
 #     before do

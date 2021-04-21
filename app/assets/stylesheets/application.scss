@@ -16,6 +16,10 @@
 
 @import "bulma";
 
+#body-color {
+  background-color: #ccccff;
+}
+
 .navbar-brand .title {
   color: white;
 }
@@ -59,7 +63,7 @@
 }
 
 @media screen and (max-width: 1000px){
-	
+
 .burger-item {
 	position: absolute;
 	top: 0;
