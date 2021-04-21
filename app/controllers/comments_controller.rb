@@ -8,9 +8,12 @@ class CommentsController < ApplicationController
       flash[:notice] = "コメントしました！"
       @comment.tweet.create_notification_comment!(current_user, @comment.id)
       redirect_back(fallback_location: root_path)
-    else
+    elsif @comment.content == ""
       flash[:alert] = "コメントを記入してください"
       redirect_back(fallback_location: root_path)
+    else
+      flash[:alert] = "コメントは140字までです"
+      render 'tweets/show'
     end
   end
 
