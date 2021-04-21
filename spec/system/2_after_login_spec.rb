@@ -51,72 +51,72 @@ describe '[STEP2] ユーザログイン後のテスト' do
     end
   end
 
-#   describe '投稿一覧画面のテスト' do
-#     before do
-#       visit books_path
-#     end
+  describe 'ツイート一覧画面のテスト' do
+    before do
+      visit tweets_path
+    end
 
-#     context '表示内容の確認' do
-#       it 'URLが正しい' do
-#         expect(current_path).to eq '/books'
-#       end
-#       it '自分と他人の画像のリンク先が正しい' do
-#         expect(page).to have_link '', href: user_path(book.user)
-#         expect(page).to have_link '', href: user_path(other_book.user)
-#       end
-#       it '自分の投稿と他人の投稿のタイトルのリンク先がそれぞれ正しい' do
-#         expect(page).to have_link book.title, href: book_path(book)
-#         expect(page).to have_link other_book.title, href: book_path(other_book)
-#       end
-#       it '自分の投稿と他人の投稿のオピニオンが表示される' do
-#         expect(page).to have_content book.body
-#         expect(page).to have_content other_book.body
-#       end
-#     end
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/tweets'
+      end
+      it '自分と他人の画像のリンク先が正しい' do
+        expect(page).to have_link '', href: user_path(tweet.user)
+        expect(page).to have_link '', href: user_path(other_tweet.user)
+      end
+      it '自分の投稿と他人の投稿のタイトルのリンク先がそれぞれ正しい' do
+        expect(page).to have_link tweet.tweet, href: tweet_path(tweet)
+        expect(page).to have_link other_tweet.tweet, href: tweet_path(other_tweet)
+      end
+      it '自分の投稿と他人のツイートが表示される' do
+        expect(page).to have_content tweet.tweet
+        expect(page).to have_content other_tweet.tweet
+      end
+    end
 
-#     context 'サイドバーの確認' do
-#       it '自分の名前と紹介文が表示される' do
-#         expect(page).to have_content user.name
-#         expect(page).to have_content user.introduction
-#       end
-#       it '自分のユーザ編集画面へのリンクが存在する' do
-#         expect(page).to have_link '', href: edit_user_path(user)
-#       end
-#       it '「New book」と表示される' do
-#         expect(page).to have_content 'New book'
-#       end
-#       it 'titleフォームが表示される' do
-#         expect(page).to have_field 'book[title]'
-#       end
-#       it 'titleフォームに値が入っていない' do
-#         expect(find_field('book[title]').text).to be_blank
-#       end
-#       it 'opinionフォームが表示される' do
-#         expect(page).to have_field 'book[body]'
-#       end
-#       it 'opinionフォームに値が入っていない' do
-#         expect(find_field('book[body]').text).to be_blank
-#       end
-#       it 'Create Bookボタンが表示される' do
-#         expect(page).to have_button 'Create Book'
-#       end
-#     end
+    context 'サイドバーの確認' do
+      it '自分の名前と紹介文が表示される' do
+        expect(page).to have_content user.name
+        expect(page).to have_content user.introduction
+      end
+      it '自分のユーザ編集画面へのリンクが存在する' do
+        expect(page).to have_link '', href: edit_user_path(user)
+      end
+      it '「New book」と表示される' do
+        expect(page).to have_content 'New book'
+      end
+      it 'titleフォームが表示される' do
+        expect(page).to have_field 'book[title]'
+      end
+      it 'titleフォームに値が入っていない' do
+        expect(find_field('book[title]').text).to be_blank
+      end
+      it 'opinionフォームが表示される' do
+        expect(page).to have_field 'book[body]'
+      end
+      it 'opinionフォームに値が入っていない' do
+        expect(find_field('book[body]').text).to be_blank
+      end
+      it 'Create Bookボタンが表示される' do
+        expect(page).to have_button 'Create Book'
+      end
+    end
 
-#     context '投稿成功のテスト' do
-#       before do
-#         fill_in 'book[title]', with: Faker::Lorem.characters(number: 5)
-#         fill_in 'book[body]', with: Faker::Lorem.characters(number: 20)
-#       end
+    context '投稿成功のテスト' do
+      before do
+        fill_in 'book[title]', with: Faker::Lorem.characters(number: 5)
+        fill_in 'book[body]', with: Faker::Lorem.characters(number: 20)
+      end
 
-#       it '自分の新しい投稿が正しく保存される' do
-#         expect { click_button 'Create Book' }.to change(user.books, :count).by(1)
-#       end
-#       it 'リダイレクト先が、保存できた投稿の詳細画面になっている' do
-#         click_button 'Create Book'
-#         expect(current_path).to eq '/books/' + Book.last.id.to_s
-#       end
-#     end
-#   end
+      it '自分の新しい投稿が正しく保存される' do
+        expect { click_button 'Create Book' }.to change(user.books, :count).by(1)
+      end
+      it 'リダイレクト先が、保存できた投稿の詳細画面になっている' do
+        click_button 'Create Book'
+        expect(current_path).to eq '/books/' + Book.last.id.to_s
+      end
+    end
+  end
 
 #   describe '自分の投稿詳細画面のテスト' do
 #     before do
