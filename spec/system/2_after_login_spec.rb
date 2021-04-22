@@ -278,8 +278,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_content other_user.name
       end
       it '自分と他人のshowリンクがそれぞれ表示される' do
-        expect(page).to have_link 'user.profile_image', href: user_path(user)
-        expect(page).to have_link 'user.profile_image', href: user_path(other_user)
+        expect(page).to have_link href: user_path(user)
+        expect(page).to have_link href: user_path(other_user)
       end
       # it 'フォローする/フォロー外すボタンが表示される' do
       #   expect(page).to include 'フォローする' or 'フォロー外す'
