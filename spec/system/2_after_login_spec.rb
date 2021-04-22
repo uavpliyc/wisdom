@@ -315,47 +315,48 @@ describe '[STEP2] ユーザログイン後のテスト' do
 
   end
 
-#   describe '自分のユーザ情報編集画面のテスト' do
-#     before do
-#       visit edit_user_path(user)
-#     end
+  describe '自分のユーザ情報編集画面のテスト' do
+    before do
+      visit edit_user_registration_path
+    end
 
-#     context '表示の確認' do
-#       it 'URLが正しい' do
-#         expect(current_path).to eq '/users/' + user.id.to_s + '/edit'
-#       end
-#       it '名前編集フォームに自分の名前が表示される' do
-#         expect(page).to have_field 'user[name]', with: user.name
-#       end
-#       it '画像編集フォームが表示される' do
-#         expect(page).to have_field 'user[profile_image]'
-#       end
-#       it '自己紹介編集フォームに自分の自己紹介文が表示される' do
-#         expect(page).to have_field 'user[introduction]', with: user.introduction
-#       end
-#       it 'Update Userボタンが表示される' do
-#         expect(page).to have_button 'Update User'
-#       end
-#     end
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/users/edit'
+      end
+      it '名前編集フォームに自分の名前が表示される' do
+        expect(page).to have_field 'user[name]', with: user.name
+      end
+      it '画像編集フォームが表示される' do
+        expect(page).to have_field 'user[profile_image]'
+      end
+      it '自己紹介編集フォームに自分の自己紹介文が表示される' do
+        expect(page).to have_field 'user[profile]', with: user.profile
+      end
+      it '更新するボタンが表示される' do
+        expect(page).to have_button '更新する'
+      end
+    end
 
-#     context '更新成功のテスト' do
-#       before do
-#         @user_old_name = user.name
-#         @user_old_intrpduction = user.introduction
-#         fill_in 'user[name]', with: Faker::Lorem.characters(number: 9)
-#         fill_in 'user[introduction]', with: Faker::Lorem.characters(number: 19)
-#         click_button 'Update User'
-#       end
+    context '更新成功のテスト' do
+      before do
+        @user_old_name = user.name
+        @user_old_profile = user.profile
+        fill_in 'user[name]', with: Faker::Lorem.characters(number: 8)
+        fill_in 'user[profile]', with: Faker::Lorem.characters(number: 15)
+        fill_in 'user[current_password]', with: user.password
+        click_button '更新する'
+      end
 
-#       it 'nameが正しく更新される' do
-#         expect(user.reload.name).not_to eq @user_old_name
-#       end
-#       it 'introductionが正しく更新される' do
-#         expect(user.reload.introduction).not_to eq @user_old_intrpduction
-#       end
-#       it 'リダイレクト先が、自分のユーザ詳細画面になっている' do
-#         expect(current_path).to eq '/users/' + user.id.to_s
-#       end
-#     end
-#   end
+      it 'nameが正しく更新される' do
+        expect(user.reload.name).not_to eq @user_old_name
+      end
+      it 'profileが正しく更新される' do
+        expect(user.reload.profile).not_to eq @user_old_profile
+      end
+      it 'リダイレクト先が、自分のユーザ詳細画面になっている' do
+        expect(current_path).to eq '/users/' + user.id.to_s
+      end
+    end
+  end
 end
