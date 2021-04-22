@@ -25,3 +25,4 @@ Category.create([
     { name: '歴史'},
     { name: 'テクノロジー'},
     ])
+

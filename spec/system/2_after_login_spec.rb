@@ -211,107 +211,109 @@ describe '[STEP2] ユーザログイン後のテスト' do
     end
   end
 
-#   describe '自分の投稿編集画面のテスト' do
-#     before do
-#       visit edit_book_path(book)
-#     end
+  describe '自分の投稿編集画面のテスト' do
+    before do
+      visit edit_tweet_path(tweet)
+    end
 
-#     context '表示の確認' do
-#       it 'URLが正しい' do
-#         expect(current_path).to eq '/books/' + book.id.to_s + '/edit'
-#       end
-#       it '「Editing Book」と表示される' do
-#         expect(page).to have_content 'Editing Book'
-#       end
-#       it 'title編集フォームが表示される' do
-#         expect(page).to have_field 'book[title]', with: book.title
-#       end
-#       it 'opinion編集フォームが表示される' do
-#         expect(page).to have_field 'book[body]', with: book.body
-#       end
-#       it 'Update Bookボタンが表示される' do
-#         expect(page).to have_button 'Update Book'
-#       end
-#       it 'Showリンクが表示される' do
-#         expect(page).to have_link 'Show', href: book_path(book)
-#       end
-#       it 'Backリンクが表示される' do
-#         expect(page).to have_link 'Back', href: books_path
-#       end
-#     end
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/tweets/' + tweet.id.to_s + '/edit'
+      end
+      it '「ツイートを編集する」と表示される' do
+        expect(page).to have_content 'ツイートを編集する'
+      end
+      it 'ツイート編集フォームが表示される' do
+        expect(page).to have_field 'tweet[tweet]', with: tweet.tweet
+      end
+      it 'カテゴリーセレクトボタンが表示される' do
+        expect(page).to have_field 'tweet[category_id]'
+      end
+      it '画像添付用ファイルを選択が表示される' do
+        expect(page).to have_link '#tweet_image'
+      end
+      it 'ツイートする/下書きするセレクトボタンが表示される' do
+        expect(page).to have_select 'tweet[status]'
+      end
+      it 'ツイート/下書きするボタンが表示される' do
+        expect(page).to have_button 'ツイート/下書きする'
+      end
+      it 'Cancelボタンが表示される' do
+        expect(page).to have_link 'Cancel'
+      end
+    end
 
-#     context '編集成功のテスト' do
-#       before do
-#         @book_old_title = book.title
-#         @book_old_body = book.body
-#         fill_in 'book[title]', with: Faker::Lorem.characters(number: 4)
-#         fill_in 'book[body]', with: Faker::Lorem.characters(number: 19)
-#         click_button 'Update Book'
-#       end
+    context '編集成功のテスト' do
+      before do
+        @tweet_old_tweet = tweet.tweet
+        @tweet_old_category = tweet.category
+        fill_in 'tweet[tweet]', with: Faker::Lorem.characters(number: 15)
+        find("#tweet_category_id").find("option[value='2']").select_option
+        click_button 'ツイート/下書きする'
+      end
 
-#       it 'titleが正しく更新される' do
-#         expect(book.reload.title).not_to eq @book_old_title
-#       end
-#       it 'bodyが正しく更新される' do
-#         expect(book.reload.body).not_to eq @book_old_body
-#       end
-#       it 'リダイレクト先が、更新した投稿の詳細画面になっている' do
-#         expect(current_path).to eq '/books/' + book.id.to_s
-#         expect(page).to have_content 'Book detail'
-#       end
-#     end
-#   end
+      it 'ツイートが正しく更新される' do
+        expect(tweet.reload.tweet).not_to eq @tweet_old_tweet
+      end
+      it 'カテゴリーが正しく更新される' do
+        expect(tweet.reload.category).not_to eq @tweet_old_category
+      end
+      it 'リダイレクト先が、更新したツイートの詳細画面になっている' do
+        expect(current_path).to eq '/tweets/' + tweet.id.to_s
+      end
+    end
+  end
 
-#   describe 'ユーザ一覧画面のテスト' do
-#     before do
-#       visit users_path
-#     end
+  describe 'ユーザ一覧画面のテスト' do
+    before do
+      visit users_path
+    end
 
-#     context '表示内容の確認' do
-#       it 'URLが正しい' do
-#         expect(current_path).to eq '/users'
-#       end
-#       it '自分と他人の画像が表示される: fallbackの画像がサイドバーの1つ＋一覧(2人)の2つの計3つ存在する' do
-#         expect(all('img').size).to eq(3)
-#       end
-#       it '自分と他人の名前がそれぞれ表示される' do
-#         expect(page).to have_content user.name
-#         expect(page).to have_content other_user.name
-#       end
-#       it '自分と他人のshowリンクがそれぞれ表示される' do
-#         expect(page).to have_link 'Show', href: user_path(user)
-#         expect(page).to have_link 'Show', href: user_path(other_user)
-#       end
-#     end
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/users'
+      end
+      it '自分と他人の画像が表示される: fallbackの画像がサイドバーの1つ＋一覧(2人)の2つの計3つ存在する' do
+        expect(all('img').size).to eq(3)
+      end
+      it '自分と他人の名前がそれぞれ表示される' do
+        expect(page).to have_content user.name
+        expect(page).to have_content other_user.name
+      end
+      it '自分と他人のshowリンクがそれぞれ表示される' do
+        expect(page).to have_link 'Show', href: user_path(user)
+        expect(page).to have_link 'Show', href: user_path(other_user)
+      end
+    end
 
-#     context 'サイドバーの確認' do
-#       it '自分の名前と紹介文が表示される' do
-#         expect(page).to have_content user.name
-#         expect(page).to have_content user.introduction
-#       end
-#       it '自分のユーザ編集画面へのリンクが存在する' do
-#         expect(page).to have_link '', href: edit_user_path(user)
-#       end
-#       it '「New book」と表示される' do
-#         expect(page).to have_content 'New book'
-#       end
-#       it 'titleフォームが表示される' do
-#         expect(page).to have_field 'book[title]'
-#       end
-#       it 'titleフォームに値が入っていない' do
-#         expect(find_field('book[title]').text).to be_blank
-#       end
-#       it 'opinionフォームが表示される' do
-#         expect(page).to have_field 'book[body]'
-#       end
-#       it 'opinionフォームに値が入っていない' do
-#         expect(find_field('book[body]').text).to be_blank
-#       end
-#       it 'Create Bookボタンが表示される' do
-#         expect(page).to have_button 'Create Book'
-#       end
-#     end
-#   end
+    context 'サイドバーの確認' do
+      it '自分の名前と紹介文が表示される' do
+        expect(page).to have_content user.name
+        expect(page).to have_content user.introduction
+      end
+      it '自分のユーザ編集画面へのリンクが存在する' do
+        expect(page).to have_link '', href: edit_user_path(user)
+      end
+      it '「New book」と表示される' do
+        expect(page).to have_content 'New book'
+      end
+      it 'titleフォームが表示される' do
+        expect(page).to have_field 'book[title]'
+      end
+      it 'titleフォームに値が入っていない' do
+        expect(find_field('book[title]').text).to be_blank
+      end
+      it 'opinionフォームが表示される' do
+        expect(page).to have_field 'book[body]'
+      end
+      it 'opinionフォームに値が入っていない' do
+        expect(find_field('book[body]').text).to be_blank
+      end
+      it 'Create Bookボタンが表示される' do
+        expect(page).to have_button 'Create Book'
+      end
+    end
+  end
 
 #   describe '自分のユーザ詳細画面のテスト' do
 #     before do
