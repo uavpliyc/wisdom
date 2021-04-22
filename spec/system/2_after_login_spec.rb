@@ -273,101 +273,47 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it 'URLが正しい' do
         expect(current_path).to eq '/users'
       end
-      it '自分と他人の画像が表示される: fallbackの画像がサイドバーの1つ＋一覧(2人)の2つの計3つ存在する' do
-        expect(all('img').size).to eq(3)
-      end
       it '自分と他人の名前がそれぞれ表示される' do
         expect(page).to have_content user.name
         expect(page).to have_content other_user.name
       end
       it '自分と他人のshowリンクがそれぞれ表示される' do
-        expect(page).to have_link 'Show', href: user_path(user)
-        expect(page).to have_link 'Show', href: user_path(other_user)
+        expect(page).to have_link 'user.profile_image', href: user_path(user)
+        expect(page).to have_link 'user.profile_image', href: user_path(other_user)
       end
+      # it 'フォローする/フォロー外すボタンが表示される' do
+      #   expect(page).to include 'フォローする' or 'フォロー外す'
+      # end
     end
 
-    context 'サイドバーの確認' do
-      it '自分の名前と紹介文が表示される' do
-        expect(page).to have_content user.name
-        expect(page).to have_content user.introduction
-      end
-      it '自分のユーザ編集画面へのリンクが存在する' do
-        expect(page).to have_link '', href: edit_user_path(user)
-      end
-      it '「New book」と表示される' do
-        expect(page).to have_content 'New book'
-      end
-      it 'titleフォームが表示される' do
-        expect(page).to have_field 'book[title]'
-      end
-      it 'titleフォームに値が入っていない' do
-        expect(find_field('book[title]').text).to be_blank
-      end
-      it 'opinionフォームが表示される' do
-        expect(page).to have_field 'book[body]'
-      end
-      it 'opinionフォームに値が入っていない' do
-        expect(find_field('book[body]').text).to be_blank
-      end
-      it 'Create Bookボタンが表示される' do
-        expect(page).to have_button 'Create Book'
-      end
-    end
   end
 
-#   describe '自分のユーザ詳細画面のテスト' do
-#     before do
-#       visit user_path(user)
-#     end
+  describe '自分のユーザ詳細画面のテスト' do
+    before do
+      visit user_path(user)
+    end
 
-#     context '表示の確認' do
-#       it 'URLが正しい' do
-#         expect(current_path).to eq '/users/' + user.id.to_s
-#       end
-#       it '投稿一覧のユーザ画像のリンク先が正しい' do
-#         expect(page).to have_link '', href: user_path(user)
-#       end
-#       it '投稿一覧に自分の投稿のtitleが表示され、リンクが正しい' do
-#         expect(page).to have_link book.title, href: book_path(book)
-#       end
-#       it '投稿一覧に自分の投稿のopinionが表示される' do
-#         expect(page).to have_content book.body
-#       end
-#       it '他人の投稿は表示されない' do
-#         expect(page).not_to have_link '', href: user_path(other_user)
-#         expect(page).not_to have_content other_book.title
-#         expect(page).not_to have_content other_book.body
-#       end
-#     end
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/users/' + user.id.to_s
+      end
+      it '投稿一覧のユーザ画像のリンク先が正しい' do
+        expect(page).to have_link '', href: user_path(user)
+      end
+      it '投稿一覧に自分のツイートが表示され、リンクが正しい' do
+        expect(page).to have_link tweet.tweet, href: tweet_path(tweet)
+      end
+      it '投稿一覧に自分のツイートのカテゴリーが表示される' do
+        expect(page).to have_content tweet.category_id
+      end
+      it '他人の投稿は表示されない' do
+        expect(page).not_to have_link '', href: user_path(other_user)
+        expect(page).not_to have_content other_tweet.tweet
+        expect(page).not_to have_content other_tweet.category
+      end
+    end
 
-#     context 'サイドバーの確認' do
-#       it '自分の名前と紹介文が表示される' do
-#         expect(page).to have_content user.name
-#         expect(page).to have_content user.introduction
-#       end
-#       it '自分のユーザ編集画面へのリンクが存在する' do
-#         expect(page).to have_link '', href: edit_user_path(user)
-#       end
-#       it '「New book」と表示される' do
-#         expect(page).to have_content 'New book'
-#       end
-#       it 'titleフォームが表示される' do
-#         expect(page).to have_field 'book[title]'
-#       end
-#       it 'titleフォームに値が入っていない' do
-#         expect(find_field('book[title]').text).to be_blank
-#       end
-#       it 'opinionフォームが表示される' do
-#         expect(page).to have_field 'book[body]'
-#       end
-#       it 'opinionフォームに値が入っていない' do
-#         expect(find_field('book[body]').text).to be_blank
-#       end
-#       it 'Create Bookボタンが表示される' do
-#         expect(page).to have_button 'Create Book'
-#       end
-#     end
-#   end
+  end
 
 #   describe '自分のユーザ情報編集画面のテスト' do
 #     before do
