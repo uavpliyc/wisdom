@@ -6,6 +6,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
   let!(:category) { create(:category) }
   let!(:tweet) { create(:tweet, user: user, category: category) }
   let!(:other_tweet) { create(:tweet, user: other_user) }
+  # let!(:comment) { create(:content) }
 
   before do
     visit new_user_session_path
@@ -145,7 +146,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
 
     context 'カテゴリー選択のテスト' do
       before do
-        click_on "category.id"
+        click_on "tweets/category.id"
       end
       it '選択したカテゴリーの一覧ページが表示される' do
         expect(current_path).to eq tweet_category_path(category)
@@ -172,26 +173,37 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it 'コメントのフォームが表示される' do
         expect(page).to have_field comment[content]
       end
-      it 'ツイートの編集リンクが表示される' do
-        expect(page).to have_link '.fa-pencil-alt', href: edit_tweet_path(tweet)
+      it 'コメントリンクが左から１番目に表示される' do
+        comment_tweet_link = find_all('.level-item')[1]
+        expect(page).to have_link comment_tweet_link, href: tweet_path(tweet)
       end
-      it 'ツイートの削除リンクが表示される' do
-        expect(page).to have_link '.fa-trash-alt', href: tweet_path(tweet)
+      it 'いいねが左から２番目に表示される' do
+        favorite_tweet = find_all('.level-item')[2]
+        expect(page).to have_content favorite_tweet
+      end
+      it 'ツイートの編集リンクが左から３番目に表示される' do
+        edit_tweet_link = find_all('.level-item')[3]
+        expect(page).to have_link edit_tweet_link, href: edit_tweet_path(tweet)
+      end
+      it 'ツイートの削除リンクが左から４番目に表示される' do
+        destroy_tweet_link = find_all('.level-item')[4]
+        expect(page).to have_link destroy_tweet_link, href: tweet_path(tweet)
       end
     end
 
     context '編集リンクのテスト' do
       it '編集画面に遷移する' do
-        click_link 'Edit'
+        edit_tweet_link = find_all('.level-item')[3]
+        click_link edit_tweet_link, match: :first
         expect(current_path).to eq '/tweets/' + tweet.id.to_s + '/edit'
       end
     end
 
     context '削除リンクのテスト' do
       before do
-        click_link 'Destroy'
+        destroy_tweet_link = find_all('.level-item')[4]
+        click_link destroy_tweet_link, match: :first
       end
-
       it '正しく削除される' do
         expect(Tweet.where(id: tweet.id).count).to eq 0
       end

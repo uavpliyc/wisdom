@@ -2,11 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe Tweet, type: :model do
-  describe 'ツイートモデルのテスト' do
+RSpec.describe 'ツイートモデルのテスト', type: :model do
+  describe 'バリデーションのテスト' do
+    subject { tweet.valid? }
 
-    let!(:user) { build(:user) }
-    let!(:category) { build(:category) }
+    let(:user) { create(:user) }
+    let(:category) { create(:category) }
     let!(:tweet) { build(:tweet, user_id: user.id) }
 
     context 'tweetカラム' do

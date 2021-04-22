@@ -12,7 +12,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       end
       it 'Log inリンクが表示される: 左上から1番目のリンクが「ログイン」である' do
         log_in_link = find_all('a')[1].native.inner_text
-        expect(log_in_link).to match(/ログイン/i)
+        expect(log_in_link).to match(/ログイン/)
       end
       it 'Log inリンクの内容が正しい' do
         log_in_link = find_all('a')[1].native.inner_text
