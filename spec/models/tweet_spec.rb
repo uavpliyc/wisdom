@@ -8,7 +8,7 @@ RSpec.describe 'ツイートモデルのテスト', type: :model do
 
     let(:user) { create(:user) }
     let(:category) { create(:category) }
-    let!(:tweet) { build(:tweet, user_id: user.id) }
+    let!(:tweet) { build(:tweet, user_id: user.id, category: category) }
 
     context 'tweetカラム' do
       it 'ツイートが空欄でないこと' do
