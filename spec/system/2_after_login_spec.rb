@@ -109,10 +109,10 @@ describe '[STEP2] ユーザログイン後のテスト' do
     context 'ツイートを検索するテスト' do
       before do
         fill_in 'search', with: 'a'
-        click_on 'search'
+        click_button 'search'
       end
       it '入力されたワードで検索したページへ遷移する' do
-        is_expected.to eq '/tweets/search'
+        expect(current_path).to eq '/tweets/search'
       end
     end
 
