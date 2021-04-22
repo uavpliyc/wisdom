@@ -32,10 +32,10 @@
                   <%= render 'favorites/favorite', tweet: @tweet %>
                 </div>
               <% if user_signed_in? && current_user.id == @tweet.user_id %>
-                <%= link_to edit_tweet_path(@tweet), class: "level-item ml-5 text-decoration-none" do %>
+                <%= link_to edit_tweet_path(@tweet), class: "level-item ml-5 text-decoration-none edit-btn" do %>
                   <span class="icon"><i class="fas fa-pencil-alt" aria-hidden="true"></i></span>
                 <% end %>
-                <%= link_to @tweet, method: :delete, data: { confirm: "Are you sure you want to delete this tweet?"}, class: "ml-3" do %>
+                <%= link_to @tweet, method: :delete, data: { confirm: "Are you sure you want to delete this tweet?"}, class: "ml-3 destroy-btn" do %>
                   <span class="icon"><i class="far fa-trash-alt" aria-hidden="true"></i></span>
                 <% end %>
               <% end %>

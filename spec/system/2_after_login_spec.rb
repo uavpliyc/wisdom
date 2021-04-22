@@ -4,9 +4,9 @@ describe '[STEP2] ユーザログイン後のテスト' do
   let(:user) { create(:user) }
   let!(:other_user) { create(:user) }
   let!(:category) { create(:category) }
+  let!(:comment) { create(:comment) }
   let!(:tweet) { create(:tweet, user: user, category: category) }
   let!(:other_tweet) { create(:tweet, user: other_user) }
-  # let!(:comment) { create(:content) }
 
   before do
     visit new_user_session_path
@@ -171,7 +171,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_content tweet.tweet
       end
       it 'コメントのフォームが表示される' do
-        expect(page).to have_field comment[content]
+        expect(page).to have_field comment[comment]
       end
       it 'コメントリンクが左から１番目に表示される' do
         comment_tweet_link = find_all('.level-item')[1]
@@ -193,16 +193,14 @@ describe '[STEP2] ユーザログイン後のテスト' do
 
     context '編集リンクのテスト' do
       it '編集画面に遷移する' do
-        edit_tweet_link = find_all('.level-item')[3]
-        click_link edit_tweet_link, match: :first
+        find('.edit-btn').click
         expect(current_path).to eq '/tweets/' + tweet.id.to_s + '/edit'
       end
     end
 
     context '削除リンクのテスト' do
       before do
-        destroy_tweet_link = find_all('.level-item')[4]
-        click_link destroy_tweet_link, match: :first
+        find('.destroy-btn').click
       end
       it '正しく削除される' do
         expect(Tweet.where(id: tweet.id).count).to eq 0
