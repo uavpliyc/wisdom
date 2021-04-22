@@ -39,8 +39,8 @@
 						</div>
 					</div>
 					<div id="follow_buttons_<%= @user.id %>">
-			          <%= render 'follows/follow', user: @user %>
-			        </div>
+			      <%= render 'follows/follow', user: @user %>
+			    </div>
 				</div>
 			</div>
 
@@ -48,7 +48,7 @@
 
 		<%= render 'tweets/index', tweets: @tweets %>
 
-		<%= link_to 'Back', tweets_path %>
+		<%= link_to 'Back', :back %>
 
    </div>
   </div>
