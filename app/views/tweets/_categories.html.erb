@@ -3,7 +3,7 @@
     <p class="panel-heading">カテゴリー一覧</p>
 
     <% categories.each do |category| %>
-      <%= link_to tweet_category_path(category) do %>
+      <%= link_to tweet_category_path(category), class: "category-btn" do %>
         <div class="panel-block category-hover">
           <article class="media">
             <div class="media-left">

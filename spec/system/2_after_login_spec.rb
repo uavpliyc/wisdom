@@ -146,7 +146,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
 
     context 'カテゴリー選択のテスト' do
       before do
-        click_on "tweets/category.id"
+        first('.category-btn').click
       end
       it '選択したカテゴリーの一覧ページが表示される' do
         expect(current_path).to eq tweet_category_path(category)
