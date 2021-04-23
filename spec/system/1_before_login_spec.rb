@@ -78,6 +78,9 @@ describe '[STEP1] ユーザログイン前のテスト' do
       it 'nameフォームが表示される' do
         expect(page).to have_field 'user[name]'
       end
+      it 'usernameフォームが表示される' do
+        expect(page).to have_field 'user[username]'
+      end
       it 'emailフォームが表示される' do
         expect(page).to have_field 'user[email]'
       end
@@ -95,6 +98,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
     context '新規登録成功のテスト' do
       before do
         fill_in 'user[name]', with: Faker::Lorem.characters(number: 10)
+        fill_in 'user[username]', with: Faker::Lorem.characters(number: 10)
         fill_in 'user[email]', with: Faker::Internet.email
         fill_in 'user[password]', with: 'password'
         fill_in 'user[password_confirmation]', with: 'password'

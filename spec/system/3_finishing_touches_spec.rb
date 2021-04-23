@@ -14,57 +14,59 @@ describe '[STEP3] 仕上げのテスト' do
     it 'ユーザ新規登録成功時' do
       visit new_user_registration_path
       fill_in 'user[name]', with: Faker::Lorem.characters(number: 9)
+      fill_in 'user[username]', with: Faker::Lorem.characters(number: 9)
       fill_in 'user[email]', with: 'a' + user.email # 確実にuser, other_userと違う文字列にするため
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
       click_button 'Sign up'
-      is_expected.to have_content 'successfully'
+      is_expected.to have_content 'アカウント登録が完了しました'
     end
     it 'ユーザログイン成功時' do
       visit new_user_session_path
-      fill_in 'user[name]', with: user.name
+      fill_in 'user[email]', with: user.email
       fill_in 'user[password]', with: user.password
       click_button 'Log in'
-      is_expected.to have_content 'successfully'
+      is_expected.to have_content 'ログインしました'
     end
     it 'ユーザログアウト成功時' do
       visit new_user_session_path
-      fill_in 'user[name]', with: user.name
+      fill_in 'user[email]', with: user.email
       fill_in 'user[password]', with: user.password
       click_button 'Log in'
-      logout_link = find_all('a')[4].native.inner_text
+      logout_link = find_all('a')[6].native.inner_text
       logout_link = logout_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
       click_link logout_link
-      is_expected.to have_content 'successfully'
+      is_expected.to have_content 'ログアウトしました'
     end
     it 'ユーザのプロフィール情報更新成功時' do
       visit new_user_session_path
-      fill_in 'user[name]', with: user.name
+      fill_in 'user[email]', with: user.email
       fill_in 'user[password]', with: user.password
       click_button 'Log in'
-      visit edit_user_path(user)
-      click_button 'Update User'
-      is_expected.to have_content 'successfully'
+      visit edit_user_registration_path
+      fill_in 'user[current_password]', with: user.password
+      click_button '更新する'
+      is_expected.to have_content 'アカウント情報を変更しました'
     end
-    it '投稿データの新規投稿成功時: 投稿一覧画面から行います。' do
+    it 'ツイートの新規投稿成功時' do
       visit new_user_session_path
-      fill_in 'user[name]', with: user.name
+      fill_in 'user[email]', with: user.email
       fill_in 'user[password]', with: user.password
       click_button 'Log in'
-      visit books_path
-      fill_in 'book[title]', with: Faker::Lorem.characters(number: 5)
-      fill_in 'book[body]', with: Faker::Lorem.characters(number: 20)
-      click_button 'Create Book'
-      is_expected.to have_content 'successfully'
+      visit tweets_path
+      fill_in 'tweet[tweet]', with: Faker::Lorem.characters(number: 20)
+      find("#tweet_category_id").find("option[value='1']").select_option
+      click_button 'ツイート/下書きする'
+      is_expected.to have_content 'ツイートをしました'
     end
-    it '投稿データの更新成功時' do
+    it 'ツイートの更新成功時' do
       visit new_user_session_path
-      fill_in 'user[name]', with: user.name
+      fill_in 'user[email]', with: user.email
       fill_in 'user[password]', with: user.password
       click_button 'Log in'
-      visit edit_book_path(book)
-      click_button 'Update Book'
-      is_expected.to have_content 'successfully'
+      visit edit_tweet_path(tweet)
+      click_button 'ツイート/下書きする'
+      is_expected.to have_content 'ツイートを更新しました'
     end
   end
 
