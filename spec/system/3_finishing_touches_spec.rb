@@ -70,112 +70,115 @@ describe '[STEP3] 仕上げのテスト' do
     end
   end
 
-  # describe '処理失敗時のテスト' do
-  #   context 'ユーザ新規登録失敗: nameを1文字にする' do
-  #     before do
-  #       visit new_user_registration_path
-  #       @name = Faker::Lorem.characters(number: 1)
-  #       @email = 'a' + user.email # 確実にuser, other_userと違う文字列にするため
-  #       fill_in 'user[name]', with: @name
-  #       fill_in 'user[email]', with: @email
-  #       fill_in 'user[password]', with: 'password'
-  #       fill_in 'user[password_confirmation]', with: 'password'
-  #     end
+  describe '処理失敗時のテスト' do
+    context 'ユーザ新規登録失敗: nameを1文字にする' do
+      before do
+        visit new_user_registration_path
+        @name = Faker::Lorem.characters(number: 1)
+        @username = Faker::Lorem.characters(number: 5)
+        @email = 'a' + user.email # 確実にuser, other_userと違う文字列にするため
+        fill_in 'user[name]', with: @name
+        fill_in 'user[username]', with: @username
+        fill_in 'user[email]', with: @email
+        fill_in 'user[password]', with: 'password'
+        fill_in 'user[password_confirmation]', with: 'password'
+      end
 
-  #     it '新規登録されない' do
-  #       expect { click_button 'Sign up' }.not_to change(User.all, :count)
-  #     end
-  #     it '新規登録画面を表示しており、フォームの内容が正しい' do
-  #       click_button 'Sign up'
-  #       expect(page).to have_content 'Sign up'
-  #       expect(page).to have_field 'user[name]', with: @name
-  #       expect(page).to have_field 'user[email]', with: @email
-  #     end
-  #     it 'バリデーションエラーが表示される' do
-  #       click_button 'Sign up'
-  #       expect(page).to have_content "is too short (minimum is 2 characters)"
-  #     end
-  #   end
+      it '新規登録されない' do
+        expect { click_button 'Sign up' }.not_to change(User.all, :count)
+      end
+      it '新規登録画面を表示しており、フォームの内容が正しい' do
+        click_button 'Sign up'
+        expect(page).to have_content 'Sign up'
+        expect(page).to have_field 'user[name]', with: @name
+        expect(page).to have_field 'user[username]', with: @username
+        expect(page).to have_field 'user[email]', with: @email
+      end
+      it 'バリデーションエラーが表示される' do
+        click_button 'Sign up'
+        expect(page).to have_content "名前は2文字以上で入力してください"
+      end
+    end
 
-  #   context 'ユーザのプロフィール情報編集失敗: nameを1文字にする' do
-  #     before do
-  #       @user_old_name = user.name
-  #       @name = Faker::Lorem.characters(number: 1)
-  #       visit new_user_session_path
-  #       fill_in 'user[name]', with: @user_old_name
-  #       fill_in 'user[password]', with: user.password
-  #       click_button 'Log in'
-  #       visit edit_user_path(user)
-  #       fill_in 'user[name]', with: @name
-  #       click_button 'Update User'
-  #     end
+    context 'ユーザのプロフィール情報編集失敗: nameを1文字にする' do
+      before do
+        @user_old_name = user.name
+        @name = Faker::Lorem.characters(number: 1)
+        visit new_user_session_path
+        fill_in 'user[name]', with: @user_old_name
+        fill_in 'user[username]', with: user.username
+        fill_in 'user[password]', with: user.password
+        click_button 'Log in'
+        visit edit_user_registration_path
+        fill_in 'user[name]', with: @name
+        click_button '更新する'
+      end
 
-  #     it '更新されない' do
-  #       expect(user.reload.name).to eq @user_old_name
-  #     end
-  #     it 'ユーザ編集画面を表示しており、フォームの内容が正しい' do
-  #       expect(page).to have_field 'user[name]', with: @name
-  #     end
-  #     it 'バリデーションエラーが表示される' do
-  #       expect(page).to have_content "is too short (minimum is 2 characters)"
-  #     end
-  #   end
+      it '更新されない' do
+        expect(user.reload.name).to eq @user_old_name
+      end
+      it 'ユーザ編集画面を表示しており、フォームの内容が正しい' do
+        expect(page).to have_field 'user[name]', with: @name
+      end
+      it 'バリデーションエラーが表示される' do
+        expect(page).to have_content "名前は2文字以上で入力してください"
+      end
+    end
 
-  #   context '投稿データの新規投稿失敗: 投稿一覧画面から行い、titleを空にする' do
-  #     before do
-  #       visit new_user_session_path
-  #       fill_in 'user[name]', with: user.name
-  #       fill_in 'user[password]', with: user.password
-  #       click_button 'Log in'
-  #       visit books_path
-  #       @body = Faker::Lorem.characters(number: 19)
-  #       fill_in 'book[body]', with: @body
-  #     end
+    context 'ツイートの新規投稿失敗: ツイートを空にする' do
+      before do
+        visit new_user_session_path
+        fill_in 'user[email]', with: user.email
+        fill_in 'user[password]', with: user.password
+        click_button 'Log in'
+        visit tweets_path
+        find("#tweet_category_id").find("option[value='1']").select_option
+      end
 
-  #     it '投稿が保存されない' do
-  #       expect { click_button 'Create Book' }.not_to change(Book.all, :count)
-  #     end
-  #     it '投稿一覧画面を表示している' do
-  #       click_button 'Create Book'
-  #       expect(current_path).to eq '/books'
-  #       expect(page).to have_content book.body
-  #       expect(page).to have_content other_book.body
-  #     end
-  #     it '新規投稿フォームの内容が正しい' do
-  #       expect(find_field('book[title]').text).to be_blank
-  #       expect(page).to have_field 'book[body]', with: @body
-  #     end
-  #     it 'バリデーションエラーが表示される' do
-  #       click_button 'Create Book'
-  #       expect(page).to have_content "can't be blank"
-  #     end
-  #   end
+      it 'ツイートが保存されない' do
+        expect { click_button 'ツイート/下書きする' }.not_to change(Tweet.all, :count)
+      end
+      it 'ツイート一覧画面を表示している' do
+        click_button 'ツイート/下書きする'
+        expect(current_path).to eq '/tweets'
+        expect(page).to have_content tweet.tweet
+        expect(page).to have_content other_tweet.tweet
+      end
+      it '新規ツイートフォームの内容が正しい' do
+        expect(find_field('tweet[tweet]').text).to be_blank
+      end
+      it 'バリデーションエラーが表示される' do
+        click_button 'ツイート/下書きする'
+        expect(page).to have_content "ツイートを入力してください"
+      end
+    end
 
-  #   context '投稿データの更新失敗: titleを空にする' do
-  #     before do
-  #       visit new_user_session_path
-  #       fill_in 'user[name]', with: user.name
-  #       fill_in 'user[password]', with: user.password
-  #       click_button 'Log in'
-  #       visit edit_book_path(book)
-  #       @book_old_title = book.title
-  #       fill_in 'book[title]', with: ''
-  #       click_button 'Update Book'
-  #     end
+    context 'ツイートの更新失敗: ツイートを空にする' do
+      before do
+        visit new_user_session_path
+        fill_in 'user[name]', with: user.name
+        fill_in 'user[username]', with: user.username
+        fill_in 'user[password]', with: user.password
+        click_button 'Log in'
+        visit edit_tweet_path(tweet)
+        @tweet_old_tweet = tweet.tweet
+        fill_in 'tweet[tweet]', with: ''
+        click_button 'ツイート/下書きする'
+      end
 
-  #     it '投稿が更新されない' do
-  #       expect(book.reload.title).to eq @book_old_title
-  #     end
-  #     it '投稿編集画面を表示しており、フォームの内容が正しい' do
-  #       expect(current_path).to eq '/books/' + book.id.to_s
-  #       expect(find_field('book[title]').text).to be_blank
-  #       expect(page).to have_field 'book[body]', with: book.body
-  #     end
-  #     it 'エラーメッセージが表示される' do
-  #       expect(page).to have_content 'error'
-  #     end
-  #   end
-  # end
+      it 'ツイートが更新されない' do
+        expect(tweet.reload.tweet).to eq @tweet_old_tweet
+      end
+      it 'ツイート編集画面を表示しており、フォームの内容が正しい' do
+        expect(current_path).to eq '/tweets/' + tweet.id.to_s
+        expect(find_field('tweet[tweet]').text).to be_blank
+        expect(page).to have_field 'tweet[tweet]', with: tweet.tweet
+      end
+      it 'エラーメッセージが表示される' do
+        expect(page).to have_content 'error'
+      end
+    end
+  end
 
   # describe 'ログインしていない場合のアクセス制限のテスト: アクセスできず、ログイン画面に遷移する' do
   #   subject { current_path }
