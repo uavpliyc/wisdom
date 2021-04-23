@@ -89,7 +89,7 @@ describe '[STEP3] 仕上げのテスト' do
       end
       it '新規登録画面を表示しており、フォームの内容が正しい' do
         click_button 'Sign up'
-        expect(page).to have_content 'Sign up'
+        expect(page).to have_button 'Sign up'
         expect(page).to have_field 'user[name]', with: @name
         expect(page).to have_field 'user[username]', with: @username
         expect(page).to have_field 'user[email]', with: @email
@@ -105,8 +105,7 @@ describe '[STEP3] 仕上げのテスト' do
         @user_old_name = user.name
         @name = Faker::Lorem.characters(number: 1)
         visit new_user_session_path
-        fill_in 'user[name]', with: @user_old_name
-        fill_in 'user[username]', with: user.username
+        fill_in 'user[email]', with: user.email
         fill_in 'user[password]', with: user.password
         click_button 'Log in'
         visit edit_user_registration_path
@@ -156,8 +155,7 @@ describe '[STEP3] 仕上げのテスト' do
     context 'ツイートの更新失敗: ツイートを空にする' do
       before do
         visit new_user_session_path
-        fill_in 'user[name]', with: user.name
-        fill_in 'user[username]', with: user.username
+        fill_in 'user[email]', with: user.email
         fill_in 'user[password]', with: user.password
         click_button 'Log in'
         visit edit_tweet_path(tweet)
