@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy # 自分が受け取る通知
 
   validates :name, presence: true, length: { minimum: 2, maximum:20 }, uniqueness: true
+  validates :username, uniqueness: true
   validates :profile, length: { maximum: 160 }
 
   attachment :profile_image
