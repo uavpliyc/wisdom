@@ -5,7 +5,7 @@
 				<h1 class="title">ツイートを編集する</h1>
 				<%= render 'form', tweet: @tweet, categories: @categories %>
 				<p class="control mt-5">
-					<%= link_to 'Cancel', tweets_path, class: "button is-dark" %>
+					<%= link_to 'Cancel', :back, class: "button is-dark" %>
 				</p>
 			</div>
 		</div>

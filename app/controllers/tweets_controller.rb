@@ -65,10 +65,12 @@ class TweetsController < ApplicationController
 
   def update
     @tweet = Tweet.find(params[:id])
+    @categories = Category.all
     if @tweet.update(tweet_params)
       flash[:notice] = "ツイートを更新しました"
       redirect_to @tweet
     else
+      flash[:alert] = "ツイートの更新に失敗しました"
       render :edit
     end
   end

@@ -175,7 +175,7 @@ describe '[STEP3] 仕上げのテスト' do
         expect(page).to have_field 'tweet[tweet]', with: tweet.tweet
       end
       it 'エラーメッセージが表示される' do
-        expect(page).to have_content 'error'
+        expect(page).to have_content 'ツイートを入力してください'
       end
     end
   end
