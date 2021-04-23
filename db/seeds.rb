@@ -26,3 +26,21 @@ Category.create([
     { name: 'テクノロジー'},
     ])
 
+5.times do |n|
+User.create([
+    { email: 'a#{ n + 1 }@a' },
+    { password: 'aaaa#{ n + 1 }' },
+    { name: 'nozaki#{ n + 1 }' },
+    { username: '@nozaki#{ n + 1 }' },
+    { profile: '日本制覇#{ n + 1 }' }
+    ])
+  end
+
+User.all.each do |user|
+  user.tweets.create([
+    { tweet: '早起きすること#{ n + 1}' },
+    { category_id: '1 + #{ n + 1}' },
+    { status: '0' }
+    ])
+  end
+

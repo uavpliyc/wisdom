@@ -1,4 +1,5 @@
-<div class="column is-half">
+<div class="column is-half-multiline is-half-mobile is-half-tablet is-half-desktop">
+<!--<div class="column is-8-mobile">-->
   <nav class="panel">
     <p class="panel-heading">ツイートする</p>
   <% if user_signed_in? %>
@@ -11,4 +12,5 @@
 
  <%= render 'tweets/index', tweets: @tweets %>
   </nav>
+<!--</div>-->
 </div>
