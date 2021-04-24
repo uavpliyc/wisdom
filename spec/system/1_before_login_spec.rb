@@ -24,6 +24,9 @@ describe '[STEP1] ユーザログイン前のテスト' do
       it 'Sign Upリンクの内容が正しい' do
         expect(page).to have_link '新規登録', href: new_user_registration_path
       end
+      it 'お問い合わせリンクの内容が正しい' do
+        expect(page).to have_link 'お問い合わせ', href: contact_path
+      end
     end
   end
 
