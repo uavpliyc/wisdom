@@ -192,15 +192,15 @@ describe '[STEP3] 仕上げのテスト' do
       visit edit_user_registration_path
       is_expected.to eq '/users/sign_in'
     end
-    it '投稿一覧画面' do
+    it 'ツイート一覧画面' do
       visit tweets_path
       is_expected.to eq '/users/sign_in'
     end
-    it '投稿詳細画面' do
+    it 'ツイート詳細画面' do
       visit tweet_path(tweet)
       is_expected.to eq '/users/sign_in'
     end
-    it '投稿編集画面' do
+    it 'ツイート編集画面' do
       visit edit_tweet_path(tweet)
       is_expected.to eq '/users/sign_in'
     end
