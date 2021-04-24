@@ -233,10 +233,10 @@ describe '[STEP3] 仕上げのテスト' do
           expect(page).to have_field comment[comment]
         end
         it 'ツイートの編集リンクが表示されない' do
-          expect(page).not_to have_link, href: edit_tweet_path(other_tweet)
+          expect(page).to have_no_link '.edit-btn', href: edit_tweet_path(other_tweet)
         end
         it 'ツイートの削除リンクが表示されない' do
-          expect(page).not_to have_link, href: tweet_path(other_tweet)
+          expect(page).to have_no_link '.destroy-btn', href: tweet_path(other_tweet)
         end
       end
 
