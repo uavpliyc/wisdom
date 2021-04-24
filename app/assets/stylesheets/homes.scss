@@ -76,6 +76,10 @@ h2, .h2 {
     background-color: #fff;
   }
 
+.contact-form .input {
+  height: 10em;
+}
+
 @media (min-width: 576px) {
   .container-sm, .container {
     max-width: 540px;

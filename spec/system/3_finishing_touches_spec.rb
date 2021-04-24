@@ -274,134 +274,67 @@ describe '[STEP3] 仕上げのテスト' do
 
   end
 
-  # describe 'グリッドシステムのテスト: container, row, col-md-〇を正しく使えている' do
-  #   subject { page }
+  describe 'アイコンのテスト' do
 
-  #   before do
-  #     visit new_user_session_path
-  #     fill_in 'user[name]', with: user.name
-  #     fill_in 'user[password]', with: user.password
-  #     click_button 'Log in'
-  #   end
+    context 'ヘッダー: ログインしていない場合' do
+      subject { page }
 
-  #   it 'ユーザ一覧画面' do
-  #     visit users_path
-  #     is_expected.to have_selector '.container .row .col-md-3'
-  #     is_expected.to have_selector '.container .row .col-md-8.offset-md-1'
-  #   end
-  #   it 'ユーザ詳細画面' do
-  #     visit user_path(user)
-  #     is_expected.to have_selector '.container .row .col-md-3'
-  #     is_expected.to have_selector '.container .row .col-md-8.offset-md-1'
-  #   end
-  #   it 'ツイート一覧画面' do
-  #     visit books_path
-  #     is_expected.to have_selector '.container .row .col-md-3'
-  #     is_expected.to have_selector '.container .row .col-md-8.offset-md-1'
-  #   end
-  #   it 'ツイート詳細画面' do
-  #     visit book_path(book)
-  #     is_expected.to have_selector '.container .row .col-md-3'
-  #     is_expected.to have_selector '.container .row .col-md-8.offset-md-1'
-  #   end
-  # end
+      before do
+        visit root_path
+      end
 
-  # describe 'アイコンのテスト' do
-  #   context 'トップ画面' do
-  #     subject { page }
+      it '「ログイン」のアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-sign-in-alt'
+      end
+      it '「新規登録」のアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-user-plus'
+      end
+    end
 
-  #     before do
-  #       visit root_path
-  #     end
+    context 'ヘッダー: ログインしている場合' do
+      subject { page }
 
-  #     it '本のアイコンが表示される' do
-  #       is_expected.to have_selector '.fas.fa-book'
-  #     end
-  #   end
+      before do
+        visit new_user_session_path
+        fill_in 'user[email]', with: user.email
+        fill_in 'user[password]', with: user.password
+        click_button 'Log in'
+      end
 
-  #   context 'アバウト画面' do
-  #     subject { page }
+      it '「新しい知識を提供する」のアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-hand-holding-heart'
+      end
+      it '「下書き一覧」のアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-archive'
+      end
+      it '「ユーザー一覧」のアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-users'
+      end
+      it '「通知一覧」のアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-bell'
+      end
+      it '「プロフィール編集」のアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-user-edit'
+      end
+      it '「ログアウト」のアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-sign-out-alt'
+      end
+    end
 
-  #     before do
-  #       visit '/home/about'
-  #     end
+    context 'ツイート一覧画面' do
+      subject { page }
 
-  #     it '本のアイコンが表示される' do
-  #       is_expected.to have_selector '.fas.fa-book'
-  #     end
-  #   end
+      before do
+        visit new_user_session_path
+        fill_in 'user[email]', with: user.email
+        fill_in 'user[password]', with: user.password
+        click_button 'Log in'
+      end
 
-  #   context 'ヘッダー: ログインしていない場合' do
-  #     subject { page }
-
-  #     before do
-  #       visit root_path
-  #     end
-
-  #     it 'Homeリンクのアイコンが表示される' do
-  #       is_expected.to have_selector '.fas.fa-home'
-  #     end
-  #     it 'Aboutリンクのアイコンが表示される' do
-  #       is_expected.to have_selector '.fas.fa-link'
-  #     end
-  #     it 'sign upリンクのアイコンが表示される' do
-  #       is_expected.to have_selector '.fas.fa-user-plus'
-  #     end
-  #     it 'loginリンクのアイコンが表示される' do
-  #       is_expected.to have_selector '.fas.fa-sign-in-alt'
-  #     end
-  #   end
-
-  #   context 'ヘッダー: ログインしている場合' do
-  #     subject { page }
-
-  #     before do
-  #       visit new_user_session_path
-  #       fill_in 'user[name]', with: user.name
-  #       fill_in 'user[password]', with: user.password
-  #       click_button 'Log in'
-  #     end
-
-  #     it 'Homeリンクのアイコンが表示される' do
-  #       is_expected.to have_selector '.fas.fa-home'
-  #     end
-  #     it 'Usersリンクのアイコンが表示される' do
-  #       is_expected.to have_selector '.fas.fa-users'
-  #     end
-  #     it 'Booksリンクのアイコンが表示される' do
-  #       is_expected.to have_selector '.fas.fa-book-open'
-  #     end
-  #     it 'log outリンクのアイコンが表示される' do
-  #       is_expected.to have_selector '.fas.fa-sign-out-alt'
-  #     end
-  #   end
-
-  #   context 'サイドバー' do
-  #     subject { page }
-
-  #     before do
-  #       visit new_user_session_path
-  #       fill_in 'user[name]', with: user.name
-  #       fill_in 'user[password]', with: user.password
-  #       click_button 'Log in'
-  #     end
-
-  #     it 'ユーザ一覧画面でレンチアイコンが表示される' do
-  #       visit users_path
-  #       is_expected.to have_selector '.fas.fa-user-cog'
-  #     end
-  #     it 'ユーザ詳細画面でレンチアイコンが表示される' do
-  #       visit user_path(user)
-  #       is_expected.to have_selector '.fas.fa-user-cog'
-  #     end
-  #     it 'ツイート一覧画面でレンチアイコンが表示される' do
-  #       visit books_path
-  #       is_expected.to have_selector '.fas.fa-user-cog'
-  #     end
-  #     it 'ツイート詳細画面でレンチアイコンが表示される' do
-  #       visit book_path(book)
-  #       is_expected.to have_selector '.fas.fa-user-cog'
-  #     end
-  #   end
-  # end
+      it 'カテゴリ一覧画面で矢印アイコンが表示される' do
+        visit tweets_path
+        is_expected.to have_selector '.fas.fa-caret-right'
+      end
+    end
+  end
 end

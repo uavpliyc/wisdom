@@ -4,7 +4,8 @@
         <div class="media-left">
           <%= link_to user_path(tweet.user_id) do %>
           <figure class="image is-64x64">
-             <%= attachment_image_tag tweet.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
+             <%= attachment_image_tag tweet.user, :profile_image, size:
+             "64x64", format: 'jpeg', fallback: "logo.png" %>
           </figure>
           <% end %>
         </div>
