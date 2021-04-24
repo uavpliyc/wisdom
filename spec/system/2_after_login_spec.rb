@@ -65,11 +65,11 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_link '', href: user_path(tweet.user)
         expect(page).to have_link '', href: user_path(other_tweet.user)
       end
-      it '自分の投稿と他人の投稿のタイトルのリンク先がそれぞれ正しい' do
+      it '自分のツイートと他人のツイートのリンク先がそれぞれ正しい' do
         expect(page).to have_link tweet.tweet, href: tweet_path(tweet)
         expect(page).to have_link other_tweet.tweet, href: tweet_path(other_tweet)
       end
-      it '自分の投稿と他人のツイートが表示される' do
+      it '自分のツイートと他人のツイートが表示される' do
         expect(page).to have_content tweet.tweet
         expect(page).to have_content other_tweet.tweet
       end
@@ -116,7 +116,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
     end
 
-    context 'ツイート投稿フォームのテスト' do
+    context 'ツイートツイートフォームのテスト' do
       it 'tweetフォームが表示される' do
         expect(page).to have_field 'tweet[tweet]'
       end
@@ -135,10 +135,10 @@ describe '[STEP2] ユーザログイン後のテスト' do
         find("#tweet_category_id").find("option[value='1']").select_option
       end
 
-      it '自分の新しい投稿が正しく保存される' do
+      it '自分の新しいツイートが正しく保存される' do
         expect { click_button 'ツイート/下書きする' }.to change(user.tweets, :count).by(1)
       end
-      it 'リダイレクト先が、保存できた投稿の詳細画面になっている' do
+      it 'リダイレクト先が、保存できたツイートの詳細画面になっている' do
         click_button 'ツイート/下書きする'
         expect(current_path).to eq '/tweets'
       end
@@ -297,16 +297,16 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it 'URLが正しい' do
         expect(current_path).to eq '/users/' + user.id.to_s
       end
-      it '投稿一覧のユーザ画像のリンク先が正しい' do
+      it 'ツイート一覧のユーザ画像のリンク先が正しい' do
         expect(page).to have_link '', href: user_path(user)
       end
-      it '投稿一覧に自分のツイートが表示され、リンクが正しい' do
+      it 'ツイート一覧に自分のツイートが表示され、リンクが正しい' do
         expect(page).to have_link tweet.tweet, href: tweet_path(tweet)
       end
-      it '投稿一覧に自分のツイートのカテゴリーが表示される' do
+      it 'ツイート一覧に自分のツイートのカテゴリーが表示される' do
         expect(page).to have_content tweet.category_id
       end
-      it '他人の投稿は表示されない' do
+      it '他人のツイートは表示されない' do
         expect(page).not_to have_link '', href: user_path(other_user)
         expect(page).not_to have_content other_tweet.tweet
         expect(page).not_to have_content other_tweet.category

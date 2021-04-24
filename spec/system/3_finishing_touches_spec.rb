@@ -48,7 +48,7 @@ describe '[STEP3] 仕上げのテスト' do
       click_button '更新する'
       is_expected.to have_content 'アカウント情報を変更しました'
     end
-    it 'ツイートの新規投稿成功時' do
+    it 'ツイートの新規ツイート成功時' do
       visit new_user_session_path
       fill_in 'user[email]', with: user.email
       fill_in 'user[password]', with: user.password
@@ -124,7 +124,7 @@ describe '[STEP3] 仕上げのテスト' do
       end
     end
 
-    context 'ツイートの新規投稿失敗: ツイートを空にする' do
+    context 'ツイートの新規ツイート失敗: ツイートを空にする' do
       before do
         visit new_user_session_path
         fill_in 'user[email]', with: user.email
@@ -250,54 +250,28 @@ describe '[STEP3] 仕上げのテスト' do
     end
 
 
-  #   describe '他人のユーザ詳細画面のテスト' do
-  #     before do
-  #       visit user_path(other_user)
-  #     end
+    describe '他人のユーザ詳細画面のテスト' do
+      before do
+        visit user_path(other_user)
+      end
 
-  #     context '表示の確認' do
-  #       it 'URLが正しい' do
-  #         expect(current_path).to eq '/users/' + other_user.id.to_s
-  #       end
-  #       it '投稿一覧のユーザ画像のリンク先が正しい' do
-  #         expect(page).to have_link '', href: user_path(other_user)
-  #       end
-  #       it '投稿一覧に他人の投稿のtitleが表示され、リンクが正しい' do
-  #         expect(page).to have_link other_book.title, href: book_path(other_book)
-  #       end
-  #       it '投稿一覧に他人の投稿のopinionが表示される' do
-  #         expect(page).to have_content other_book.body
-  #       end
-  #       it '自分の投稿は表示されない' do
-  #         expect(page).not_to have_content book.title
-  #         expect(page).not_to have_content book.body
-  #       end
-  #     end
+      context '表示の確認' do
+        it 'URLが正しい' do
+          expect(current_path).to eq '/users/' + other_user.id.to_s
+        end
+        it 'ツイート一覧のユーザ画像のリンク先が正しい' do
+          expect(page).to have_link '', href: user_path(other_user)
+        end
+        it 'ツイート一覧に他人のツイートが表示され、リンクが正しい' do
+          expect(page).to have_link other_tweet.tweet, href: tweet_path(other_tweet)
+        end
+        it '自分のツイートは表示されない' do
+          expect(page).not_to have_content tweet.tweet
+        end
+      end
 
-  #     context 'サイドバーの確認' do
-  #       it '他人の名前と紹介文が表示される' do
-  #         expect(page).to have_content other_user.name
-  #         expect(page).to have_content other_user.introduction
-  #       end
-  #       it '他人のユーザ編集画面へのリンクが存在する' do
-  #         expect(page).to have_link '', href: edit_user_path(other_user)
-  #       end
-  #       it '自分の名前と紹介文は表示されない' do
-  #         expect(page).not_to have_content user.name
-  #         expect(page).not_to have_content user.introduction
-  #       end
-  #       it '自分のユーザ編集画面へのリンクは存在しない' do
-  #         expect(page).not_to have_link '', href: edit_user_path(user)
-  #       end
-  #     end
-  #   end
+    end
 
-  #   context '他人のユーザ情報編集画面' do
-  #     it '遷移できず、自分のユーザ詳細画面にリダイレクトされる' do
-  #       visit edit_user_path(other_user)
-  #       expect(current_path).to eq '/users/' + user.id.to_s
-  #     end
-  #   end
   end
 
   # describe 'グリッドシステムのテスト: container, row, col-md-〇を正しく使えている' do
@@ -320,12 +294,12 @@ describe '[STEP3] 仕上げのテスト' do
   #     is_expected.to have_selector '.container .row .col-md-3'
   #     is_expected.to have_selector '.container .row .col-md-8.offset-md-1'
   #   end
-  #   it '投稿一覧画面' do
+  #   it 'ツイート一覧画面' do
   #     visit books_path
   #     is_expected.to have_selector '.container .row .col-md-3'
   #     is_expected.to have_selector '.container .row .col-md-8.offset-md-1'
   #   end
-  #   it '投稿詳細画面' do
+  #   it 'ツイート詳細画面' do
   #     visit book_path(book)
   #     is_expected.to have_selector '.container .row .col-md-3'
   #     is_expected.to have_selector '.container .row .col-md-8.offset-md-1'
@@ -420,11 +394,11 @@ describe '[STEP3] 仕上げのテスト' do
   #       visit user_path(user)
   #       is_expected.to have_selector '.fas.fa-user-cog'
   #     end
-  #     it '投稿一覧画面でレンチアイコンが表示される' do
+  #     it 'ツイート一覧画面でレンチアイコンが表示される' do
   #       visit books_path
   #       is_expected.to have_selector '.fas.fa-user-cog'
   #     end
-  #     it '投稿詳細画面でレンチアイコンが表示される' do
+  #     it 'ツイート詳細画面でレンチアイコンが表示される' do
   #       visit book_path(book)
   #       is_expected.to have_selector '.fas.fa-user-cog'
   #     end
