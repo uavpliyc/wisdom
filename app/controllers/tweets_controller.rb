@@ -38,6 +38,9 @@ class TweetsController < ApplicationController
   def edit
     @tweet      = Tweet.find(params[:id])
     @categories = Category.all
+    if @tweet.user != current_user
+      redirect_to tweets_path
+    end
   end
 
   def create
