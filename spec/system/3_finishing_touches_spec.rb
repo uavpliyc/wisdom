@@ -206,67 +206,49 @@ describe '[STEP3] 仕上げのテスト' do
     end
   end
 
-  # describe '他人の画面のテスト' do
-  #   before do
-  #     visit new_user_session_path
-  #     fill_in 'user[name]', with: user.name
-  #     fill_in 'user[password]', with: user.password
-  #     click_button 'Log in'
-  #   end
+  describe '他人の画面のテスト' do
+    before do
+      visit new_user_session_path
+      fill_in 'user[email]', with: user.email
+      fill_in 'user[password]', with: user.password
+      click_button 'Log in'
+    end
 
-  #   describe '他人の投稿詳細画面のテスト' do
-  #     before do
-  #       visit book_path(other_book)
-  #     end
+    describe '他人のツイート詳細画面のテスト' do
+      before do
+        visit tweet_path(other_tweet)
+      end
 
-  #     context '表示内容の確認' do
-  #       it 'URLが正しい' do
-  #         expect(current_path).to eq '/books/' + other_book.id.to_s
-  #       end
-  #       it '「Book detail」と表示される' do
-  #         expect(page).to have_content 'Book detail'
-  #       end
-  #       it 'ユーザ画像・名前のリンク先が正しい' do
-  #         expect(page).to have_link other_book.user.name, href: user_path(other_book.user)
-  #       end
-  #       it '投稿のtitleが表示される' do
-  #         expect(page).to have_content other_book.title
-  #       end
-  #       it '投稿のopinionが表示される' do
-  #         expect(page).to have_content other_book.body
-  #       end
-  #       it '投稿の編集リンクが表示されない' do
-  #         expect(page).not_to have_link 'Edit'
-  #       end
-  #       it '投稿の削除リンクが表示されない' do
-  #         expect(page).not_to have_link 'Destroy'
-  #       end
-  #     end
+      context '表示内容の確認' do
+        it 'URLが正しい' do
+          expect(current_path).to eq '/tweets/' + other_tweet.id.to_s
+        end
+        it 'ユーザ画像のリンク先が正しい' do
+          expect(page).to have_link, href: user_path(other_tweet.user)
+        end
+        it 'ツイートの内容が表示される' do
+          expect(page).to have_content other_tweet.tweet
+        end
+        it 'コメントのフォームが表示される' do
+          expect(page).to have_field comment[comment]
+        end
+        it 'ツイートの編集リンクが表示されない' do
+          expect(page).not_to have_link, href: edit_tweet_path(other_tweet)
+        end
+        it 'ツイートの削除リンクが表示されない' do
+          expect(page).not_to have_link, href: tweet_path(other_tweet)
+        end
+      end
 
-  #     context 'サイドバーの確認' do
-  #       it '他人の名前と紹介文が表示される' do
-  #         expect(page).to have_content other_user.name
-  #         expect(page).to have_content other_user.introduction
-  #       end
-  #       it '他人のユーザ編集画面へのリンクが存在する' do
-  #         expect(page).to have_link '', href: edit_user_path(other_user)
-  #       end
-  #       it '自分の名前と紹介文は表示されない' do
-  #         expect(page).not_to have_content user.name
-  #         expect(page).not_to have_content user.introduction
-  #       end
-  #       it '自分のユーザ編集画面へのリンクは存在しない' do
-  #         expect(page).not_to have_link '', href: edit_user_path(user)
-  #       end
-  #     end
-  #   end
+    end
 
-  #   context '他人の投稿編集画面' do
-  #     it '遷移できず、投稿一覧画面にリダイレクトされる' do
-  #       visit edit_book_path(other_book)
-  #       expect(current_path).to eq '/books'
-  #     end
-  #   end
+    context '他人のツイート編集画面' do
+      it '遷移できず、ツイート一覧画面にリダイレクトされる' do
+        visit edit_tweet_path(other_tweet)
+        expect(current_path).to eq '/tweets'
+      end
+    end
+
 
   #   describe '他人のユーザ詳細画面のテスト' do
   #     before do
@@ -316,7 +298,7 @@ describe '[STEP3] 仕上げのテスト' do
   #       expect(current_path).to eq '/users/' + user.id.to_s
   #     end
   #   end
-  # end
+  end
 
   # describe 'グリッドシステムのテスト: container, row, col-md-〇を正しく使えている' do
   #   subject { page }
