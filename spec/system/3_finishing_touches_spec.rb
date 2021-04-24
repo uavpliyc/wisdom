@@ -170,7 +170,6 @@ describe '[STEP3] 仕上げのテスト' do
       it 'ツイート編集画面を表示しており、フォームの内容が正しい' do
         expect(current_path).to eq '/tweets/' + tweet.id.to_s
         expect(find_field('tweet[tweet]').text).to be_blank
-        expect(page).to have_field 'tweet[tweet]', with: tweet.tweet
       end
       it 'エラーメッセージが表示される' do
         expect(page).to have_content 'ツイートを入力してください'
@@ -178,34 +177,34 @@ describe '[STEP3] 仕上げのテスト' do
     end
   end
 
-  # describe 'ログインしていない場合のアクセス制限のテスト: アクセスできず、ログイン画面に遷移する' do
-  #   subject { current_path }
+  describe 'ログインしていない場合のアクセス制限のテスト: アクセスできず、ログイン画面に遷移する' do
+    subject { current_path }
 
-  #   it 'ユーザ一覧画面' do
-  #     visit users_path
-  #     is_expected.to eq '/users/sign_in'
-  #   end
-  #   it 'ユーザ詳細画面' do
-  #     visit user_path(user)
-  #     is_expected.to eq '/users/sign_in'
-  #   end
-  #   it 'ユーザ情報編集画面' do
-  #     visit edit_user_path(user)
-  #     is_expected.to eq '/users/sign_in'
-  #   end
-  #   it '投稿一覧画面' do
-  #     visit books_path
-  #     is_expected.to eq '/users/sign_in'
-  #   end
-  #   it '投稿詳細画面' do
-  #     visit book_path(book)
-  #     is_expected.to eq '/users/sign_in'
-  #   end
-  #   it '投稿編集画面' do
-  #     visit edit_book_path(book)
-  #     is_expected.to eq '/users/sign_in'
-  #   end
-  # end
+    it 'ユーザ一覧画面' do
+      visit users_path
+      is_expected.to eq '/users/sign_in'
+    end
+    it 'ユーザ詳細画面' do
+      visit user_path(user)
+      is_expected.to eq '/users/sign_in'
+    end
+    it 'ユーザ情報編集画面' do
+      visit edit_user_registration_path
+      is_expected.to eq '/users/sign_in'
+    end
+    it '投稿一覧画面' do
+      visit tweets_path
+      is_expected.to eq '/users/sign_in'
+    end
+    it '投稿詳細画面' do
+      visit tweet_path(tweet)
+      is_expected.to eq '/users/sign_in'
+    end
+    it '投稿編集画面' do
+      visit edit_tweet_path(tweet)
+      is_expected.to eq '/users/sign_in'
+    end
+  end
 
   # describe '他人の画面のテスト' do
   #   before do
