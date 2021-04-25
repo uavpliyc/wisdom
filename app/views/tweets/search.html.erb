@@ -47,7 +47,7 @@
                       <span class="icon"><i class="far fa-comment" aria-hidden="true"></i><%= tweet.comments.count %></span>
                     <% end %>
                     <%= link_to tweet, class: "level-item" do %>
-                      <div id="fovorites_buttons_<%= tweet.id %>">
+                      <div id="favorites_buttons_<%= tweet.id %>">
                         <%= render 'favorites/favorite', tweet: tweet %>
                       </div>
                     <% end %>

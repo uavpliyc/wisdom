@@ -46,7 +46,7 @@
                     <%= link_to tweet, class: "level-item text-decoration-none" do %>
                       <span class="icon"><i class="far fa-comment" aria-hidden="true"></i><%= tweet.comments.count %></span>
                     <% end %>
-                    <div id="fovorites_buttons_<%= tweet.id %>">
+                    <div id="favorites_buttons_<%= tweet.id %>">
                       <%= render 'favorites/favorite', tweet: tweet %>
                     </div>
                 <% if user_signed_in? && current_user.id == tweet.user_id %>

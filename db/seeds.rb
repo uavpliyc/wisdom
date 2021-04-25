@@ -36,20 +36,12 @@ Category.create([
     { name: 'テクノロジー'},
     ])
 
-
-# User.all.each do |user|
-#   user.tweets.create([
-#     { tweet: '早起きすること#{ n + 1}' },
-#     { category_id: '1 + #{ n + 1}' },
-#     { status: '0' }
-#     ])
-#   end
-
-# 10.times do |n|
-# Tweet.create!([
-#   { user: user },
-#   { tweet: '早起きすること#{ n + 1}' },
-#   { category_id: '1 + #{ n + 1}' },
-#   { status: '0' }
-# ])
-# end
+3.times do |n|
+User.all.each do |user|
+  user.tweets.create!([
+    tweet: "#{ n + 1}回目の早起き",
+    category_id: "1 + #{ n + 1}",
+    status: "published"
+    ])
+  end
+end
