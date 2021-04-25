@@ -43,7 +43,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         click_link notifications_link
         is_expected.to eq '/notifications'
       end
-      it '「マイページ編集」を押すと、マイページ編集画面に遷移する' do
+      it '「プロフィール編集」を押すと、プロフィール編集画面に遷移する' do
         mypage_link = find_all('a')[5].native.inner_text
         mypage_link = mypage_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
         click_link mypage_link
@@ -116,11 +116,11 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
     end
 
-    context 'ツイートツイートフォームのテスト' do
-      it 'tweetフォームが表示される' do
+    context 'ツイートフォームのテスト' do
+      it 'ツイートフォームが表示される' do
         expect(page).to have_field 'tweet[tweet]'
       end
-      it 'tweetフォームに値が入っていない' do
+      it 'ツイートフォームに値が入っていない' do
         expect(find_field('tweet[tweet]').text).to be_blank
       end
       it 'ツイート/下書きするボタンが表示される' do
@@ -131,14 +131,14 @@ describe '[STEP2] ユーザログイン後のテスト' do
     context 'ツイート成功のテスト' do
       before do
         fill_in 'tweet[tweet]', with: Faker::Lorem.characters(number: 5)
-        # fill_in 'tweet[category]', with: 1 「入力」ではなく「選択」なので以下を使う
+        # fill_in 'tweet[category]', with: 1 「入力」ではなく「選択」なので、これではなく以下を使う
         find("#tweet_category_id").find("option[value='1']").select_option
       end
 
       it '自分の新しいツイートが正しく保存される' do
         expect { click_button 'ツイート/下書きする' }.to change(user.tweets, :count).by(1)
       end
-      it 'リダイレクト先が、保存できたツイートの詳細画面になっている' do
+      it 'リダイレクト先が、ツイートの一覧画面になっている' do
         click_button 'ツイート/下書きする'
         expect(current_path).to eq '/tweets'
       end
@@ -150,6 +150,21 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
       it '選択したカテゴリーの一覧ページが表示される' do
         expect(current_path).to eq tweet_category_path(category)
+      end
+    end
+
+    context '下書き成功のテスト' do
+      before do
+        fill_in 'tweet[tweet]', with: Faker::Lorem.characters(number: 5)
+        find("#tweet_category_id").find("option[value='1']").select_option
+        find("#tweet_status").find("option[value='draft']").select_option
+      end
+      it '自分の新しいツイートが正しく下書き保存される' do
+        expect { click_button 'ツイート/下書きする' }.to change(user.tweets.draft, :count).by(1)
+      end
+      it 'リダイレクト先が、ツイートの一覧画面になっている' do
+        click_button 'ツイート/下書きする'
+        expect(current_path).to eq '/tweets'
       end
     end
 
@@ -173,21 +188,17 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it 'コメントのフォームが表示される' do
         expect(page).to have_field comment[comment]
       end
-      it 'コメントリンクが左から１番目に表示される' do
-        comment_tweet_link = find_all('.level-item')[1]
-        expect(page).to have_link comment_tweet_link, href: tweet_path(tweet)
+      it 'コメントリンクが表示される' do
+        expect(page).to have_link, href: tweet_path(tweet)
       end
-      it 'いいねが左から２番目に表示される' do
-        favorite_tweet = find_all('.level-item')[2]
-        expect(page).to have_content favorite_tweet
+      it 'いいねリンクが表示される' do
+        expect(page).to have_link, href: tweet_favorites_path(tweet)
       end
-      it 'ツイートの編集リンクが左から３番目に表示される' do
-        edit_tweet_link = find_all('.level-item')[3]
-        expect(page).to have_link edit_tweet_link, href: edit_tweet_path(tweet)
+      it 'ツイートの編集リンクが表示される' do
+        expect(page).to have_link, href: edit_tweet_path(tweet)
       end
-      it 'ツイートの削除リンクが左から４番目に表示される' do
-        destroy_tweet_link = find_all('.level-item')[4]
-        expect(page).to have_link destroy_tweet_link, href: tweet_path(tweet)
+      it 'ツイートの削除リンクが表示される' do
+        expect(page).to have_link, href: tweet_path(tweet)
       end
     end
 

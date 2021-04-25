@@ -45,12 +45,14 @@ class TweetsController < ApplicationController
 
   def create
     @tweet = current_user.tweets.build(tweet_params)
-    @categories = Category.all
+    # @categories = Category.all
+
     if @tweet.save
-      flash[:notice] = "ツイートをしました"
-      redirect_to tweets_path
-    elsif @tweet.draft?
-      flash[:notice] = "下書き保存しました"
+      if @tweet.published?
+        flash[:notice] = "ツイートをしました"
+      else
+        flash[:notice] = "下書き保存しました"
+      end
       redirect_to tweets_path
     else
       flash[:alert] = "ツイートに失敗しました"
