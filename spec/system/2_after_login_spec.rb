@@ -240,9 +240,6 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it 'カテゴリーセレクトボタンが表示される' do
         expect(page).to have_field 'tweet[category_id]'
       end
-      # it '画像添付用ファイルを選択が表示される' do
-      #   expect(page).to have_content 'ファイルを選択'
-      # end
       it 'ツイートする/下書きするセレクトボタンが表示される' do
         expect(page).to have_select 'tweet[status]'
       end
