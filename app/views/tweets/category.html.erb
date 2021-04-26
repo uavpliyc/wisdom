@@ -3,8 +3,6 @@
     <div class="columns">
       <% if user_signed_in? %>
         <%= render 'profile', user: @user %>
-      <% else %>
-        <%= render 'trends' %>
       <% end %>
   <!--真ん中-->
       <div class="column is-half">
@@ -31,7 +29,7 @@
                 </figure>
                 <% end %>
               </div>
-          <%= link_to tweet, class: "level text-decoration-none" do %>
+              <%= link_to tweet, class: "level text-decoration-none" do %>
               <div class="media-content">
                 <div class="content">
                   <strong><%= tweet.user.name %></strong>
@@ -41,24 +39,7 @@
                   <p><%= tweet.tweet %></p>
                   <p><%= attachment_image_tag tweet, :image, size: "100x100", format: 'jpeg' %></p>
                 </div>
-                  <!--ツイート下部-->
-                  <div class="level-left is-mobile">
-                    <%= link_to tweet, class: "level-item text-decoration-none" do %>
-                      <span class="icon"><i class="far fa-comment" aria-hidden="true"></i><%= tweet.comments.count %></span>
-                    <% end %>
-                    <div id="favorites_buttons_<%= tweet.id %>">
-                      <%= render 'favorites/favorite', tweet: tweet %>
-                    </div>
-                <% if user_signed_in? && current_user.id == tweet.user_id %>
-                    <%= link_to edit_tweet_path(tweet), class: "level-item ml-5 text-decoration-none" do %>
-                      <span class="icon"><i class="fas fa-pencil-alt" aria-hidden="true"></i></span>
-                    <% end %>
-                    <%= link_to tweet, method: :delete, data: { confirm: "このツイートを消しますか?"}, class: "ml-3" do %>
-                      <span class="icon"><i class="far fa-trash-alt" aria-hidden="true"></i></span>
-                    <% end %>
-                <% end %>
-                  </div>
-                  <!---->
+                <%= render 'tweets/tweet_nav',tweet: tweet %>
               </div>
             </article>
           </div>
@@ -67,7 +48,7 @@
       <!---->
       </div>
   <!---->
-      <%= render 'categories', categories: @categories %>
+    <%= render 'categories', categories: @categories %>
     </div>
   </div>
 </section>

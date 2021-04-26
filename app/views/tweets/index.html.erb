@@ -3,8 +3,6 @@
     <div class="columns">
       <% if user_signed_in? %>
         <%= render 'profile', user: @user %>
-      <% else %>
-        <%= render 'trends' %>
       <% end %>
       <%= render 'feed', user: @user %>
       <%= render 'categories', categories: @categories %>
