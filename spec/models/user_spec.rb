@@ -38,6 +38,7 @@ RSpec.describe 'ユーザーモデルのテスト', type: :model do
     end
   end
 
+
   describe 'アソシエーションのテスト' do
     context 'Tweetモデルとの関係' do
       it '1:Nとなっている' do

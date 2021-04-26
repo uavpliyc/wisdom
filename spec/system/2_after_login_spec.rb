@@ -305,6 +305,12 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it 'URLが正しい' do
         expect(current_path).to eq '/users/' + user.id.to_s
       end
+      it '自分のフォロー一覧画面へのリンクが存在する' do
+        expect(page).to have_link '', href: following_user_path(user)
+      end
+      it '自分のフォロワー一覧画面へのリンクが存在する' do
+        expect(page).to have_link '', href: followers_user_path(user)
+      end
       it 'ツイート一覧のユーザ画像のリンク先が正しい' do
         expect(page).to have_link '', href: user_path(user)
       end
