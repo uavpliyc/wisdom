@@ -1,16 +1,13 @@
 <div class="column is-half-multiline is-half-mobile is-half-tablet is-half-desktop">
-<!--<div class="column is-8-mobile">-->
   <nav class="panel">
     <p class="panel-heading">ツイートする</p>
-  <% if user_signed_in? %>
-    <article class="media box">
-      <div class="media-content">
-        <%= render 'tweets/form', tweet: @tweet, categories: @categories %>
-      </div>
-    </article>
-  <% end %>
-
- <%= render 'tweets/index', tweets: @tweets %>
+    <% if user_signed_in? %>
+      <article class="media box">
+        <div class="media-content">
+          <%= render 'tweets/form', tweet: @tweet, categories: @categories %>
+        </div>
+      </article>
+    <% end %>
+    <%= render 'tweets/index', tweets: @tweets, tweet: @tweet %>
   </nav>
-<!--</div>-->
 </div>

@@ -1,4 +1,4 @@
- <% tweets.each do |tweet| %>
+  <% tweets.each do |tweet| %>
     <div class="box">
       <article class="media">
         <div class="media-left">
@@ -18,9 +18,31 @@
             <p><%= tweet.tweet %></p>
             <p><%= attachment_image_tag tweet, :image, size: "100x100", format: 'jpeg' %></p>
           </div>
-          <%= render 'tweets/tweet_nav',tweet: tweet %>
-        </div>
-      </article>
-    </div>
+           <!--ツイート下部-->
+            <div class="level-left is-mobile">
+              <!--下書きはコメント・いいねを表示しない-->
+              <% if tweet.published? %>
+                <%= link_to tweet, class: "level-item text-decoration-none" do %>
+                  <span class="icon"><i class="far fa-comment" aria-hidden="true"></i><%= tweet.comments.count %></span>
+                <% end %>
+                <%= link_to tweet, class: "level-item" do %>
+                  <div id="favorites_buttons_<%= tweet.id %>">
+                    <%= render 'favorites/favorite', tweet: tweet %>
+                  </div>
+                <% end %>
+              <% end %>
+              <% if user_signed_in? && current_user.id == tweet.user_id %>
+                <%= link_to edit_tweet_path(tweet), class: "level-item ml-5 text-decoration-none" do %>
+                  <span class="icon"><i class="fas fa-pencil-alt" aria-hidden="true"></i></span>
+                <% end %>
+                <%= link_to tweet, method: :delete, data: { confirm: "このツイートを消しますか?"}, class: "ml-3" do %>
+                  <span class="icon"><i class="far fa-trash-alt" aria-hidden="true"></i></span>
+                <% end %>
+              <% end %>
+            </div>
+            <!---->
+          </div>
+        </article>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
