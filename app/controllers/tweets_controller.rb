@@ -31,10 +31,6 @@ class TweetsController < ApplicationController
     end
   end
 
-  def new
-    @tweet = current_user.tweets.build
-  end
-
   def edit
     @tweet      = Tweet.find(params[:id])
     @categories = Category.all
@@ -46,7 +42,6 @@ class TweetsController < ApplicationController
   def create
     @tweet = current_user.tweets.build(tweet_params)
     # @categories = Category.all
-
     if @tweet.save
       if @tweet.published?
         flash[:notice] = "ツイートをしました"
