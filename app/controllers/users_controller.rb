@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user   = User.find(params[:id])
-    @tweets = @user.tweets
+    @tweets = @user.tweets.published.order("created_at DESC")
   end
 
   def following
