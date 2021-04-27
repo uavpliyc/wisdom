@@ -1,0 +1,42 @@
+<% @user.follower_user.each do |user| %>
+    <nav class="panel">
+			<div class="panel-block">
+        <article class="media">
+          <div class="media-left">
+            <%= link_to user_path(user.id) do %>
+            <figure class="image is-64x64">
+               <%= attachment_image_tag user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
+            </figure>
+            <% end %>
+          </div>
+          <div class="media-content">
+            <div class="content">
+            　<p>
+              <strong><%= user.name %></strong>
+              <% if user.following?(current_user) %>
+								&nbsp;<small class="badge badge-secondary">フォローされています</small>
+							<% end %>
+							<br>
+              <small><%= user.username %></small><br>
+              <div><%= user.profile %></div>
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    	<div class="panel-block">
+				<div class="level is-mobile">
+					<div class="level-item has-centered-text">
+						<div>
+							<p class="heading">ツイート</p>
+							<p class="title is-6"><%= user.tweets.count %></p>
+						</div>
+					</div>
+					<div id="follow_buttons_<%= user.id %>">
+			      <%= render 'follows/follow', user: user %>
+			    </div>
+				</div>
+			</div>
+		</nav>
+  <% end %>
+      
