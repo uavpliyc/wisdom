@@ -73,6 +73,11 @@
                 </p>
               <% else %>
               <p class="control">
+                <%= link_to homes_guest_sign_in_path, method: :post, class: "button text-decoration-none" do %>
+                  <i class="fas fa-universal-access"></i>&nbsp;ゲストログイン
+                <% end %>
+              </p>
+              <p class="control">
                 <%= link_to new_user_session_path, class: "button text-decoration-none" do %>
                   <i class="fas fa-sign-in-alt"></i>&nbsp;ログイン
                 <% end %>

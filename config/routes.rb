@@ -29,5 +29,6 @@ Rails.application.routes.draw do
   root "homes#index"
   get 'contacts/new' => 'contacts#new', as: 'contact'
   post 'contacts/new', to: 'contacts#create'
+  post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
 
 end
