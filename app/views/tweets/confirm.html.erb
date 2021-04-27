@@ -3,8 +3,13 @@
   	<div class="columns is-centered">
   	  <div class="column is-6">
   	     <h2 class="title is-3">下書き一覧</h2>
+  	     <% if @tweets.exists? %>
   	     <%= render 'tweets/index',tweets: @tweets, tweet: @tweet %>
-  	    <%= link_to 'Back', tweets_path, class: "button is-warning is-light" %>
+  	     <% else %>
+  	       <p class="text-center is-size-4">下書きはありません</p>
+  	     <% end %>
+  	     <br>
+  	     <%= link_to 'Back', tweets_path, class: "button is-warning is-light" %>
   	  </div>
     </div>
   </div>

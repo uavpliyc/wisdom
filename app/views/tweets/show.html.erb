@@ -83,7 +83,7 @@
               <%= tweet.content %>
           <% if tweet.user == current_user %>
             <div class="btn">
-              <%= link_to "削除", tweet_comment_path(@tweet, tweet), method: :delete, class: "btn btn-danger btn-sm" %>
+              <%= link_to "削除", tweet_comment_path(@tweet, tweet), method: :delete, class: "button is-danger is-light is-small mt-3" %>
             </div>
           <% end %>
           </div>
@@ -91,6 +91,7 @@
       </div>
       <% end %>
       <!---->
+      <br>
       <%= link_to 'Back', 'javascript:history.back()', class: "button is-warning is-light" %>
     </div>
   </div>
