@@ -9,7 +9,7 @@
   var slider;
   var sliderFlag = false;
   var breakpoint = 768;//768px以下の場合
-    
+
   function sliderSet() {
           var windowWidth = window.innerWidth;
           if (windowWidth >= breakpoint && !sliderFlag) {//768px以上は1行でスライダー表示
@@ -26,18 +26,5 @@
               sliderFlag = false;
           }
       }
-  
-    $(window).on('load resize', function() {
-            sliderSet();
-    });
-    
-    //◆タブレット以下も1行で表示させたい場合は下記のみの記述でOK
-    //$('.slider').bxSlider({
-    //touchEnabled:false,
-    //mode: 'vertical',
-    //controls: false,
-    //auto: 'true',
-    //pager: false
-    //});
-    
-})(jQuery); // End of use strict
+
+}); // End of use strict

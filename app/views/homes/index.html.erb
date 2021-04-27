@@ -126,7 +126,7 @@
         </footer>
         <!--リロードしてもスライダーが起動するため-->
         <script>
-        document.addEventListener("turbolinks:load", function(){
+        $(window).scroll(function() {
             sliderSet();
         });
         </script>
