@@ -12,7 +12,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    @tweet = Tweet.find(params[:tweet_id])
+    @tweet    = Tweet.find(params[:tweet_id])
     @favorite = current_user.favorites.find_by(tweet_id: @tweet.id)
     @favorite.destroy
   end

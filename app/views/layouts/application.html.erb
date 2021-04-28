@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css">
     <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/9-4-1/css/9-4-1.css">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag('favicon.png') %>
@@ -29,67 +28,67 @@
           <% end %>
         <% end %>
       </div>
-        <div class="navbar-burger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+      <div class="navbar-burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
-          <nav class="navbar-item burger-item">
-            <div class="field is-grouped">
-              <% if user_signed_in? %>
-                <p class="control">
-                  <%= link_to tweets_path, class: "button text-decoration-none" do %>
-                    <i class="fas fa-hand-holding-heart"></i>&nbsp;新しい知識を提供する
-                  <% end %>
-                </p>
-                <p class="control">
-                  <%= link_to confirm_tweets_path, class: "button text-decoration-none" do %>
-                    <i class="fas fa-archive"></i>&nbsp;下書き一覧
-                  <% end %>
-                </p>
-                <p class="control">
-                  <%= link_to users_path, class: "button text-decoration-none" do %>
-                    <i class="fas fa-users"></i>&nbsp;ユーザー一覧
-                  <% end %>
-                </p>
-                <p class="control">
-                  <%= link_to notifications_path, class: "button text-decoration-none" do %>
-                  <% if unchecked_notifications.any? %>
-                    <i class="fa fa-circle" style="color: gold;"></i>
-                  <% end %>
-                    <i class="fas fa-bell"></i>&nbsp;通知一覧
-                  <% end %>
-                </p>
-                <p class="control">
-                  <%= link_to edit_user_registration_path, class: "button text-decoration-none" do %>
-                    <i class="fas fa-user-edit"></i>&nbsp;プロフィール編集
-                  <% end %>
-                </p>
-                <p class="control">
-                  <%= link_to destroy_user_session_path, method: :delete, class: "button text-decoration-none" do %>
-                    <i class="fas fa-sign-out-alt"></i>&nbsp;ログアウト
-                  <% end %>
-                </p>
-              <% else %>
-              <p class="control">
-                <%= link_to homes_guest_sign_in_path, method: :post, class: "button text-decoration-none" do %>
-                  <i class="fas fa-universal-access"></i>&nbsp;ゲストログイン
-                <% end %>
-              </p>
-              <p class="control">
-                <%= link_to new_user_session_path, class: "button text-decoration-none" do %>
-                  <i class="fas fa-sign-in-alt"></i>&nbsp;ログイン
-                <% end %>
-              </p>
-              <p class="control">
-                <%= link_to new_user_registration_path, class: "button text-decoration-none" do %>
-                  <i class="fas fa-user-plus"></i>&nbsp;新規登録
-                <% end %>
-              </p>
+      <nav class="navbar-item burger-item">
+        <div class="field is-grouped">
+          <% if user_signed_in? %>
+            <p class="control">
+              <%= link_to tweets_path, class: "button text-decoration-none" do %>
+                <i class="fas fa-hand-holding-heart"></i>&nbsp;新しい知識を提供する
               <% end %>
-            </div>
-          </nav>
+            </p>
+            <p class="control">
+              <%= link_to confirm_tweets_path, class: "button text-decoration-none" do %>
+                <i class="fas fa-archive"></i>&nbsp;下書き一覧
+              <% end %>
+            </p>
+            <p class="control">
+              <%= link_to users_path, class: "button text-decoration-none" do %>
+                <i class="fas fa-users"></i>&nbsp;ユーザー一覧
+              <% end %>
+            </p>
+            <p class="control">
+              <%= link_to notifications_path, class: "button text-decoration-none" do %>
+              <% if unchecked_notifications.any? %>
+                <i class="fa fa-circle" style="color: gold;"></i>
+              <% end %>
+                <i class="fas fa-bell"></i>&nbsp;通知一覧
+              <% end %>
+            </p>
+            <p class="control">
+              <%= link_to edit_user_registration_path, class: "button text-decoration-none" do %>
+                <i class="fas fa-user-edit"></i>&nbsp;プロフィール編集
+              <% end %>
+            </p>
+            <p class="control">
+              <%= link_to destroy_user_session_path, method: :delete, class: "button text-decoration-none" do %>
+                <i class="fas fa-sign-out-alt"></i>&nbsp;ログアウト
+              <% end %>
+            </p>
+          <% else %>
+          <p class="control">
+            <%= link_to homes_guest_sign_in_path, method: :post, class: "button text-decoration-none" do %>
+              <i class="fas fa-universal-access"></i>&nbsp;ゲストログイン
+            <% end %>
+          </p>
+          <p class="control">
+            <%= link_to new_user_session_path, class: "button text-decoration-none" do %>
+              <i class="fas fa-sign-in-alt"></i>&nbsp;ログイン
+            <% end %>
+          </p>
+          <p class="control">
+            <%= link_to new_user_registration_path, class: "button text-decoration-none" do %>
+              <i class="fas fa-user-plus"></i>&nbsp;新規登録
+            <% end %>
+          </p>
+          <% end %>
+        </div>
+      </nav>
     </nav>
 
     <div class="d">

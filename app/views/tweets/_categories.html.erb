@@ -1,8 +1,6 @@
 <div class="column fixed category">
-<!--<div class="column is-4-mobile category">-->
   <nav class="panel">
     <p class="panel-heading">カテゴリー一覧</p>
-
     <% categories.each do |category| %>
       <%= link_to tweet_category_path(category), class: "category-btn" do %>
         <div class="panel-block category-hover">
@@ -23,7 +21,5 @@
         </div>
       <% end %>
     <% end %>
-
   </nav>
-<!--</div>-->
 </div>

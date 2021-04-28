@@ -1,21 +1,21 @@
 <div class="d-flex align-items-center">
-<div class="level-item has-centered-text">
-	<div>
-		<p class="heading">フォロー</p>
-		<p class="title is-6"><%= link_to user.follower.count, following_user_path(user.id) %></p>
+	<div class="level-item has-centered-text">
+		<div>
+			<p class="heading">フォロー</p>
+			<p class="title is-6"><%= link_to user.follower.count, following_user_path(user.id) %></p>
+		</div>
 	</div>
-</div>
-<div class="level-item has-centered-text">
-	<div>
-		<p class="heading">フォロワー</p>
-		<p class="title is-6"><%= link_to user.followed.count, followers_user_path(user.id) %></p>
+	<div class="level-item has-centered-text">
+		<div>
+			<p class="heading">フォロワー</p>
+			<p class="title is-6"><%= link_to user.followed.count, followers_user_path(user.id) %></p>
+		</div>
 	</div>
-</div>
-<% if user_signed_in? && current_user.id != user.id %>
-	<% if current_user.following?(user) %>
-    <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST, class: "button is-danger is-light btn-sm ml-5", remote: true %>
-  <% else %>
-    <%= link_to 'フォローする', follow_path(user.id), method: :POST, class: "button is-primary is-light btn-sm ml-5", remote: true %>
-  <% end %>
-<% end %>
+	<% if user_signed_in? && current_user.id != user.id %>
+		<% if current_user.following?(user) %>
+	    <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST, class: "button is-danger is-light btn-sm ml-5", remote: true %>
+	  <% else %>
+	    <%= link_to 'フォローする', follow_path(user.id), method: :POST, class: "button is-primary is-light btn-sm ml-5", remote: true %>
+	  <% end %>
+	<% end %>
 </div>

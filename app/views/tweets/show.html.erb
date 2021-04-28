@@ -1,99 +1,98 @@
 <section class="section">
-<div class="container">
-	<div class="columns is-centered">
-	  <div class="column is-6">
-
-    <div class="center-block">
-     <div class="box mx-auto">
-        <article class="media">
+  <div class="container">
+  	<div class="columns is-centered">
+  	  <div class="column is-6">
+  
+       <div class="box mx-auto">
+          <article class="media">
+            <div class="media-left">
+              <%= link_to user_path(@tweet.user_id) do %>
+              <figure class="image is-64x64">
+                 <%= attachment_image_tag @tweet.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
+              </figure>
+              <% end %>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                <strong><%= @tweet.user.name %></strong>
+                <%= l @tweet.created_at %>
+                【<%= @tweet.category.name %>】<br>
+                <small><%= @tweet.user.username %></small><br>
+                <p><%= @tweet.tweet %></p>
+                <p><%= attachment_image_tag @tweet, :image, size: "100x100", format: 'jpeg' %></p>
+              </div>
+               <!--ツイート下部-->
+              <div class="level-left is-mobile">
+                <%= link_to @tweet, class: "level-item text-decoration-none" do %>
+                  <span class="icon"><i class="far fa-comment" aria-hidden="true"></i><%= @tweet.comments.count %></span>
+                <% end %>
+                <%= link_to @tweet, class: "level-item" do %>
+                  <div id="favorites_buttons_<%= @tweet.id %>">
+                    <%= render 'favorites/favorite', tweet: @tweet %>
+                  </div>
+                <% end %>
+                <% if user_signed_in? && current_user.id == @tweet.user_id %>
+                  <%= link_to edit_tweet_path(@tweet), class: "level-item ml-5 text-decoration-none edit-btn" do %>
+                    <span class="icon"><i class="fas fa-pencil-alt" aria-hidden="true"></i></span>
+                  <% end %>
+                  <%= link_to @tweet, method: :delete, data: { confirm: "このツイートを消しますか?"}, class: "ml-3 destroy-btn" do %>
+                    <span class="icon"><i class="far fa-trash-alt" aria-hidden="true"></i></span>
+                  <% end %>
+                <% end %>
+              </div>
+              <!---->
+            </div>
+          </article>
+        </div>
+  
+        <!--コメント投稿-->
+        <div class="box media">
           <div class="media-left">
-            <%= link_to user_path(@tweet.user_id) do %>
             <figure class="image is-64x64">
-               <%= attachment_image_tag @tweet.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
+              <%= attachment_image_tag @tweet.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
             </figure>
+          </div>
+          <div class="media-content">
+            <%= simple_form_for([@tweet, @comment]) do |f| %>
+              <div class="field">
+                <div class="control">
+                  <%= f.input :content, label: "アクションプランをコメントする✒️", input_html: { class: "textarea" }, label_html: {class: "label"},wrapper: false, placeholder: "こんな行動をすると良いと思います", autofocus: true %><br>
+                </div>
+              </div>
+              <%= f.button :button, class: "button is-info" do %>コメントする<% end %>
             <% end %>
           </div>
-          <div class="media-content">
-            <div class="content">
-              <strong><%= @tweet.user.name %></strong>
-              <%= l @tweet.created_at %>
-              【<%= @tweet.category.name %>】<br>
-              <small><%= @tweet.user.username %></small><br>
-              <p><%= @tweet.tweet %></p>
-              <p><%= attachment_image_tag @tweet, :image, size: "100x100", format: 'jpeg' %></p>
-            </div>
-             <!--ツイート下部-->
-            <div class="level-left is-mobile">
-              <%= link_to @tweet, class: "level-item text-decoration-none" do %>
-                <span class="icon"><i class="far fa-comment" aria-hidden="true"></i><%= @tweet.comments.count %></span>
-              <% end %>
-              <%= link_to @tweet, class: "level-item" do %>
-                <div id="favorites_buttons_<%= @tweet.id %>">
-                  <%= render 'favorites/favorite', tweet: @tweet %>
-                </div>
-              <% end %>
-              <% if user_signed_in? && current_user.id == @tweet.user_id %>
-                <%= link_to edit_tweet_path(@tweet), class: "level-item ml-5 text-decoration-none edit-btn" do %>
-                  <span class="icon"><i class="fas fa-pencil-alt" aria-hidden="true"></i></span>
-                <% end %>
-                <%= link_to @tweet, method: :delete, data: { confirm: "このツイートを消しますか?"}, class: "ml-3 destroy-btn" do %>
-                  <span class="icon"><i class="far fa-trash-alt" aria-hidden="true"></i></span>
-                <% end %>
-              <% end %>
-            </div>
-            <!---->
-          </div>
-        </article>
-      </div>
-
-      <!--コメント投稿-->
-      <div class="box media">
-        <div class="media-left">
-          <figure class="image is-64x64">
-            <%= attachment_image_tag @tweet.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
-          </figure>
         </div>
-        <div class="media-content">
-          <%= simple_form_for([@tweet, @comment]) do |f| %>
-            <div class="field">
-              <div class="control">
-                <%= f.input :content, label: "アクションプランをコメントする✒️", input_html: { class: "textarea" }, label_html: {class: "label"},wrapper: false, placeholder: "こんな行動をすると良いと思います", autofocus: true %><br>
+        <!---->
+  
+        <!--コメント一覧-->
+        <p>コメント件数：<%= @tweet.comments.count %></p>
+        <% @tweet.comments.each do |tweet| %>
+        <div class="box">
+          <article class="media">
+            <%= link_to user_path(tweet.user_id) do %>
+            <div class="media-left">
+                <figure class="image is-64x64"><%= attachment_image_tag tweet.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %></figure>
+            </div>
+            <% end %>
+            <div class="media-content">
+                <%= tweet.user.name %>
+                <%= tweet.user.username %>
+                <%= l tweet.created_at %><br>
+                <%= tweet.content %>
+            <% if tweet.user == current_user %>
+              <div class="btn">
+                <%= link_to "削除", tweet_comment_path(@tweet, tweet), method: :delete, class: "button is-danger is-light is-small mt-3" %>
               </div>
+            <% end %>
             </div>
-            <%= f.button :button, class: "button is-info" do %>コメントする<% end %>
-          <% end %>
+          </article>
         </div>
+        <% end %>
+        <!---->
+        <br>
+        <%= link_to 'Back', 'javascript:history.back()', class: "button is-warning is-light" %>
       </div>
-      <!---->
-
-      <!--コメント一覧-->
-      <p>コメント件数：<%= @tweet.comments.count %></p>
-      <% @tweet.comments.each do |tweet| %>
-      <div class="box">
-        <article class="media">
-          <%= link_to user_path(tweet.user_id) do %>
-          <div class="media-left">
-              <figure class="image is-64x64"><%= attachment_image_tag tweet.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %></figure>
-          </div>
-          <% end %>
-          <div class="media-content">
-              <%= tweet.user.name %>
-              <%= tweet.user.username %>
-              <%= l tweet.created_at %><br>
-              <%= tweet.content %>
-          <% if tweet.user == current_user %>
-            <div class="btn">
-              <%= link_to "削除", tweet_comment_path(@tweet, tweet), method: :delete, class: "button is-danger is-light is-small mt-3" %>
-            </div>
-          <% end %>
-          </div>
-        </article>
-      </div>
-      <% end %>
-      <!---->
-      <br>
-      <%= link_to 'Back', 'javascript:history.back()', class: "button is-warning is-light" %>
     </div>
   </div>
-</div>
 </section>
