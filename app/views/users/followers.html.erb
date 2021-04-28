@@ -2,9 +2,9 @@
   <div class="container">
   	<div class="columns is-centered">
   	  <div class="column is-6">
-        <p class="font-weight-bold">フォロワー</p>
+        <p class="font-weight-bold">フォロワー</p><br>
         <% if @user.follower_user.exists? %>
-          <%= render 'follow_user', user: @user.follower_user %>
+          <%= render 'follow_user', users: @user.follower_user %>
         <% else %>
           <p class="text-center is-size-4">フォロワーはいません</p>
         <% end %>

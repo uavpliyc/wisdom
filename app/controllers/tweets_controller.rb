@@ -1,5 +1,4 @@
 class TweetsController < ApplicationController
-  # before_action :set_tweet, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
 
   def index
@@ -41,7 +40,6 @@ class TweetsController < ApplicationController
 
   def create
     @tweet = current_user.tweets.build(tweet_params)
-    # @categories = Category.all
     if @tweet.save
       if @tweet.published?
         flash[:notice] = "ツイートをしました"
@@ -59,8 +57,6 @@ class TweetsController < ApplicationController
       render :index
     end
     # logger.debug @tweet.errors.inspect
-
-
   end
 
   def update
@@ -91,12 +87,12 @@ class TweetsController < ApplicationController
 
   private
 
-    def tweet_params
-      params.require(:tweet).permit(:tweet, :image, :category_id, :status)
-    end
+  def tweet_params
+    params.require(:tweet).permit(:tweet, :image, :category_id, :status)
+  end
 
-    def login_required
-      redirect_to login_url unless current_user
-    end
+  def login_required
+    redirect_to login_url unless current_user
+  end
 
 end
