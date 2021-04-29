@@ -20,11 +20,11 @@
       <div class="navbar-brand">
         <% if user_signed_in? %>
           <%= link_to tweets_path, class: "navbar-item text-decoration-none" do %>
-            <h1 class="title is-5"><img src="/assets/logo.png" alt="Wisdom"> Wisdom</h1>
+            <h1 class="title is-5"><%= image_tag asset_path('logo.png', :alt => 'Wisdom') %> Wisdom</h1>
           <% end %>
         <% else %>
           <%= link_to root_path, class: "navbar-item text-decoration-none" do %>
-            <h1 class="title is-5"><img src="/public/logo.png" alt="Wisdom"> Wisdom</h1>
+            <h1 class="title is-5"><%= image_tag asset_path('logo.png', :alt => 'Wisdom') %> Wisdom</h1>
           <% end %>
         <% end %>
       </div>
