@@ -1,26 +1,12 @@
 <section class="section">
   <div class="container">
     <div class="columns">
-      <% if user_signed_in? %>
-        <%= render 'profile', user: @user %>
-      <% end %>
-      <!--真ん中-->
+      <%= render 'profile', user: @user %>
       <div class="column is-half">
-        <% if user_signed_in? %>
-          <article class="media box">
-            <figure class="media-left">
-              <p class="image is-64x64">
-                <%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
-              </p>
-            </figure>
-            <div class="media-content">
-              <%= render 'tweets/form', tweet: @tweet, categories: @categories %>
-            </div>
-          </article>
-        <% end %>
+        <%= render 'tweets/form', tweet: @tweet, categories: @categories %>
         <%= render 'tweets/index',tweets: @tweets, tweet: @tweet %>
       </div>
-    <%= render 'categories', categories: @categories %>
+      <%= render 'categories', categories: @categories %>
     </div>
   </div>
 </section>
