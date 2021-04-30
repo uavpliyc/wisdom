@@ -17,7 +17,9 @@ Rails.application.routes.draw do
 
   resources :tweets do
     resource :favorites, only: [:create, :destroy]
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy] do
+      resource :comment_favorites, only: [:create, :destroy]
+    end
     resources :categories, only: [:index, :create, :edit, :update]
     get :search, on: :collection
     collection do

@@ -2,7 +2,7 @@
   <div class="container">
   	<div class="columns is-centered">
   	  <div class="column is-6">
-  
+
        <div class="box mx-auto">
           <article class="media">
             <div class="media-left">
@@ -44,7 +44,7 @@
             </div>
           </article>
         </div>
-  
+
         <!--コメント投稿-->
         <div class="box media">
           <div class="media-left">
@@ -64,7 +64,7 @@
           </div>
         </div>
         <!---->
-  
+
         <!--コメント一覧-->
         <p>コメント件数：<%= @tweet.comments.count %></p>
         <% @tweet.comments.each do |tweet| %>
@@ -80,6 +80,11 @@
                 <%= tweet.user.username %>
                 <%= l tweet.created_at %><br>
                 <div class="is-size-5"><%= tweet.content %></div>
+                <!--<= link_to tweet.comment, class: "level-item" do %>-->
+                  <div id="comment_favorites_buttons_<%= @comment.id %>">
+                    <%= render 'comment_favorites/comment_favorite', comment: @comment.id, tweet: tweet %>
+                  </div>
+                <!--< end %>-->
             <% if tweet.user == current_user %>
               <div class="btn">
                 <%= link_to "削除", tweet_comment_path(@tweet, tweet), method: :delete, class: "button is-danger is-light is-small mt-3" %>
