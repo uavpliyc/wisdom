@@ -18,7 +18,7 @@
                 <%= l @tweet.created_at %>
                 【<%= @tweet.category.name %>】<br>
                 <small><%= @tweet.user.username %></small><br>
-                <p><%= @tweet.tweet %></p>
+                <p class="is-size-5"><%= @tweet.tweet %></p>
                 <p><%= attachment_image_tag @tweet, :image, size: "100x100", format: 'jpeg' %></p>
               </div>
                <!--ツイート下部-->
@@ -79,7 +79,7 @@
                 <%= tweet.user.name %>
                 <%= tweet.user.username %>
                 <%= l tweet.created_at %><br>
-                <%= tweet.content %>
+                <div class="is-size-5"><%= tweet.content %></div>
             <% if tweet.user == current_user %>
               <div class="btn">
                 <%= link_to "削除", tweet_comment_path(@tweet, tweet), method: :delete, class: "button is-danger is-light is-small mt-3" %>

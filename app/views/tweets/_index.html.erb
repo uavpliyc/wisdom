@@ -15,7 +15,7 @@
             <%= l tweet.created_at %>
             【<%= tweet.category.name %>】<br>
             <small><%= tweet.user.username %></small><br>
-            <p><%= tweet.tweet %></p>
+            <p class="is-size-5"><%= tweet.tweet %></p>
             <p><%= attachment_image_tag tweet, :image, size: "100x100", format: 'jpeg' %></p>
           </div>
            <!--ツイート下部-->
