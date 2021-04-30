@@ -67,27 +67,25 @@
 
         <!--コメント一覧-->
         <p>コメント件数：<%= @tweet.comments.count %></p>
-        <% @tweet.comments.each do |tweet| %>
+        <% @tweet.comments.each do |comment| %>
         <div class="box">
           <article class="media">
-            <%= link_to user_path(tweet.user_id) do %>
+            <%= link_to user_path(comment.user_id) do %>
             <div class="media-left">
-                <figure class="image is-64x64"><%= attachment_image_tag tweet.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %></figure>
+                <figure class="image is-64x64"><%= attachment_image_tag comment.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %></figure>
             </div>
             <% end %>
             <div class="media-content">
-                <%= tweet.user.name %>
-                <%= tweet.user.username %>
-                <%= l tweet.created_at %><br>
-                <div class="is-size-5"><%= tweet.content %></div>
-                <!--<= link_to tweet.comment, class: "level-item" do %>-->
-                  <div id="comment_favorites_buttons_<%= @comment.id %>">
-                    <%= render 'comment_favorites/comment_favorite', comment: @comment.id, tweet: tweet %>
-                  </div>
-                <!--< end %>-->
-            <% if tweet.user == current_user %>
+              <%= comment.user.name %>
+              <%= comment.user.username %>
+              <%= l comment.created_at %><br>
+              <div class="is-size-5"><%= comment.content %></div>
+              <div id="comment_favorites_buttons_<%= comment.id %>">
+                <%= render 'comment_favorites/comment_favorite', comment: comment, tweet: @tweet %>
+              </div>
+            <% if comment.user == current_user %>
               <div class="btn">
-                <%= link_to "削除", tweet_comment_path(@tweet, tweet), method: :delete, class: "button is-danger is-light is-small mt-3" %>
+                <%= link_to "削除", tweet_comment_path(@tweet, comment), method: :delete, class: "button is-danger is-light is-small mt-3" %>
               </div>
             <% end %>
             </div>

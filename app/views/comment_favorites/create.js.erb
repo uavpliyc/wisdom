@@ -1,1 +1,1 @@
-$('#comment_favorites_buttons_<%= @comment.id %>').html("<%= j(render partial: 'comment_favorites/comment_favorite', locals: {comment: @comment, tweet: tweet}) %>");
+$('#comment_favorites_buttons_<%= @comment.id %>').html("<%= j(render 'comment_favorites/comment_favorite', comment: @comment, tweet: @tweet) %>");
