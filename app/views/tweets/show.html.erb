@@ -78,11 +78,12 @@
             <div class="media-content">
               <%= comment.user.name %>
               <%= comment.user.username %>
-              <%= l comment.created_at %><br>
-              <div class="is-size-5"><%= comment.content %></div>
+              <%= l comment.created_at %>
               <div id="comment_favorites_buttons_<%= comment.id %>">
                 <%= render 'comment_favorites/comment_favorite', comment: comment, tweet: @tweet %>
               </div>
+              <br>
+              <div class="is-size-5"><%= comment.content %></div>
             <% if comment.user == current_user %>
               <div class="btn">
                 <%= link_to "削除", tweet_comment_path(@tweet, comment), method: :delete, class: "button is-danger is-light is-small mt-3" %>

@@ -29,7 +29,7 @@
 						</article>
 					</div>
 					<div class="panel-block">
-						<div class="level is-mobile">
+						<div class="level is-mobile mb-0">
 							<div class="level-item has-centered-text">
 								<div>
 									<p class="heading">ツイート</p>
@@ -40,6 +40,11 @@
 					      <%= render 'follows/follow', user: @user %>
 					    </div>
 						</div>
+					<% if user_signed_in? && current_user.id == @user.id %>
+						<%= link_to edit_user_registration_path, class: "button text-decoration-none ml-auto" do %>
+	            <i class="fas fa-user-edit"></i>&nbsp;プロフィール編集
+	          <% end %>
+          <% end %>
 					</div>
 				</nav>
 				<%= render 'tweets/index', tweets: @tweets, tweet: @tweet %>

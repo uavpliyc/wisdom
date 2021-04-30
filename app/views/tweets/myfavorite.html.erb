@@ -1,0 +1,16 @@
+<section class="section">
+  <div class="container">
+  	<div class="columns is-centered">
+  	  <div class="column is-6">
+  	     <h2 class="title is-3">マイアクションプラン一覧</h2>
+  	     <% if @tweets.exists? %>
+  	     <%= render 'tweets/index',tweets: @tweets, tweet: @tweet %>
+  	     <% else %>
+  	       <p class="text-center is-size-4">マイアクションプランはありません</p>
+  	     <% end %>
+  	     <br>
+  	     <%= link_to 'Back', tweets_path, class: "button is-warning is-light" %>
+  	  </div>
+    </div>
+  </div>
+</section>

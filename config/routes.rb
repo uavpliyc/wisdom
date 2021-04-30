@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     get :search, on: :collection
     collection do
       get 'confirm'
+      get 'myfavorite'
     end
   end
 
