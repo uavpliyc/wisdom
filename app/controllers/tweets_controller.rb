@@ -7,9 +7,6 @@ class TweetsController < ApplicationController
     @categories = Category.all
   end
 
-  def confirm
-    @tweets = current_user.tweets.draft.order("created_at DESC")
-  end
 
   def category
     @categories = Category.all
@@ -56,7 +53,6 @@ class TweetsController < ApplicationController
       @categories = Category.all
       render :index
     end
-    # logger.debug @tweet.errors.inspect
   end
 
   def update
@@ -83,6 +79,17 @@ class TweetsController < ApplicationController
     @tweets     = @tweets.where('tweet LIKE ?', "%#{params[:search]}%") if params[:search].present?
     @tweet      = Tweet.new
     @categories = Category.all
+  end
+
+  def confirm
+    @tweets = current_user.tweets.draft.order("created_at DESC")
+  end
+
+  def myfavorite
+    @tweet            = Tweet.find_by(params[:tweet_id])
+    @comments         = Tweet.comments
+    @comment_favorite = CommentFavorite.where(comment_id: comment.id)
+    # @comments         = Comment.comment_favorites.order("create_at DESC")
   end
 
   private

@@ -2,9 +2,29 @@
   <div class="container">
   	<div class="columns is-centered">
   	  <div class="column is-6">
-  	     <h2 class="title is-3">マイアクションプラン一覧</h2>
-  	     <% if @tweets.exists? %>
-  	     <%= render 'tweets/index',tweets: @tweets, tweet: @tweet %>
+  	    <h2 class="title is-3">マイアクションプラン一覧</h2>
+  	    <% if @comments.exists? %>
+          <% @comments.each do |comment| %>
+          <div class="box">
+            <article class="media">
+              <%= link_to user_path(comment.user_id) do %>
+              <div class="media-left">
+                <figure class="image is-64x64"><%= attachment_image_tag comment.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %></figure>
+              </div>
+              <% end %>
+              <div class="media-content">
+                <%= comment.user.name %>
+                <%= comment.user.username %>
+                <%= l comment.created_at %>
+                <div id="comment_favorites_buttons_<%= comment.id %>">
+                  <%= render 'comment_favorites/comment_favorite', comment: comment, tweet: @tweet %>
+                </div>
+                <br>
+                <div class="is-size-5"><%= comment.content %></div>
+              </div>
+            </article>
+          </div>
+          <% end %>
   	     <% else %>
   	       <p class="text-center is-size-4">マイアクションプランはありません</p>
   	     <% end %>
