@@ -313,8 +313,8 @@ describe '[STEP3] 仕上げのテスト' do
       it '「通知一覧」のアイコンが表示される' do
         is_expected.to have_selector '.fas.fa-bell'
       end
-      it '「プロフィール編集」のアイコンが表示される' do
-        is_expected.to have_selector '.fas.fa-user-edit'
+      it '「マイアクション」のアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-running'
       end
       it '「ログアウト」のアイコンが表示される' do
         is_expected.to have_selector '.fas.fa-sign-out-alt'
