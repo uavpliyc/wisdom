@@ -102,6 +102,21 @@ span {
   margin-left: 10px;
 }
 
+#box {
+  width: 30px;
+  height: 30px;
+}
+
+input[type="checkbox"]:checked {
+  color: #ddd;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:before {
+  cursor: pointer;
+  border: 1px solid #6cc0e5;
+}
+
 @media screen and (max-width: 768px) {
 
   .is-one-quarter {
