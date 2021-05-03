@@ -40,6 +40,7 @@ select {
   color: #fff;
   border-radius: 1;
   background: #000;
+  margin-left: 140px;
 }
 
 .btn-flat span {
@@ -76,6 +77,29 @@ select {
 .btn-shadow {
   -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
   box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+}
+
+.selectdiv {
+  position: relative;
+}
+
+.selectdiv select {
+  height: 40px;
+  margin: 5px 10px 0 0;
+  padding: 0 auto;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #000;
+  background-color: #CCFFFF;
+  border: 1px solid #000080;
+}
+
+.flex {
+  display: flex;
+}
+
+span {
+  margin-left: 10px;
 }
 
 @media screen and (max-width: 768px) {
