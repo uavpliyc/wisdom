@@ -84,10 +84,15 @@ class TweetsController < ApplicationController
 
   def confirm
     @tweets = current_user.tweets.draft.order("created_at DESC")
+    @tweet   = Tweet.find(params[:tweet_id])
+    @comment = Comment.find(params[:id])
   end
 
   def myfavorite
     @comment_favorites = current_user.comment_favorites.order("created_at DESC")
+    # @tweet   = Tweet.find_by(params[:id])
+    # @comment = @tweet.comments.find_by(params[:comment_id])
+    # @comment_favorite = current_user.comment_favorites.find_by(comment_id: @comment.id)
   end
 
   private

@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   def create
     @tweet            = Tweet.find(params[:tweet_id])
     @comment          = current_user.comments.new(comment_params)
-    @comment.score     = Language.get_data(comment_params[:content])
+    @comment.score    = Language.get_data(comment_params[:content])
     @comment.tweet_id = @tweet.id
     if @comment.save
       flash[:notice] = "コメントしました！"
