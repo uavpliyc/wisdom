@@ -87,10 +87,7 @@ class TweetsController < ApplicationController
   end
 
   def myfavorite
-    @tweet            = Tweet.find_by(params[:tweet_id])
-    @comments         = Tweet.comments
-    @comment_favorite = CommentFavorite.where(comment_id: comment.id)
-    # @comments         = Comment.comment_favorites.order("create_at DESC")
+    @comment_favorites = current_user.comment_favorites.order("created_at DESC")
   end
 
   private

@@ -3,8 +3,8 @@
   	<div class="columns is-centered">
   	  <div class="column is-6">
   	    <h2 class="title is-3">マイアクションプラン一覧</h2>
-  	    <% if @comments.exists? %>
-          <% @comments.each do |comment| %>
+  	    <% if @comment_favorites.exists? %>
+          <% @comment_favorites.each do |comment| %>
           <div class="box">
             <article class="media">
               <%= link_to user_path(comment.user_id) do %>
@@ -16,11 +16,8 @@
                 <%= comment.user.name %>
                 <%= comment.user.username %>
                 <%= l comment.created_at %>
-                <div id="comment_favorites_buttons_<%= comment.id %>">
-                  <%= render 'comment_favorites/comment_favorite', comment: comment, tweet: @tweet %>
-                </div>
                 <br>
-                <div class="is-size-5"><%= comment.content %></div>
+                <div class="is-size-5"><%= comment.comment.content %></div>
               </div>
             </article>
           </div>
