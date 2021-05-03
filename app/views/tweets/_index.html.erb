@@ -14,7 +14,8 @@
             <strong><%= tweet.user.name %></strong>
             <%= l tweet.created_at %>
             【<%= tweet.category.name %>】<br>
-            <small><%= tweet.user.username %></small><br>
+            <small><%= tweet.user.username %></small>
+            <span class="sentiment-score">(ツイートの感情分析スコア☆<%= tweet.score %>)</span><br>
             <p class="is-size-5"><%= tweet.tweet %></p>
             <p><%= attachment_image_tag tweet, :image, size: "100x100", format: 'jpeg' %></p>
           </div>

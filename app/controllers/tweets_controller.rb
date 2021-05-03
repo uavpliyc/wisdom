@@ -37,6 +37,7 @@ class TweetsController < ApplicationController
 
   def create
     @tweet = current_user.tweets.build(tweet_params)
+    @tweet.score = Language.get_data(tweet_params[:tweet])
     if @tweet.save
       if @tweet.published?
         flash[:notice] = "ツイートをしました"

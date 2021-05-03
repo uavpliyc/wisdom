@@ -17,7 +17,8 @@
                 <strong><%= @tweet.user.name %></strong>
                 <%= l @tweet.created_at %>
                 【<%= @tweet.category.name %>】<br>
-                <small><%= @tweet.user.username %></small><br>
+                <small><%= @tweet.user.username %></small>
+                <span class="sentiment-score">(ツイートの感情分析スコア☆<%= @tweet.score %>)</span><br>
                 <p class="is-size-5"><%= @tweet.tweet %></p>
                 <p><%= attachment_image_tag @tweet, :image, size: "100x100", format: 'jpeg' %></p>
               </div>
@@ -78,7 +79,8 @@
             <div class="media-content">
               <%= comment.user.name %>
               <%= comment.user.username %>
-              <%= l comment.created_at %>
+              <%= l comment.created_at %><br>
+              <span class="sentiment-score">(コメントの感情分析スコア☆<%= comment.score %>)</span>
               <div id="comment_favorites_buttons_<%= comment.id %>">
                 <%= render 'comment_favorites/comment_favorite', comment: comment, tweet: @tweet %>
               </div>
