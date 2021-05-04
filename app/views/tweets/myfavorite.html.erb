@@ -3,42 +3,11 @@
   	<div class="columns is-centered">
   	  <div class="column is-8">
   	    <h2 class="title is-3">マイアクションプラン一覧</h2>
-  	    <% if @comment_favorites.exists? %>
-          <% @comment_favorites.each.with_index(1) do |comment_favorite, index| %>
-          <table class="table is-hoverable">
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>ユーザー</th>
-                <th style="width: 600px;">マイアクションプラン</th>
-                <th style="width: 88px;">チェック</th>
-                <th style="width: 56px;">削除</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><%= "#{index}" %></td>
-                <td>
-                  <%= link_to user_path(comment_favorite.user_id) do %>
-                    <figure class="image is-64x64"><%= attachment_image_tag comment_favorite.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %></figure>
-                  <% end %>
-                  <div class="has-text-centered"><%= comment_favorite.user.name %></div>
-                </td>
-                <td style="width: 600px;" class="is-size-5"><%= comment_favorite.comment.content %></td>
-                <td class="has-text-centered is-vcentered"><input type="checkbox" id="box"></td>
-                <td>
-                  <div class="btn">
-                    <!--<= link_to "削除", tweet_comment_comment_favorites_path(tweet_id: @tweet.id, comment_id: omment_favorite.id), method: :delete, class: "button is-danger is-light is-small" %>-->
-                  </div>
-                </td>
-              </tr>
-                <!--<= l comment.created_at %>-->
-            </tbody>
-          </table>
-          <% end %>
-  	     <% else %>
-  	       <p class="text-center is-size-4">マイアクションプランはありません</p>
-  	     <% end %>
+
+  	      <div id="myfavorite_table">
+           <%= render 'tweets/myfavorite', comment: @comment, tweet: @tweet, comment_favorites: @comment_favorites %>
+          </div>
+
   	     <br>
   	     <%= link_to 'Back', tweets_path, class: "button is-warning is-light" %>
   	  </div>

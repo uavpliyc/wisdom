@@ -73,7 +73,7 @@
           <article class="media">
             <%= link_to user_path(comment.user_id) do %>
             <div class="media-left">
-                <figure class="image is-64x64"><%= attachment_image_tag comment.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %></figure>
+              <figure class="image is-64x64"><%= attachment_image_tag comment.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %></figure>
             </div>
             <% end %>
             <div class="media-content">
@@ -82,7 +82,7 @@
               <%= l comment.created_at %><br>
               <span class="sentiment-score">(コメントの感情分析スコア☆<%= comment.score %>)</span>
               <div id="comment_favorites_buttons_<%= comment.id %>">
-                <%= render 'comment_favorites/comment_favorite', comment: comment, tweet: @tweet %>
+                <%= render 'comment_favorites/comment_favorite', comment: comment, tweet: @tweet, comment_favorite: @comment_favorite %>
               </div>
               <br>
               <div class="is-size-5"><%= comment.content %></div>

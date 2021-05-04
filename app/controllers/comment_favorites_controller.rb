@@ -11,7 +11,9 @@ class CommentFavoritesController < ApplicationController
     @tweet            = Tweet.find_by(params[:tweet_id])
     @comment          = Comment.find(params[:comment_id])
     @comment_favorite = current_user.comment_favorites.find_by(comment_id: @comment.id)
+    # byebug
     @comment_favorite.destroy
+    # redirect_to myfavorite_tweets_path
   end
 
 end

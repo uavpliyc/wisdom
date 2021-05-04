@@ -1,0 +1,39 @@
+
+<% if comment_favorites.exists? %>
+<% comment_favorites.each.with_index(1) do |comment_favorite, index| %>
+  <table class="table is-hoverable">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>ユーザー</th>
+        <th style="width: 600px;">マイアクションプラン</th>
+        <th style="width: 88px;">チェック</th>
+        <th style="width: 56px;">削除</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= "#{index}" %></td>
+        <td>
+          <%= link_to user_path(comment_favorite.user_id) do %>
+            <figure class="image is-64x64"><%= attachment_image_tag comment_favorite.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %></figure>
+          <% end %>
+          <div class="has-text-centered"><%= comment_favorite.user.name %></div>
+        </td>
+        <td style="width: 600px;" class="is-size-5"><%= comment_favorite.comment.content %></td>
+        <td class="has-text-centered is-vcentered"><input type="checkbox" id="box"></td>
+        <td class="has-text-centered is-vcentered">
+
+          <div id="comment_favorites_delete_buttons_<%= comment_favorite.id %>" >
+            <%= link_to '削除', tweet_comment_comment_favorite_path(tweet_id: comment_favorite.comment.tweet.id, comment_id: comment_favorite.comment.id, id: comment_favorite.id), method: :delete, remote: true, class: "button is-danger is-light is-small" %>
+          </div>
+
+        </td>
+      </tr>
+        <!--<= l comment.created_at %>-->
+    </tbody>
+  </table>
+<% end %>
+<% else %>
+ <p class="text-center is-size-4">マイアクションプランはありません</p>
+<% end %>
