@@ -19,6 +19,7 @@ class TweetsController < ApplicationController
     @tweet    = Tweet.find(params[:id])
     @comments = @tweet.comments
     @comment  = Comment.new
+    @comment_favorite = current_user.comment_favorites.find_by(params[:id])
     # 下書きはログインしていないと見れない
     if  @tweet.nil?
       redirect_to root_path
@@ -36,7 +37,7 @@ class TweetsController < ApplicationController
   end
 
   def create
-    @tweet = current_user.tweets.build(tweet_params)
+    @tweet = current_user.tweets.new(tweet_params)
     @tweet.score = Language.get_data(tweet_params[:tweet])
     if @tweet.save
       if @tweet.published?

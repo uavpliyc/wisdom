@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   resources :tweets do
     resource :favorites, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy] do
-      resource :comment_favorites, only: [:create, :destroy]
-      resources :comment_favorites, only: [:destroy]
+      delete 'index_destroy/:id' => 'comment_favorites#index_destroy', as: 'index_destroy'
+      resources :comment_favorites, only: [:create, :destroy]
     end
     resources :categories, only: [:index, :create, :edit, :update]
     get :search, on: :collection
