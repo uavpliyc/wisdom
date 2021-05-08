@@ -1,6 +1,7 @@
 <% visiter = notification.visiter %>
 <% visited = notification.visited %>
 <% tweet = notification.tweet %>
+<% comment = notification.comment %>
 
 <div class="box">
   <article class="media">
@@ -21,6 +22,13 @@
             <% when 'favorite' then %>
               <%= link_to 'あなたの投稿', notification.tweet, style: "font-weight: bold;" %>
               <%= "にいいねしました" %>
+              <p></p>
+            <% when 'comment_favorite' then %>
+              <%= link_to 'あなたのコメント', notification.comment.tweet, style: "font-weight: bold;" %>
+              <%= "をマイアクションに登録しました" %>
+              <p class="mt-2">
+                <%= Comment.find_by(id: notification.comment_id)&.content %>
+              </p>
               <p></p>
             <% when 'comment' then %>
               <%= link_to "あなたの投稿", notification.tweet, style: "font-weight: bold;" %>

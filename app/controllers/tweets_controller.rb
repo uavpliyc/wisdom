@@ -7,7 +7,6 @@ class TweetsController < ApplicationController
     @categories = Category.all
   end
 
-
   def category
     @categories = Category.all
     @category   = Category.find(params[:id])
@@ -85,16 +84,12 @@ class TweetsController < ApplicationController
 
   def confirm
     @tweets = current_user.tweets.draft.order("created_at DESC")
-    # @tweet   = Tweet.find(xparams[:tweet_id])
-    # @comment = Comment.find(params[:id])
   end
 
   def myfavorite
     @comment_favorites = current_user.comment_favorites.order("created_at DESC")
     @tweet   = Tweet.find_by(params[:tweet_id])
     @comment = Comment.find_by(params[:comment_id])
-    # # @comments = @tweet.comments
-    # @comment_favorite = current_user.comment_favorites.find_by(comment_id: @comment.id)
   end
 
   private

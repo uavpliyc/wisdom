@@ -16,6 +16,10 @@ class Tweet < ApplicationRecord
       visited_id: user_id,
       action: "favorite"
     )
+    # 自分の投稿に対するいいねの場合は、通知済みとする
+    if notification.visiter_id == notification.visited_id
+      notification.checked = true
+    end
     notification.save if notification.valid?
   end
 
