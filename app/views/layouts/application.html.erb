@@ -28,18 +28,13 @@
           <% end %>
         <% end %>
       </div>
-      <div class="navbar-burger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
 
-      <nav class="navbar-item burger-item">
+      <nav class="navbar-item">
         <div class="field is-grouped">
           <% if user_signed_in? %>
             <p class="control">
               <%= link_to tweets_path, class: "button text-decoration-none" do %>
-                <i class="fas fa-hand-holding-heart"></i>&nbsp;新しい知識を提供する
+                <i class="fas fa-hand-holding-heart"></i>&nbsp;知識を提供する
               <% end %>
             </p>
             <p class="control">
@@ -105,5 +100,11 @@
     </div>
 
     <%= yield %>
+    <ul class="bottom-menu">
+      <li>
+        <a href="#">
+    	  <i class="blogicon-home"></i><br><span class="mini-text">ホーム</span></a>
+      </li>
+    </ul>
   </body>
 </html>

@@ -68,41 +68,8 @@ body {
 
 @media screen and (max-width: 1000px){
 
-.burger-item {
-	position: absolute;
-	top: 0;
-	right: -100%;
-	width: 100%;
-	height: 100%;
-	z-index: 2;
-}
-
-.navbar-burger {
-	display: block;
-  position: relative;
-  height: 50px;
-  cursor: pointer;
-  z-index: 101;
-  margin: 0 0 0 auto;
-  color: #fff;
-  border: #fff 2px solid;
-}
-
-.navbar-item.open{
-	right: 0px;
-}
-
-.is-grouped {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	text-align: center;
-	margin-top: 65px;
-}
-
-.field.is-grouped > .control {
-  margin: 5px 10px 5px auto;
+.navbar-brand {
+  display: none;
 }
 
 .is-one-quarter {
