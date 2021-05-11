@@ -43,12 +43,6 @@ describe '[STEP2] ユーザログイン後のテスト' do
         click_link notifications_link
         is_expected.to eq '/notifications'
       end
-      # it '「マイアクション」を押すと、保存したコメントいいね画面に遷移する' do
-      #   mypage_link = find_all('a')[5].native.inner_text
-      #   mypage_link = mypage_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
-      #   click_link mypage_link
-      #   is_expected.to eq '/users/edit'
-      # end
     end
   end
 
