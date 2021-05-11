@@ -1,25 +1,23 @@
-<div class="column fixed category">
-  <nav class="panel">
-    <p class="panel-heading">カテゴリー一覧</p>
-    <% categories.each do |category| %>
-      <%= link_to tweet_category_path(category), class: "category-btn" do %>
-        <div class="panel-block category-hover">
-          <article class="media">
-            <div class="media-left">
-              <figure class="image is-32x32">
-                <i class="fas fa-caret-right"></i>
-              </figure>
+<nav class="panel">
+  <p class="panel-heading">カテゴリー一覧</p>
+  <% categories.each do |category| %>
+    <%= link_to tweet_category_path(category), class: "category-btn" do %>
+      <div class="panel-block category-hover">
+        <article class="media">
+          <div class="media-left">
+            <figure class="image is-32x32">
+              <i class="fas fa-caret-right"></i>
+            </figure>
+          </div>
+          <div class="media-content">
+            <div class="content">
+              <p><strong>
+                <%= category.name %>
+              </strong></p>
             </div>
-            <div class="media-content">
-              <div class="content">
-                <p><strong>
-                  <%= category.name %>
-                </strong></p>
-              </div>
-            </div>
-          </article>
-        </div>
-      <% end %>
+          </div>
+        </article>
+      </div>
     <% end %>
-  </nav>
-</div>
+  <% end %>
+</nav>

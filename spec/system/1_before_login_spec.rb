@@ -10,15 +10,22 @@ describe '[STEP1] ユーザログイン前のテスト' do
       it 'URLが正しい' do
         expect(current_path).to eq '/'
       end
-      it 'Log inリンクが表示される: 左上から1番目のリンクが「ログイン」である' do
+      it 'Guest Log inリンクが表示される: 左上から1番目のリンクが「ゲストログイン」である' do
         log_in_link = find_all('a')[1].native.inner_text
+        expect(log_in_link).to match(/ゲストログイン/)
+      end
+      it 'Guest Log inリンクの内容が正しい' do
+        expect(page).to have_link 'ゲストログイン', href: homes_guest_sign_in_path
+      end
+      it 'Log inリンクが表示される: 左上から2番目のリンクが「ログイン」である' do
+        log_in_link = find_all('a')[2].native.inner_text
         expect(log_in_link).to match(/ログイン/)
       end
       it 'Log inリンクの内容が正しい' do
         expect(page).to have_link 'ログイン', href: new_user_session_path
       end
       it 'Sign Upリンクが表示される: 左上から2番目のリンクが「新規登録」である' do
-        sign_up_link = find_all('a')[2].native.inner_text
+        sign_up_link = find_all('a')[3].native.inner_text
         expect(sign_up_link).to match(/新規登録/i)
       end
       it 'Sign Upリンクの内容が正しい' do
@@ -39,29 +46,39 @@ describe '[STEP1] ユーザログイン前のテスト' do
       it 'タイトルが表示される' do
         expect(page).to have_content 'Wisdom'
       end
-      it 'sign upリンクが表示される: 左上から2番目のリンクが「新規登録」である' do
-        signup_link = find_all('a')[2].native.inner_text
-        expect(signup_link).to match(/新規登録/i)
+      it 'guest_loginリンクが表示される: 左上から1番目のリンクが「ゲストログイン」である' do
+        guest_login_link = find_all('a')[1].native.inner_text
+        expect(guest_login_link).to match(/ゲストログイン/i)
       end
-      it 'loginリンクが表示される: 左上から1番目のリンクが「ログイン」である' do
-        login_link = find_all('a')[1].native.inner_text
-        expect(login_link).to match(/ログイン/i)
+      it 'loginリンクが表示される: 左上から2番目のリンクが「ログイン」である' do
+        signup_link = find_all('a')[2].native.inner_text
+        expect(signup_link).to match(/ログイン/i)
+      end
+      it 'sign up: 左上から3番目のリンクが「新規登録」である' do
+        login_link = find_all('a')[3].native.inner_text
+        expect(login_link).to match(/新規登録/i)
       end
     end
 
     context 'リンクの内容を確認' do
       subject { current_path }
-      it 'sign upを押すと、新規登録画面に遷移する' do
-        signup_link = find_all('a')[2].native.inner_text
-        signup_link = signup_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
-        click_link signup_link
-        is_expected.to eq '/users/sign_up'
+      it 'ゲストログインを押すと、ゲストログイン画面に遷移する' do
+        guest_login_link = find_all('a')[1].native.inner_text
+        guest_login_link = guest_login_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link guest_login_link
+        is_expected.to eq '/tweets'
       end
-      it 'loginを押すと、ログイン画面に遷移する' do
-        login_link = find_all('a')[1].native.inner_text
+      it 'ログインを押すと、ログイン画面に遷移する' do
+        login_link = find_all('a')[2].native.inner_text
         login_link = login_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
         click_link login_link
         is_expected.to eq '/users/sign_in'
+      end
+      it '新規登録を押すと、新規登録画面に遷移する' do
+        signup_link = find_all('a')[3].native.inner_text
+        signup_link = signup_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link signup_link
+        is_expected.to eq '/users/sign_up'
       end
     end
   end
