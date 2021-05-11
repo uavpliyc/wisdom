@@ -1,0 +1,16 @@
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <%= render 'profile', user: @user %>
+      </div>
+      <div class="column is-half-desktop is-full-tablet">
+        <%= render 'tweets/form', tweet: @tweet, categories: @categories %>
+        <%= render 'tweets/index', tweets: @tweets, tweet: @tweet %>
+      </div>
+      <div class="column is-one-quarter">
+        <%= render 'categories', categories: @categories %>
+      </div>
+    </div>
+  </div>
+</section>

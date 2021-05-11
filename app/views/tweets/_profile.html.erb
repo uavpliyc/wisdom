@@ -1,47 +1,45 @@
-<div class="column is-one-quarter fix">
-	<nav class="panel .bg-white">
-		<p class="panel-heading">プロフィール</p>
-		<div class="panel-block">
-			<article class="media">
-				<div class="media-left">
-					<%= link_to user_path(current_user.id) do %>
-					<figure class="image is-64x64">
-						<%= attachment_image_tag current_user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
-					</figure>
-					<% end %>
+<nav class="panel .bg-white">
+	<p class="panel-heading">プロフィール</p>
+	<div class="panel-block">
+		<article class="media">
+			<div class="media-left">
+				<%= link_to user_path(current_user.id) do %>
+				<figure class="image is-64x64">
+					<%= attachment_image_tag current_user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
+				</figure>
+				<% end %>
+			</div>
+			<div class="media-content">
+				<div class="content">
+					<p>
+						<strong><%= current_user.name %></strong><br>
+						<small><%= current_user.username %></small>
+					</p>
 				</div>
-				<div class="media-content">
-					<div class="content">
-						<p>
-							<strong><%= current_user.name %></strong><br>
-							<small><%= current_user.username %></small>
-						</p>
-					</div>
+			</div>
+		</article>
+	</div>
+	<div class="panel-block">
+		<div class="level is-mobile">
+			<div class="level-item has-centered-text">
+				<div>
+					<p class="heading">ツイート</p>
+					<p class="title is-6"><%= link_to current_user.tweets.count, user_path(current_user.id) %></p>
 				</div>
-			</article>
-		</div>
-		<div class="panel-block">
-			<div class="level is-mobile">
+			</div>
+			<div class="level-item has-centered-text">
+				<div>
+					<p class="heading">フォロー</p>
+					<p class="title is-6"><%= link_to current_user.follower.count, following_user_path(current_user.id) %></p>
+				</div>
+			</div>
 				<div class="level-item has-centered-text">
-					<div>
-						<p class="heading">ツイート</p>
-						<p class="title is-6"><%= link_to current_user.tweets.count, user_path(current_user.id) %></p>
-					</div>
-				</div>
-				<div class="level-item has-centered-text">
-					<div>
-						<p class="heading">フォロー</p>
-						<p class="title is-6"><%= link_to current_user.follower.count, following_user_path(current_user.id) %></p>
-					</div>
-				</div>
-					<div class="level-item has-centered-text">
-					<div>
-						<p class="heading">フォロワー</p>
-						<p class="title is-6"><%= link_to current_user.followed.count, followers_user_path(current_user.id) %></p>
-					</div>
+				<div>
+					<p class="heading">フォロワー</p>
+					<p class="title is-6"><%= link_to current_user.followed.count, followers_user_path(current_user.id) %></p>
 				</div>
 			</div>
 		</div>
-	</nav>
-	<%= render 'search', tweet: @tweet %>
-</div>
+	</div>
+</nav>
+<%= render 'search', tweet: @tweet %>
