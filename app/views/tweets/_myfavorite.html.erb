@@ -1,6 +1,5 @@
-
 <% if comment_favorites.exists? %>
-<% comment_favorites.each.with_index(1) do |comment_favorite, index| %>
+  <% comment_favorites.each.with_index(1) do |comment_favorite, index| %>
   <table class="table is-hoverable">
     <thead>
       <tr>
@@ -15,10 +14,10 @@
       <tr>
         <td><%= "#{index}" %></td>
         <td>
-          <%= link_to user_path(comment_favorite.user_id) do %>
-            <figure class="image is-64x64"><%= attachment_image_tag comment_favorite.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %></figure>
+          <%= link_to user_path(comment_favorite.comment.user_id) do %>
+            <figure class="image is-64x64"><%= attachment_image_tag comment_favorite.comment.user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %></figure>
           <% end %>
-          <div class="has-text-centered"><%= comment_favorite.user.name %></div>
+          <div class="has-text-centered"><%= comment_favorite.comment.user.name %></div>
         </td>
         <td style="width: 600px;" class="is-size-5"><%= comment_favorite.comment.content %></td>
         <td class="has-text-centered is-vcentered"><input type="checkbox" id="box"></td>
@@ -33,7 +32,7 @@
         <!--<= l comment.created_at %>-->
     </tbody>
   </table>
-<% end %>
+  <% end %>
 <% else %>
- <p class="text-center is-size-4">マイアクションプランはありません</p>
+  <p class="text-center is-size-4">マイアクションプランはありません</p>
 <% end %>
