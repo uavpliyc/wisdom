@@ -19,7 +19,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
     context 'リンクの内容を確認: ※logoutは『1_before_login』でテスト済み。' do
       subject { current_path }
 
-      it '「新しい知識を提供する」を押すと、ツイート一覧画面に遷移する' do
+      it '「知識を提供する」を押すと、ツイート一覧画面に遷移する' do
         new_link = find_all('a')[1].native.inner_text
         new_link = new_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
         click_link new_link
