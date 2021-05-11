@@ -1,7 +1,7 @@
 <section class="section">
   <div class="container">
   	<div class="columns is-centered">
-  	  <div class="column is-6">
+  	  <div class="column is-half-desktop is-full-tablet">
         <p class="font-weight-bold">フォロー中</p><br>
         <% if @user.following_user.exists? %>
           <%= render 'follow_user', users: @user.following_user %>
