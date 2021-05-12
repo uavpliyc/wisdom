@@ -109,20 +109,26 @@
     	    <i class="fas fa-user-alt"></i>
     	  <% end %>
       </li>
-      <li>
-        <a href="#">
+      <li class="menu-width-max">
+        <a>
     	    <i class="fas fa-search"></i>
     	  </a>
+    	  <div class="menu-second-level">
+    	    <%= render 'tweets/search' %>
+    	  </div>
       </li>
-      <li>
-        <a href="#">
+      <li class="menu-width-max">
+        <a>
     	    <i class="fab fa-pagelines"></i>
     	  </a>
+    	  <div class="menu-second-level">
+    	    <%= render 'tweets/categories', categories: Category.all %>
+    	  </div>
       </li>
       <li>
-        <a href="#">
+        <%= link_to tweets_path do %>
     	    <i class="fas fa-hand-holding-heart"></i>
-    	  </a>
+    	  <% end %>
       </li>
     </ul>
     <% end %>

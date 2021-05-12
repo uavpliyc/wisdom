@@ -120,5 +120,27 @@ ul.bottom-menu li {
   text-decoration: none;
 }
 
+ul.menu-second-level {
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1;
+}
+
+li.menu-width-max:hover .menu-second-level {
+  position: absolute;
+  bottom: 100px;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  visibility: visible;
+  opacity: 1;
+}
+
+li.menu-width-max:hover .category-btn {
+  height: 70px;
+  padding-top: 0;
+}
+
 
 }
