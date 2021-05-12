@@ -100,12 +100,31 @@
     </div>
 
     <%= yield %>
-    <!--ボトムナビゲーションを書く-->
-    <!--<ul class="bottom-menu">-->
-    <!--  <li>-->
-    <!--    <a href="#">-->
-    <!--	  <i class="blogicon-home"></i><br><span class="mini-text">ホーム</span></a>-->
-    <!--  </li>-->
-    <!--</ul>-->
+
+    <!--ボトムナビゲーション-->
+    <% if user_signed_in? %>
+    <ul class="bottom-menu">
+      <li>
+        <%= link_to user_path(current_user.id) do %>
+    	    <i class="fas fa-user-alt"></i>
+    	  <% end %>
+      </li>
+      <li>
+        <a href="#">
+    	    <i class="fas fa-search"></i>
+    	  </a>
+      </li>
+      <li>
+        <a href="#">
+    	    <i class="fab fa-pagelines"></i>
+    	  </a>
+      </li>
+      <li>
+        <a href="#">
+    	    <i class="fas fa-hand-holding-heart"></i>
+    	  </a>
+      </li>
+    </ul>
+    <% end %>
   </body>
 </html>

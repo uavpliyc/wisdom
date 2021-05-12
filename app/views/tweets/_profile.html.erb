@@ -4,9 +4,9 @@
 		<article class="media">
 			<div class="media-left">
 				<%= link_to user_path(current_user.id) do %>
-				<figure class="image is-64x64">
-					<%= attachment_image_tag current_user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
-				</figure>
+					<figure class="image is-64x64">
+						<%= attachment_image_tag current_user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
+					</figure>
 				<% end %>
 			</div>
 			<div class="media-content">
