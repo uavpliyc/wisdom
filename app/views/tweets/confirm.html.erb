@@ -1,7 +1,7 @@
 <section class="section">
   <div class="container">
   	<div class="columns is-centered">
-  	  <div class="column is-6">
+  	  <div class="column is-half-desktop is-full-tablet">
   	     <h2 class="title is-3">下書き一覧</h2>
   	     <% if @tweets.exists? %>
   	     <%= render 'tweets/index',tweets: @tweets, tweet: @tweet %>

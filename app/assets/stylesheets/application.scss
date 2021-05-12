@@ -66,6 +66,14 @@ body {
   transition : 1s;
 }
 
+@media screen and (min-width: 1001px){
+
+ul.bottom-menu {
+  display: none;
+}
+
+}
+
 @media screen and (max-width: 1000px){
 
 .navbar-brand {
