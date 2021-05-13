@@ -93,7 +93,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_field 'search'
       end
       it 'searchフォームに値が入っていない' do
-        expect(find_field('search').text).to be_blank
+        expect(find_all('search')).to be_blank
       end
       it '「カテゴリー一覧」と表示される' do
         expect(page).to have_content 'カテゴリー一覧'
@@ -102,8 +102,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
 
     context 'ツイートを検索するテスト' do
       before do
-        fill_in 'search', with: 'a'
-        click_button '検索する'
+        (all(".form-control")[0]).set("a")
+        (all(".btn-shadow")[0]).click
       end
       it '入力されたワードで検索したページへ遷移する' do
         expect(current_path).to eq '/tweets/search'
