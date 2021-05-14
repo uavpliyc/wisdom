@@ -58,6 +58,7 @@ class TweetsController < ApplicationController
 
   def update
     @tweet = Tweet.find(params[:id])
+    @tweet.score = Language.get_data(tweet_params[:tweet])
     @categories = Category.all
     if @tweet.update(tweet_params)
       flash[:notice] = "ツイートを更新しました"
