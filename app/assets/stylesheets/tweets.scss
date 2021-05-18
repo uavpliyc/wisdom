@@ -139,10 +139,36 @@ input[type="checkbox"]:before {
   color: #080957;
 }
 
-@media screen and (max-width: 768px) {
+abbr {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
 
   .is-one-quarter  {
     display: none;
+  }
+
+  .box {
+    height: auto;
+    font-size: 2vmax;
+  }
+
+  .level-item {
+    margin-right: 3rem !important;
+  }
+
+  .control {
+    font-size: 1.4rem !important;
+  }
+
+  .label {
+    font-size: 2rem !important;
+  }
+
+  .textarea {
+    height: 300px !important;
+    font-size: 2rem !important;
   }
 
 }

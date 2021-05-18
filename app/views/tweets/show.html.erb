@@ -80,7 +80,7 @@
               <%= comment.user.name %>
               <%= comment.user.username %>
               <%= l comment.created_at %><br>
-              <span class="sentiment-score">(コメントの感情分析スコア☆<%= comment.score %>)</span>
+              <span class="sentiment-score">(感情分析スコア☆<%= comment.score %>)</span>
               <div id="comment_favorites_buttons_<%= comment.id %>">
                 <%= render 'comment_favorites/comment_favorite', comment: comment, tweet: @tweet, comment_favorite: @comment_favorite %>
               </div>
