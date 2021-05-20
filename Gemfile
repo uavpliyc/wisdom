@@ -32,7 +32,6 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bulma-rails', '~> 0.9.1'
 gem 'simple_form', '~> 5.0', '>= 5.0.1'
-gem 'gravatar_image_tag', '~> 1.2'
 gem 'devise', '~> 4.7', '>= 4.7.3'
 
 group :development, :test do
@@ -67,6 +66,7 @@ gem 'enum_help'
 
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 
 gem "dotenv-rails"
 
