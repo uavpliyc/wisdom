@@ -6,9 +6,7 @@
       </div>
       <div class="column is-half-desktop is-full-tablet">
         <%= render 'tweets/form', tweet: @tweet, categories: @categories %>
-        <div class="jscroll">
-          <%= render 'tweets/index', tweets: @tweets, tweet: @tweet %>
-        </div>
+        <%= render 'tweets/index', tweets: @tweets, tweet: @tweet %>
       </div>
       <div class="column is-one-quarter">
         <%= render 'categories', categories: @categories %>

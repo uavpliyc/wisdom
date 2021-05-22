@@ -12,14 +12,18 @@
 //
 //= require jquery
 //= require jquery.turbolinks
-//= require jquery.jscroll.min.js
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
 
-$(function() {
-  $('.jscroll').jscroll({
-    contentSelector: '.jscroll',
-    nextSelector: 'span.next:last a'
-  });
+// 下5%で無限スクロール
+$(window).on('scroll', function() {
+    scrollHeight = $(document).height();
+    scrollPosition = $(window).height() + $(window).scrollTop();
+    if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.05) {
+          $('.jscroll').jscroll({
+            contentSelector: '.jscroll',
+            nextSelector: 'span.next:last a'
+          });
+    }
 });

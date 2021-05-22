@@ -1,4 +1,5 @@
-  <% tweets.each do |tweet| %>
+  <div class="jscroll">
+    <% tweets.each do |tweet| %>
     <div class="box">
       <article class="media">
         <div class="media-left">
@@ -46,5 +47,6 @@
         <% end %>
         </article>
       </div>
-  <% end %>
-  <%= paginate tweets %>
+    <% end %>
+    <%= paginate tweets %>
+</div>
