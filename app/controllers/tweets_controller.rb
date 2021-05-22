@@ -2,7 +2,7 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @tweets     = Tweet.published.order("created_at DESC")
+    @tweets     = Tweet.published.page(params[:page]).per(10).order("created_at DESC")
     @tweet      = Tweet.new
     @categories = Category.all
   end
@@ -10,13 +10,13 @@ class TweetsController < ApplicationController
   def category
     @categories = Category.all
     @category   = Category.find(params[:id])
-    @tweets     = @category.tweets.published.order("created_at DESC")
+    @tweets     = @category.tweets.published.page(params[:page]).per(10).order("created_at DESC")
     @tweet      = Tweet.new
   end
 
   def show
     @tweet    = Tweet.find(params[:id])
-    @comments = @tweet.comments
+    @comments = @tweet.comments.page(params[:page]).per(10)
     @comment  = Comment.new
     @comment_favorite = current_user.comment_favorites.find_by(params[:id])
     # 下書きはログインしていないと見れない
@@ -77,18 +77,18 @@ class TweetsController < ApplicationController
   end
 
   def search
-    @tweets     = Tweet.published.order("created_at DESC")
+    @tweets     = Tweet.published.page(params[:page]).per(10).order("created_at DESC")
     @tweets     = @tweets.where('tweet LIKE ?', "%#{params[:search]}%") if params[:search].present?
     @tweet      = Tweet.new
     @categories = Category.all
   end
 
   def confirm
-    @tweets = current_user.tweets.draft.order("created_at DESC")
+    @tweets = current_user.tweets.draft.page(params[:page]).per(10).order("created_at DESC")
   end
 
   def myfavorite
-    @comment_favorites = current_user.comment_favorites.order("created_at DESC")
+    @comment_favorites = current_user.comment_favorites.page(params[:page]).per(10).order("created_at DESC")
     @tweet   = Tweet.find_by(params[:tweet_id])
     @comment = Comment.find_by(params[:comment_id])
   end

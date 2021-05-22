@@ -12,22 +12,7 @@
 //
 //= require jquery
 //= require jquery.turbolinks
+//= require jquery.jscroll.min.js
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
-$(function() {
-  $('.navbar-burger').on("click", function(){
-
-    $(this).toggleClass('open');
-    $('.burger-item').toggleClass('open');
-  });
-
-});
-
-// メニューをクリックされたら、非表示にする
-$(function() {
-  $('.is-grouped').on("click", function(){
-     $('.burger-item').removeClass('open');
-  });
-});

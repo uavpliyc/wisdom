@@ -22,17 +22,15 @@
         <td style="width: 600px;" class="is-size-5"><%= comment_favorite.comment.content %></td>
         <td class="has-text-centered is-vcentered"><input type="checkbox" id="box"></td>
         <td class="has-text-centered is-vcentered">
-
           <div id="myfavorite_delete_btn_<%= comment_favorite.id %>">
             <%= link_to '削除', tweet_comment_index_destroy_path(tweet_id: comment_favorite.comment.tweet.id, comment_id: comment_favorite.comment.id, id: comment_favorite.id), method: :delete, local: true, class: "button is-danger is-light is-small" %>
           </div>
-
         </td>
       </tr>
-        <!--<= l comment.created_at %>-->
     </tbody>
   </table>
   <% end %>
+  <%= paginate comment_favorites %>
 <% else %>
   <p class="text-center is-size-4">マイアクションプランはありません</p>
 <% end %>

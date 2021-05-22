@@ -3,23 +3,23 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @users  = User.all
+    @users  = User.all.page(params[:page]).per(10)
   end
 
   def show
     @user   = User.find(params[:id])
-    @tweets = @user.tweets.published.order("created_at DESC")
+    @tweets = @user.tweets.published.page(params[:page]).per(10).order("created_at DESC")
   end
 
   def following
     @user  = User.find(params[:id])
-    @users = @user.follower
+    @users = @user.follower.page(params[:page]).per(10)
     render 'following'
   end
 
   def followers
     @user  = User.find(params[:id])
-    @users = @user.followed
+    @users = @user.followed.page(params[:page]).per(10)
     render 'followers'
   end
 
