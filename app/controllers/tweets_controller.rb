@@ -50,7 +50,7 @@ class TweetsController < ApplicationController
       if tweet_params[:category_id] == ""
         flash[:alert] = "カテゴリーを選択して下さい"
       end
-      @tweets     = Tweet.published.order("created_at DESC")
+      @tweets     = Tweet.published.page(params[:page]).per(10).order("created_at DESC")
       @categories = Category.all
       render :index
     end

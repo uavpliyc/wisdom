@@ -27,3 +27,8 @@ $(window).on('scroll', function() {
           });
     }
 });
+
+// エラー・サクセスメッセージ自動非表示
+$(function(){
+  setTimeout("$('.notification').fadeOut('slow')", 3000) 
+})
