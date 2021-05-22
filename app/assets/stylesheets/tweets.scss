@@ -139,6 +139,12 @@ input[type="checkbox"]:before {
   color: #080957;
 }
 
+.sticky {
+  postion: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+}
+
 abbr {
   display: none;
 }
