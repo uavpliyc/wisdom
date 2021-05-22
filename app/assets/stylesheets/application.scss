@@ -66,6 +66,11 @@ body {
   transition : 1s;
 }
 
+// 無限スクロール用
+nav.pagination {
+  display: none;
+}
+
 @media screen and (min-width: 1001px){
 
 ul.bottom-menu {

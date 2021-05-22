@@ -16,3 +16,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  $('.jscroll').jscroll({
+    contentSelector: '.jscroll',
+    nextSelector: 'span.next:last a'
+  });
+});
