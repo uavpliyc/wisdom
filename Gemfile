@@ -64,10 +64,6 @@ gem "refile-mini_magick"
 
 gem 'enum_help'
 
-<<<<<<< HEAD
-=======
-gem 'bootstrap', '~> 4.1.1'
->>>>>>> 3256a6d9214d44775f7a7d8f4ed50aa8c5cd1c62
 gem 'jquery-turbolinks'
 
 # deviseエラーメッセージの日本語化
