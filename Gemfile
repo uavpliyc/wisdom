@@ -65,7 +65,6 @@ gem "refile-mini_magick"
 gem 'enum_help'
 
 gem 'bootstrap', '~> 4.1.1'
-gem 'jquery-rails'
 gem 'jquery-turbolinks'
 
 gem "dotenv-rails"
@@ -76,7 +75,6 @@ gem 'devise-i18n-views'
 
 gem 'rails-i18n'
 
-gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end
