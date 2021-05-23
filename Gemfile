@@ -64,6 +64,8 @@ gem "refile-mini_magick"
 
 gem 'enum_help'
 
+gem 'dotenv-rails'
+
 gem 'jquery-turbolinks'
 
 # deviseエラーメッセージの日本語化
