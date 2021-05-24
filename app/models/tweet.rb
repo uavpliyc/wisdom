@@ -6,6 +6,13 @@ class Tweet < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
+  attachment :image
+
+  validates :tweet, presence: true, length: { maximum: 140 }
+  validates :category_id, presence: true
+
+  enum status: { published: 0, draft: 1 }
+
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
@@ -43,11 +50,11 @@ class Tweet < ApplicationRecord
     notification.save if notification.valid?
   end
 
-  attachment :image
+  # リファクタリング
+  scope :recent, -> { per(10).order("created_at DESC") }
+  
+  # 検索リファクタリング実装予定
+  # scope :searching, -> (search){ where('tweet LIKE ?', "%#{search}%") }
 
-  enum status: { published: 0, draft: 1 }
-
-  validates :tweet, presence: true, length: { maximum: 140 }
-  validates :category_id, presence: true
 
 end

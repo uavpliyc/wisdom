@@ -1,8 +1,10 @@
 class TweetsController < ApplicationController
+  
   before_action :authenticate_user!
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tweets     = Tweet.published.page(params[:page]).per(10).order("created_at DESC")
+    @tweets     = Tweet.published.page(params[:page]).recent
     @tweet      = Tweet.new
     @categories = Category.all
   end
@@ -10,13 +12,12 @@ class TweetsController < ApplicationController
   def category
     @categories = Category.all
     @category   = Category.find(params[:id])
-    @tweets     = @category.tweets.published.page(params[:page]).per(10).order("created_at DESC")
+    @tweets     = @category.tweets.published.page(params[:page]).recent
     @tweet      = Tweet.new
   end
 
   def show
-    @tweet    = Tweet.find(params[:id])
-    @comments = @tweet.comments.page(params[:page]).per(10)
+    @comments = @tweet.comments.page(params[:page]).recent
     @comment  = Comment.new
     @comment_favorite = current_user.comment_favorites.find_by(params[:id])
     # 下書きはログインしていないと見れない
@@ -28,7 +29,6 @@ class TweetsController < ApplicationController
   end
 
   def edit
-    @tweet      = Tweet.find(params[:id])
     @categories = Category.all
     if @tweet.user != current_user
       redirect_to tweets_path
@@ -50,14 +50,13 @@ class TweetsController < ApplicationController
       if tweet_params[:category_id] == ""
         flash[:alert] = "カテゴリーを選択して下さい"
       end
-      @tweets     = Tweet.published.page(params[:page]).per(10).order("created_at DESC")
+      @tweets     = Tweet.published.page(params[:page]).recent
       @categories = Category.all
       render :index
     end
   end
 
   def update
-    @tweet = Tweet.find(params[:id])
     @tweet.score = Language.get_data(tweet_params[:tweet])
     @categories = Category.all
     if @tweet.update(tweet_params)
@@ -70,21 +69,20 @@ class TweetsController < ApplicationController
   end
 
   def destroy
-    @tweet = Tweet.find(params[:id])
     @tweet.destroy
     flash[:notice] = "ツイートを削除しました"
     redirect_to tweets_url
   end
 
   def search
-    @tweets     = Tweet.published.page(params[:page]).per(10).order("created_at DESC")
+    @tweets     = Tweet.published.page(params[:page]).recent
     @tweets     = @tweets.where('tweet LIKE ?', "%#{params[:search]}%") if params[:search].present?
     @tweet      = Tweet.new
     @categories = Category.all
   end
 
   def confirm
-    @tweets = current_user.tweets.draft.page(params[:page]).per(10).order("created_at DESC")
+    @tweets = current_user.tweets.draft.page(params[:page]).recent
   end
 
   def myfavorite
@@ -101,6 +99,11 @@ class TweetsController < ApplicationController
 
   def login_required
     redirect_to login_url unless current_user
+  end
+  
+  # callback(before_action)を利用して共通化
+  def set_tweet
+    @tweet = Tweet.find(params[:id])
   end
 
 end
