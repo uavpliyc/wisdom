@@ -1,5 +1,7 @@
 class Relationship < ApplicationRecord
 
+  include Paginate  #concerns/pagenate.rbを持ってくる
+
   belongs_to :follower, class_name: "User"
   belongs_to :followed, class_name: "User"
 

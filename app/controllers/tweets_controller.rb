@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tweets     = Tweet.published.page(params[:page]).recent
+    @tweets     = Tweet.published.paginate(params)
     @tweet      = Tweet.new
     @categories = Category.all
   end
@@ -12,12 +12,12 @@ class TweetsController < ApplicationController
   def category
     @categories = Category.all
     @category   = Category.find(params[:id])
-    @tweets     = @category.tweets.published.page(params[:page]).recent
+    @tweets     = @category.tweets.published.paginate(params)
     @tweet      = Tweet.new
   end
 
   def show
-    @comments = @tweet.comments.page(params[:page]).recent
+    @comments = @tweet.comments.paginate(params)
     @comment  = Comment.new
     @comment_favorite = current_user.comment_favorites.find_by(params[:id])
     # 下書きはログインしていないと見れない
@@ -30,13 +30,11 @@ class TweetsController < ApplicationController
 
   def edit
     @categories = Category.all
-    if @tweet.user != current_user
-      redirect_to tweets_path
-    end
+    redirect_to tweets_path if @tweet.user != current_user
   end
 
   def create
-    @tweet = current_user.tweets.new(tweet_params)
+    @tweet       = current_user.tweets.new(tweet_params)
     @tweet.score = Language.get_data(tweet_params[:tweet])
     if @tweet.save
       if @tweet.published?
@@ -50,7 +48,7 @@ class TweetsController < ApplicationController
       if tweet_params[:category_id] == ""
         flash[:alert] = "カテゴリーを選択して下さい"
       end
-      @tweets     = Tweet.published.page(params[:page]).recent
+      @tweets     = Tweet.published.paginate(params)
       @categories = Category.all
       render :index
     end
@@ -58,7 +56,7 @@ class TweetsController < ApplicationController
 
   def update
     @tweet.score = Language.get_data(tweet_params[:tweet])
-    @categories = Category.all
+    @categories  = Category.all
     if @tweet.update(tweet_params)
       flash[:notice] = "ツイートを更新しました"
       redirect_to @tweet
@@ -75,14 +73,14 @@ class TweetsController < ApplicationController
   end
 
   def search
-    @tweets     = Tweet.published.page(params[:page]).recent
+    @tweets     = Tweet.published.paginate(params)
     @tweets     = @tweets.where('tweet LIKE ?', "%#{params[:search]}%") if params[:search].present?
     @tweet      = Tweet.new
     @categories = Category.all
   end
 
   def confirm
-    @tweets = current_user.tweets.draft.page(params[:page]).recent
+    @tweets = current_user.tweets.draft.paginate(params)
   end
 
   def myfavorite
@@ -90,6 +88,7 @@ class TweetsController < ApplicationController
     @tweet   = Tweet.find_by(params[:tweet_id])
     @comment = Comment.find_by(params[:comment_id])
   end
+  
 
   private
 

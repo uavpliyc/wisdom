@@ -1,5 +1,7 @@
 class Comment < ApplicationRecord
 
+  include Paginate  #concerns/pagenate.rbを持ってくる
+
   belongs_to :user
   belongs_to :tweet
   has_many :comment_favorites, dependent: :destroy

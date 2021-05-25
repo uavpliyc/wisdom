@@ -1,25 +1,23 @@
 class UsersController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :set_user, only: [:show, :following, :followers]
 
   def index
-    @users  = User.all.page(params[:page]).per(10)
+    @users  = User.all.paginate(params)
   end
 
   def show
-    @user   = User.find(params[:id])
-    @tweets = @user.tweets.published.page(params[:page]).per(10).order("created_at DESC")
+    @tweets = @user.tweets.published.paginate(params)
   end
 
   def following
-    @user  = User.find(params[:id])
-    @users = @user.follower.page(params[:page]).per(10)
+    @users = @user.follower.paginate(params)
     render 'following'
   end
 
   def followers
-    @user  = User.find(params[:id])
-    @users = @user.followed.page(params[:page]).per(10)
+    @users = @user.followed.paginate(params)
     render 'followers'
   end
 
@@ -30,6 +28,13 @@ class UsersController < ApplicationController
     else
       @users = User.none
     end
+  end
+
+  private
+
+  # callback(before_action)を利用して共通化
+  def set_user
+    @user = User.find(params[:id])
   end
 
 end

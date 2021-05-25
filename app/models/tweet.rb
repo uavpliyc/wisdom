@@ -1,5 +1,7 @@
 class Tweet < ApplicationRecord
 
+  include Paginate  #concerns/pagenate.rbを持ってくる
+
   belongs_to :user
   belongs_to :category
   has_many :comments, dependent: :destroy
@@ -50,9 +52,6 @@ class Tweet < ApplicationRecord
     notification.save if notification.valid?
   end
 
-  # リファクタリング
-  scope :recent, -> { per(10).order("created_at DESC") }
-  
   # 検索リファクタリング実装予定
   # scope :searching, -> (search){ where('tweet LIKE ?', "%#{search}%") }
 
