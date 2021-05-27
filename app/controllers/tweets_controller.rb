@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  
+
   before_action :authenticate_user!
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
@@ -74,7 +74,7 @@ class TweetsController < ApplicationController
 
   def search
     @tweets     = Tweet.published.paginate(params)
-    @tweets     = @tweets.where('tweet LIKE ?', "%#{params[:search]}%") if params[:search].present?
+    @tweets     = @tweets.search(params)
     @tweet      = Tweet.new
     @categories = Category.all
   end
@@ -88,7 +88,7 @@ class TweetsController < ApplicationController
     @tweet   = Tweet.find_by(params[:tweet_id])
     @comment = Comment.find_by(params[:comment_id])
   end
-  
+
 
   private
 
@@ -99,7 +99,7 @@ class TweetsController < ApplicationController
   def login_required
     redirect_to login_url unless current_user
   end
-  
+
   # callback(before_action)を利用して共通化
   def set_tweet
     @tweet = Tweet.find(params[:id])

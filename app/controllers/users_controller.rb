@@ -21,15 +21,6 @@ class UsersController < ApplicationController
     render 'followers'
   end
 
-  def search
-    if params[:name][:username].present?
-      @users = User.where('name LIKE ?', "%#{params[:name]}%")
-      @users = User.where('username LIKE ?', "%#{params[:username]}%")
-    else
-      @users = User.none
-    end
-  end
-
   private
 
   # callback(before_action)を利用して共通化

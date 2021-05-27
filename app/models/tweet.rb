@@ -52,8 +52,7 @@ class Tweet < ApplicationRecord
     notification.save if notification.valid?
   end
 
-  # 検索リファクタリング実装予定
-  # scope :searching, -> (search){ where('tweet LIKE ?', "%#{search}%") }
+  scope :search, -> (p){ where('tweet LIKE ?', "%#{p[:search]}%") if p[:search].present? }
 
 
 end

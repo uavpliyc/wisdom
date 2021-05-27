@@ -1,4 +1,3 @@
-# 共通のモジュール化(色んなモデルで使える)
 module Paginate
   extend ActiveSupport::Concern
   include Kaminari::PageScopeMethods
