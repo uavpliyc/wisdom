@@ -100,7 +100,6 @@ class TweetsController < ApplicationController
     redirect_to login_url unless current_user
   end
 
-  # callback(before_action)を利用して共通化
   def set_tweet
     @tweet = Tweet.find(params[:id])
   end

@@ -23,7 +23,6 @@ class UsersController < ApplicationController
 
   private
 
-  # callback(before_action)を利用して共通化
   def set_user
     @user = User.find(params[:id])
   end

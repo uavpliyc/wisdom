@@ -1,6 +1,6 @@
 class Tweet < ApplicationRecord
 
-  include Paginate  #concerns/pagenate.rbを持ってくる
+  include Paginate  
 
   belongs_to :user
   belongs_to :category
