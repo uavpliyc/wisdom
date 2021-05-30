@@ -92,8 +92,8 @@ describe '[STEP1] ユーザログイン前のテスト' do
       it 'URLが正しい' do
         expect(current_path).to eq '/users/sign_up'
       end
-      it '「Sign Up」と表示される' do
-        expect(page).to have_content 'Sign Up'
+      it '「新規登録」と表示される' do
+        expect(page).to have_content '新規登録'
       end
       it 'nameフォームが表示される' do
         expect(page).to have_field 'user[name]'
@@ -110,8 +110,8 @@ describe '[STEP1] ユーザログイン前のテスト' do
       it 'password_confirmationフォームが表示される' do
         expect(page).to have_field 'user[password_confirmation]'
       end
-      it 'Sign upボタンが表示される' do
-        expect(page).to have_button 'Sign up'
+      it '新規登録ボタンが表示される' do
+        expect(page).to have_button '新規登録'
       end
     end
 
@@ -125,10 +125,10 @@ describe '[STEP1] ユーザログイン前のテスト' do
       end
 
       it '正しく新規登録される' do
-        expect { click_button 'Sign up' }.to change(User.all, :count).by(1)
+        expect { click_button '新規登録' }.to change(User.all, :count).by(1)
       end
       it '新規登録後のリダイレクト先が、ツイート一覧画面になっている' do
-        click_button 'Sign up'
+        click_button '新規登録'
         expect(current_path).to eq '/tweets'
       end
     end
@@ -145,8 +145,8 @@ describe '[STEP1] ユーザログイン前のテスト' do
       it 'URLが正しい' do
         expect(current_path).to eq '/users/sign_in'
       end
-      it '「Log in」と表示される' do
-        expect(page).to have_content 'Log in'
+      it '「ログイン」と表示される' do
+        expect(page).to have_content 'ログイン'
       end
       it 'emailフォームが表示される' do
         expect(page).to have_field 'user[email]'
@@ -154,8 +154,8 @@ describe '[STEP1] ユーザログイン前のテスト' do
       it 'passwordフォームが表示される' do
         expect(page).to have_field 'user[password]'
       end
-      it 'Log inボタンが表示される' do
-        expect(page).to have_button 'Log in'
+      it 'ログインボタンが表示される' do
+        expect(page).to have_button 'ログイン'
       end
     end
 
@@ -163,7 +163,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       before do
         fill_in 'user[email]', with: user.email
         fill_in 'user[password]', with: user.password
-        click_button 'Log in'
+        click_button 'ログイン'
       end
 
       it 'ログイン後のリダイレクト先が、ツイート一覧画面になっている' do
@@ -175,7 +175,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       before do
         fill_in 'user[email]', with: ''
         fill_in 'user[password]', with: ''
-        click_button 'Log in'
+        click_button 'ログイン'
       end
 
       it 'ログインに失敗し、ログイン画面にリダイレクトされる' do
@@ -191,7 +191,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       visit new_user_session_path
       fill_in 'user[email]', with: Faker::Internet.email
       fill_in 'user[password]', with: user.password
-      click_button 'Log in'
+      click_button 'ログイン'
     end
 
   end
@@ -203,7 +203,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       visit new_user_session_path
       fill_in 'user[email]', with: user.email
       fill_in 'user[password]', with: user.password
-      click_button 'Log in'
+      click_button 'ログイン'
       logout_link = find_all('a')[6].native.inner_text
       logout_link = logout_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
       click_link logout_link

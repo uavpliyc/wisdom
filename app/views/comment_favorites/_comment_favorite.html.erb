@@ -1,5 +1,4 @@
 <% if comment.favorited_by?(current_user) %>
-  <%# byebug %>
   <%= link_to tweet_comment_comment_favorite_path(tweet, comment, comment_favorite), method: :delete, class: "text-decoration-none level-item is-pulled-right is-size-4", remote: true do %>
     <span class="icon"><i class="fas fa-save"></i><%= comment.comment_favorites.count %></span>
   <% end %>

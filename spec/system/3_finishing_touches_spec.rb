@@ -18,21 +18,21 @@ describe '[STEP3] 仕上げのテスト' do
       fill_in 'user[email]', with: 'a' + user.email # 確実にuser, other_userと違う文字列にするため
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
-      click_button 'Sign up'
+      click_button '新規登録'
       is_expected.to have_content 'アカウント登録が完了しました'
     end
     it 'ユーザログイン成功時' do
       visit new_user_session_path
       fill_in 'user[email]', with: user.email
       fill_in 'user[password]', with: user.password
-      click_button 'Log in'
+      click_button 'ログイン'
       is_expected.to have_content 'ログインしました'
     end
     it 'ユーザログアウト成功時' do
       visit new_user_session_path
       fill_in 'user[email]', with: user.email
       fill_in 'user[password]', with: user.password
-      click_button 'Log in'
+      click_button 'ログイン'
       logout_link = find_all('a')[6].native.inner_text
       logout_link = logout_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
       click_link logout_link
@@ -42,7 +42,7 @@ describe '[STEP3] 仕上げのテスト' do
       visit new_user_session_path
       fill_in 'user[email]', with: user.email
       fill_in 'user[password]', with: user.password
-      click_button 'Log in'
+      click_button 'ログイン'
       visit edit_user_registration_path
       fill_in 'user[current_password]', with: user.password
       click_button '更新する'
@@ -52,7 +52,7 @@ describe '[STEP3] 仕上げのテスト' do
       visit new_user_session_path
       fill_in 'user[email]', with: user.email
       fill_in 'user[password]', with: user.password
-      click_button 'Log in'
+      click_button 'ログイン'
       visit tweets_path
       fill_in 'tweet[tweet]', with: Faker::Lorem.characters(number: 20)
       find("#tweet_category_id").find("option[value='1']").select_option
@@ -63,7 +63,7 @@ describe '[STEP3] 仕上げのテスト' do
       visit new_user_session_path
       fill_in 'user[email]', with: user.email
       fill_in 'user[password]', with: user.password
-      click_button 'Log in'
+      click_button 'ログイン'
       visit edit_tweet_path(tweet)
       click_button 'ツイート/下書きする'
       is_expected.to have_content 'ツイートを更新しました'
@@ -85,17 +85,17 @@ describe '[STEP3] 仕上げのテスト' do
       end
 
       it '新規登録されない' do
-        expect { click_button 'Sign up' }.not_to change(User.all, :count)
+        expect { click_button '新規登録' }.not_to change(User.all, :count)
       end
       it '新規登録画面を表示しており、フォームの内容が正しい' do
-        click_button 'Sign up'
-        expect(page).to have_button 'Sign up'
+        click_button '新規登録'
+        expect(page).to have_button '新規登録'
         expect(page).to have_field 'user[name]', with: @name
         expect(page).to have_field 'user[username]', with: @username
         expect(page).to have_field 'user[email]', with: @email
       end
       it 'バリデーションエラーが表示される' do
-        click_button 'Sign up'
+        click_button '新規登録'
         expect(page).to have_content "名前は2文字以上で入力してください"
       end
     end
@@ -107,7 +107,7 @@ describe '[STEP3] 仕上げのテスト' do
         visit new_user_session_path
         fill_in 'user[email]', with: user.email
         fill_in 'user[password]', with: user.password
-        click_button 'Log in'
+        click_button 'ログイン'
         visit edit_user_registration_path
         fill_in 'user[name]', with: @name
         click_button '更新する'
@@ -129,7 +129,7 @@ describe '[STEP3] 仕上げのテスト' do
         visit new_user_session_path
         fill_in 'user[email]', with: user.email
         fill_in 'user[password]', with: user.password
-        click_button 'Log in'
+        click_button 'ログイン'
         visit tweets_path
         find("#tweet_category_id").find("option[value='1']").select_option
       end
@@ -157,7 +157,7 @@ describe '[STEP3] 仕上げのテスト' do
         visit new_user_session_path
         fill_in 'user[email]', with: user.email
         fill_in 'user[password]', with: user.password
-        click_button 'Log in'
+        click_button 'ログイン'
         visit edit_tweet_path(tweet)
         @tweet_old_tweet = tweet.tweet
         fill_in 'tweet[tweet]', with: ''
@@ -211,7 +211,7 @@ describe '[STEP3] 仕上げのテスト' do
       visit new_user_session_path
       fill_in 'user[email]', with: user.email
       fill_in 'user[password]', with: user.password
-      click_button 'Log in'
+      click_button 'ログイン'
     end
 
     describe '他人のツイート詳細画面のテスト' do
@@ -298,7 +298,7 @@ describe '[STEP3] 仕上げのテスト' do
         visit new_user_session_path
         fill_in 'user[email]', with: user.email
         fill_in 'user[password]', with: user.password
-        click_button 'Log in'
+        click_button 'ログイン'
       end
 
       it '「新しい知識を提供する」のアイコンが表示される' do
@@ -328,7 +328,7 @@ describe '[STEP3] 仕上げのテスト' do
         visit new_user_session_path
         fill_in 'user[email]', with: user.email
         fill_in 'user[password]', with: user.password
-        click_button 'Log in'
+        click_button 'ログイン'
       end
 
       it 'カテゴリ一覧画面で矢印アイコンが表示される' do

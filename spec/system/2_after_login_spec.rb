@@ -12,7 +12,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
     visit new_user_session_path
     fill_in 'user[email]', with: user.email
     fill_in 'user[password]', with: user.password
-    click_button 'Log in'
+    click_button 'ログイン'
   end
 
   describe 'ヘッダーのテスト: ログインしている場合' do
@@ -283,9 +283,6 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_link href: user_path(user)
         expect(page).to have_link href: user_path(other_user)
       end
-      # it 'フォローする/フォロー外すボタンが表示される' do
-      #   expect(page).to include 'フォローする' or 'フォロー外す'
-      # end
     end
 
   end
