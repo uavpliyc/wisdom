@@ -68,7 +68,6 @@ gem 'dotenv-rails'
 
 gem 'jquery-turbolinks'
 
-# deviseエラーメッセージの日本語化
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 
