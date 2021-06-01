@@ -3,50 +3,7 @@
 		<div class="columns is-centered">
 		  <div class="column is-half-desktop is-full-tablet">
 				<h2 class="title is-3">ユーザー一覧</h2>
-				<div class="jscroll">
-					<% @users.each do |user| %>
-						<nav class="panel">
-							<div class="panel-block">
-								<article class="media">
-									<div class="media-left">
-										<%= link_to user_path(user.id) do %>
-											<figure class="image is-64x64">
-												<%= attachment_image_tag user, :profile_image, size: "64x64", format: 'jpeg', fallback: "logo.png" %>
-											</figure>
-										<% end %>
-									</div>
-									<div class="media-content">
-										<div class="content">
-											<p>
-												<strong><%= user.name %></strong>
-												<% if user.following?(current_user) %>
-													&nbsp;<small class="tag">フォローされています</small>
-												<% end %>
-												<br>
-												<small><%= user.username %></small>
-												<div><%= user.profile %></div>
-											</p>
-										</div>
-									</div>
-								</article>
-							</div>
-							<div class="panel-block">
-								<div class="level is-mobile">
-									<div class="level-item has-centered-text">
-										<div>
-											<p class="heading">ツイート</p>
-											<p class="title is-6"><%= user.tweets.count %></p>
-										</div>
-									</div>
-							    <div id="follow_buttons_<%= user.id %>">
-						        <%= render 'follows/follow', user: user %>
-						       </div>
-								</div>
-							</div>
-						</nav>
-					<% end %>
-					<%= paginate @users %>
-				</div>
+				<%= render 'follow_user', users: @users %>
 				<%= link_to 'Back', tweets_path, class: "button is-warning is-light" %>
 			</div>
 	  </div>
