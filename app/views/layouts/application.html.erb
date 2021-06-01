@@ -10,12 +10,18 @@
     <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/9-4-1/css/9-4-1.css">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <link rel="manifest" href="/manifest.json">
-    <link rel="apple-touch-icon" href="images/logo.png">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag('favicon.png') %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
+    <script>
+      if('serviceWorker' in navigator){
+      	navigator.serviceWorker.register('/serviceworker.js').then(function(){
+      		console.log("Service Worker is registered!!");
+      	});
+      }
+    </script>
   </head>
 
   <body>
@@ -131,12 +137,5 @@
       </li>
     </ul>
     <% end %>
-    <script>
-      if('serviceWorker' in navigator){
-      	navigator.serviceWorker.register('/serviceworker.js').then(function(){
-      		console.log("Service Worker is registered!!");
-      	});
-      }
-    </script>
   </body>
 </html>
