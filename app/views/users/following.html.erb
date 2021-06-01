@@ -2,7 +2,7 @@
   <div class="container">
   	<div class="columns is-centered">
   	  <div class="column is-half-desktop is-full-tablet">
-        <p class="font-weight-bold">フォロー中</p><br>
+        <h2 class="title is-3">フォロー中</h2>
         <% if @user.following_user.exists? %>
           <%= render 'follow_user', users: @user.following_user %>
         <% else %>
