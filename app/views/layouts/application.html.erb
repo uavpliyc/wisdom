@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css">
     <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/9-4-1/css/9-4-1.css">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag('favicon.png') %>
@@ -129,5 +130,12 @@
       </li>
     </ul>
     <% end %>
+    <script>
+      if('serviceWorker' in navigator){
+      	navigator.serviceWorker.register('/serviceworker.js').then(function(){
+      		console.log("Service Worker is registered!!");
+      	});
+      }
+    </script>
   </body>
 </html>
