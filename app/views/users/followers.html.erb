@@ -2,7 +2,11 @@
   <div class="container">
   	<div class="columns is-centered">
   	  <div class="column is-half-desktop is-full-tablet">
-        <h2 class="title is-3">フォロワー</h2>
+  	    <% if user_signed_in? && @user == current_user %>
+          <h2 class="title is-3">フォロワー</h2>
+        <% else %>
+          <h2 class="title is-3"><%= @user.name %>さんのフォロワー</h2>
+        <% end %>
         <% if @user.follower_user.exists? %>
           <%= render 'follow_user', users: @user.follower_user %>
         <% else %>
