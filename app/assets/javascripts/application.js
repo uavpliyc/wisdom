@@ -32,3 +32,4 @@ $(window).on('scroll', function() {
 $(function(){
   setTimeout("$('.notification').fadeOut('slow')", 3000) 
 })
+

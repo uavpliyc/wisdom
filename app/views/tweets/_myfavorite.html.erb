@@ -1,13 +1,12 @@
 <% if comment_favorites.exists? %>
   <% comment_favorites.each.with_index(1) do |comment_favorite, index| %>
-  <table class="table is-hoverable">
+  <table class="table is-hoverable" id="<%= index %>_id" draggable="true">
     <thead>
       <tr>
         <th>No.</th>
         <th>ユーザー</th>
         <th style="width: 600px;">マイアクションプラン</th>
-        <th style="width: 105px;" class="text-center">チェック</th>
-        <th style="width: 56px;" class="text-center">削除</th>
+        <th style="width: 56px;" class="text-center"></th>
       </tr>
     </thead>
     <tbody>
@@ -20,7 +19,6 @@
           <div class="has-text-centered"><%= comment_favorite.comment.user.name %></div>
         </td>
         <td style="width: 600px;" class="is-size-5"><%= comment_favorite.comment.content %></td>
-        <td class="has-text-centered is-vcentered"><input type="checkbox" id="box"></td>
         <td class="has-text-centered is-vcentered">
           <div id="myfavorite_delete_btn_<%= comment_favorite.id %>">
             <%= link_to '削除', tweet_comment_index_destroy_path(tweet_id: comment_favorite.comment.tweet.id, comment_id: comment_favorite.comment.id, id: comment_favorite.id), method: :delete, local: true, class: "button is-danger is-light is-small" %>
@@ -33,3 +31,24 @@
 <% else %>
   <p class="text-center is-size-4">マイアクションプランはありません</p>
 <% end %>
+<script>
+ document.querySelectorAll('.table').forEach (elm => {
+ 	elm.ondragstart = function () {
+ 		event.dataTransfer.setData('text/plain', event.target.id);
+ 	};
+ 	elm.ondragover = function () {
+ 		event.preventDefault();
+ 		this.style.borderTop = '4px solid blue';
+ 	};
+ 	elm.ondragleave = function () {
+ 		this.style.borderTop = '';
+ 	};
+ 	elm.ondrop = function () {
+ 		event.preventDefault();
+ 		let id = event.dataTransfer.getData('text/plain');
+ 		let elm_drag = document.getElementById(id);
+ 		this.parentNode.insertBefore(elm_drag, this);
+ 		this.style.borderTop = '';
+ 	};
+ });
+</script>
