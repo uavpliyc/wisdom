@@ -4,7 +4,7 @@
     <thead>
       <tr>
         <th>No.</th>
-        <th>ユーザー</th>
+        <th class="text-center">ユーザー</th>
         <th style="width: 600px;">マイアクションプラン</th>
         <th style="width: 56px;" class="text-center"></th>
       </tr>
@@ -18,10 +18,10 @@
           <% end %>
           <div class="has-text-centered"><%= comment_favorite.comment.user.name %></div>
         </td>
-        <td style="width: 600px;" class="is-size-5"><%= comment_favorite.comment.content %></td>
+        <td style="width: 600px;" class="is-size-5-desktop is-size-4"><%= comment_favorite.comment.content %></td>
         <td class="has-text-centered is-vcentered">
           <div id="myfavorite_delete_btn_<%= comment_favorite.id %>">
-            <%= link_to '削除', tweet_comment_index_destroy_path(tweet_id: comment_favorite.comment.tweet.id, comment_id: comment_favorite.comment.id, id: comment_favorite.id), method: :delete, local: true, class: "button is-danger is-light is-small" %>
+            <%= link_to '削除', tweet_comment_index_destroy_path(tweet_id: comment_favorite.comment.tweet.id, comment_id: comment_favorite.comment.id, id: comment_favorite.id), method: :delete, local: true, class: "button is-danger is-light is-small-desktop" %>
           </div>
         </td>
       </tr>

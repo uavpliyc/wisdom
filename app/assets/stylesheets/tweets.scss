@@ -186,5 +186,17 @@ abbr {
     font-size: 2rem !important;
   }
 
+  .table {
+    font-size: 1.5rem;
+  }
+
+  table th:nth-child(2) {
+    width: 200px;
+  }
+
+  .is-64x64 {
+    margin-left: 32px;
+  }
+
 }
 
