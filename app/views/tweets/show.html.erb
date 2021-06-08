@@ -19,7 +19,7 @@
                 【<%= @tweet.category.name %>】<br>
                 <small><%= @tweet.user.username %></small>
                 <span class="sentiment-score">(ツイートの感情分析スコア☆<%= @tweet.score %>)</span><br>
-                <p class="is-size-5"><%= @tweet.tweet %></p>
+                <p class="is-size-5-desktop"><%= @tweet.tweet %></p>
                 <p><%= attachment_image_tag @tweet, :image, size: "100x100", format: 'jpeg' %></p>
               </div>
                <!--ツイート下部-->
@@ -85,10 +85,10 @@
                 <%= render 'comment_favorites/comment_favorite', comment: comment, tweet: @tweet, comment_favorite: @comment_favorite %>
               </div>
               <br>
-              <div class="is-size-5"><%= comment.content %></div>
+              <div class="is-size-5-desktop"><%= comment.content %></div>
             <% if comment.user == current_user %>
               <div class="btn">
-                <%= link_to "削除", tweet_comment_path(@tweet, comment), method: :delete, class: "button is-danger is-light is-small mt-3" %>
+                <%= link_to "削除", tweet_comment_path(@tweet, comment), method: :delete, class: "button is-danger is-light is-small-desktop mt-3" %>
               </div>
             <% end %>
             </div>
