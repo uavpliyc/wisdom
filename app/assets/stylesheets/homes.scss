@@ -3808,7 +3808,7 @@ header.masthead h1 {
   padding: 20px;
 }
 
-@media screen and (max-width: 575.98px) {
+@media screen and (max-width: 1000px) {
   .navbar-expand-sm > .container,
 .navbar-expand-sm > .container-fluid,
 .navbar-expand-sm > .container-sm,
@@ -3820,6 +3820,22 @@ header.masthead h1 {
   }
   .py-3 {
   display: none;
+}
+
+.text-center {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 4rem!important;
+}
+
+.btn-xl {
+  font-size: 2rem!important;
+}
+
+.maintext {
+  font-size: 100px!important;
 }
 
 }
