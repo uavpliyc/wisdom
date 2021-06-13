@@ -216,7 +216,7 @@ li.menu-width-max:hover .category-btn {
   z-index: 3;
 }
 .open .toggle_btn {
-  left: 330px;
+  right: 70px;
 }
 .toggle_btn span {
   display: block;
@@ -241,15 +241,15 @@ li.menu-width-max:hover .category-btn {
   background-color: #fff;
 }
 .open .toggle_btn span:nth-child(1) {
-  -webkit-transform: translateY(10px) rotate(-315deg);
-  transform: translateY(10px) rotate(-315deg);
+  -webkit-transform: translateY(30px) rotate(-315deg);
+  transform: translateY(30px) rotate(-315deg);
 }
 .open .toggle_btn span:nth-child(2) {
   opacity: 0;
 }
 .open .toggle_btn span:nth-child(3) {
-  -webkit-transform: translateY(-10px) rotate(315deg);
-  transform: translateY(-10px) rotate(315deg);
+  -webkit-transform: translateY(-30px) rotate(315deg);
+  transform: translateY(-30px) rotate(315deg);
 }
 
 #mask {
