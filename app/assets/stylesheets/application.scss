@@ -71,6 +71,10 @@ nav.pagination {
   display: none;
 }
 
+.toggle_btn {
+  height: 0;
+}
+
 @media screen and (min-width: 1001px){
 
 ul.bottom-menu {
@@ -86,7 +90,8 @@ ul.bottom-menu {
 }
 
 .navbar {
-  justify-content: flex-end;
+  background-color: #000;
+  z-index: 3;
 }
 
 .is-one-quarter {
@@ -153,6 +158,115 @@ li.menu-width-max:hover .category-btn {
 
 .input {
   font-size: 40px;
+}
+
+.navbar-item {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: -300px;
+  bottom: 0;
+  width: 300px;
+  background: #ffffff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transition: .5s;
+  z-index: 3;
+}
+
+.open .navbar-item {
+  left: 0;
+}
+.navbar-item .is-grouped {
+  padding: 25px;
+  display: block;
+}
+.navbar-item .is-grouped .control {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navbar-item .is-grouped .control {
+  position: relative;
+  border-bottom: 1px solid #333;
+}
+.navbar-item .is-grouped .control a {
+  color: #333;
+  font-size: 25px;
+  padding: 1em;
+  text-decoration: none;
+  transition-duration: 0.2s;
+  border-width: 0;
+  margin-top: 50px;
+}
+.navbar-item .is-grouped .control a:hover {
+  background: #e4e4e4;
+}
+
+.toggle_btn {
+  display: block;
+  position: fixed;
+  top: 70px;
+  right: 70px;
+  width: 30px;
+  height: 70px;
+  transition: all .5s;
+  cursor: pointer;
+  z-index: 3;
+}
+.open .toggle_btn {
+  left: 330px;
+}
+.toggle_btn span {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 70px;
+  height: 2px;
+  background-color: #333;
+  border-radius: 4px;
+  transition: all .5s;
+}
+.toggle_btn span:nth-child(1) {
+  top: 4px;
+}
+.toggle_btn span:nth-child(2) {
+  top: 35px;
+}
+.toggle_btn span:nth-child(3) {
+  bottom: 4px;
+}
+.open .toggle_btn span {
+  background-color: #fff;
+}
+.open .toggle_btn span:nth-child(1) {
+  -webkit-transform: translateY(10px) rotate(-315deg);
+  transform: translateY(10px) rotate(-315deg);
+}
+.open .toggle_btn span:nth-child(2) {
+  opacity: 0;
+}
+.open .toggle_btn span:nth-child(3) {
+  -webkit-transform: translateY(-10px) rotate(315deg);
+  transform: translateY(-10px) rotate(315deg);
+}
+
+#mask {
+  display: none;
+  transition: all .5s;
+}
+.open #mask {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: .8;
+  z-index: 2;
+  cursor: pointer;
 }
 
 }
