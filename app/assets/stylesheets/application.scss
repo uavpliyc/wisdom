@@ -164,9 +164,9 @@ li.menu-width-max:hover .category-btn {
   display: block;
   position: fixed;
   top: 0;
-  left: -300px;
+  left: -500px;
   bottom: 0;
-  width: 300px;
+  width: 500px;
   background: #ffffff;
   overflow-x: hidden;
   overflow-y: auto;
@@ -193,7 +193,7 @@ li.menu-width-max:hover .category-btn {
 }
 .navbar-item .is-grouped .control a {
   color: #333;
-  font-size: 25px;
+  font-size: 40px;
   padding: 1em;
   text-decoration: none;
   transition-duration: 0.2s;
@@ -224,7 +224,7 @@ li.menu-width-max:hover .category-btn {
   left: 0;
   width: 70px;
   height: 2px;
-  background-color: #333;
+  background-color: #C0C0C0;
   border-radius: 4px;
   transition: all .5s;
 }
