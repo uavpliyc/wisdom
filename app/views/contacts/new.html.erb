@@ -5,11 +5,11 @@
         <h3 class="is-size-2 mb-4">お問合せフォーム</h3>
         <%= form_with model: @contact, url: contact_path do |f| %>
         <div class="form-group mb-4">
-          <%= f.label :お名前 %><br>
+          <div class="f-size"><%= f.label :お名前 %></div>
           <%= f.text_field :name, class: "form-control input" %><br>
         </div>
         <div class="form-group contact-form">
-          <%= f.label :お問い合わせ内容 %><br>
+          <div class="f-size"><%= f.label :お問い合わせ内容 %></div>
           <%= f.text_area :message, class: "form-control input form-height" %><br>
           <%= f.submit '送信', class: "button is-info mb-4 mt-4" %><br>
           <div data-turbolinks="false"><%= link_to 'Back', root_path, class: "button is-warning is-light" %></div>
